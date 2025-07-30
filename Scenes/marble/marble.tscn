@@ -29,3 +29,7 @@ mesh = SubResource("SphereMesh_mowa8")
 transform = Transform3D(1, 0, 0, 0, 0.933762, 0.357895, 0, -0.357895, 0.933762, 0, 1.75965, 2.49716)
 current = true
 far = 200.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.933762, -0.357895, 0, 0.357895, 0.933762, 0, 0, 0)
+target_position = Vector3(0, -10, 0)
