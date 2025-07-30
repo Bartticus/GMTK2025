@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=11 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
@@ -28,6 +28,11 @@ uv1_triplanar = true
 material = SubResource("StandardMaterial3D_21xkr")
 size = Vector3(50, 2, 50)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4etoo"]
+friction = 5.0
+rough = true
+bounce = 0.2
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -41,20 +46,20 @@ shadow_enabled = true
 
 [node name="Floor" type="StaticBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
 shape = SubResource("BoxShape3D_kry3j")
+disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
 mesh = SubResource("BoxMesh_6bp64")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="Marble" parent="." instance=ExtResource("2_w1fgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+physics_material_override = SubResource("PhysicsMaterial_4etoo")
+angular_damp = 0.1
 
 [node name="Ring" parent="." instance=ExtResource("3_4etoo")]
-
-[node name="CollisionShape3D" parent="Ring" index="0"]
-disabled = true
 
 [editable path="Ring"]
