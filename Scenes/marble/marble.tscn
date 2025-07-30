@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=8 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
+[ext_resource type="Script" uid="uid://c4by3r2ovm4hr" path="res://Scenes/marble/visuals.gd" id="3_lpkg8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 
@@ -22,14 +23,22 @@ script = ExtResource("1_qlpfi")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_qlpfi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_mowa8")
+[node name="Visuals" type="Node3D" parent="." node_paths=PackedStringArray("marble")]
+script = ExtResource("3_lpkg8")
+marble = NodePath("..")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.933762, 0.357895, 0, -0.357895, 0.933762, 0, 1.75965, 2.49716)
+[node name="MarbleMesh" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("SphereMesh_mowa8")
+skeleton = NodePath("../..")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0, 1.76, 2.497)
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000349998, 0.000159979)
 current = true
 far = 200.0
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.933762, -0.357895, 0, 0.357895, 0.933762, 0, 0, 0)
+[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 0.743484, -0.668755, 0, 0.668755, 0.743484, 0, 0, 0)
 target_position = Vector3(0, -10, 0)
