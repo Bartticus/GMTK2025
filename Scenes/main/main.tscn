@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv7x2ren5evyl"]
+
+[ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
+[ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
+[ext_resource type="PackedScene" uid="uid://e3yd7vkq41oi" path="res://Scenes/ring/ring.tscn" id="3_4etoo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_8gbba"]
+sky_material = SubResource("ProceduralSkyMaterial_bo1nx")
+
+[sub_resource type="Environment" id="Environment_jjvhh"]
+background_mode = 2
+sky = SubResource("Sky_8gbba")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
+size = Vector3(50, 2, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
+albedo_texture = ExtResource("1_b20jg")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_6bp64"]
+material = SubResource("StandardMaterial3D_21xkr")
+size = Vector3(50, 2, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jjvhh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
+shape = SubResource("BoxShape3D_kry3j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
+mesh = SubResource("BoxMesh_6bp64")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Marble" parent="." instance=ExtResource("2_w1fgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Ring" parent="." instance=ExtResource("3_4etoo")]
+
+[node name="CollisionShape3D" parent="Ring" index="0"]
+disabled = true
+
+[editable path="Ring"]

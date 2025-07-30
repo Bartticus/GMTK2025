@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://e3yd7vkq41oi"]
+
+[ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_82iis"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i8cph"]
+height = 20.0
+radius = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6nsi"]
+albedo_texture = ExtResource("1_82iis")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7uk3o"]
+material = SubResource("StandardMaterial3D_q6nsi")
+flip_faces = true
+top_radius = 50.0
+bottom_radius = 50.0
+height = 20.0
+cap_top = false
+cap_bottom = false
+
+[node name="Ring" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_i8cph")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_7uk3o")

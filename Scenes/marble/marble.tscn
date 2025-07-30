@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo12c78cmhfo2"]
+
+[ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
+[ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qlpfi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpkg8"]
+albedo_texture = ExtResource("1_q4dig")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_mowa8"]
+material = SubResource("StandardMaterial3D_lpkg8")
+
+[node name="Marble" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_vfrwj")
+script = ExtResource("1_qlpfi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qlpfi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mowa8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.933762, 0.357895, 0, -0.357895, 0.933762, 0, 1.75965, 2.49716)
+current = true
+far = 200.0
