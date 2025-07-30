@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var scale_distortion_scale : float = 1.3
+@export var scale_distortion_scale : float = 1.0
 
 @export var marble : RigidBody3D
 @onready var marble_mesh : MeshInstance3D = $MarbleMesh
@@ -30,4 +30,4 @@ func visuals_handler(delta: float) -> void:
 	scale_object_local(new_scale)
 	
 	marble_mesh.global_rotation = marble.global_rotation
-	
+	#print(marble.linear_velocity)

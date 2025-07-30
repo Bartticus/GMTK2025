@@ -39,6 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000349998, 0.000159979)
 current = true
 far = 200.0
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.933762, -0.357895, 0, 0.357895, 0.933762, 0, 0, 0)
+[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 0.743484, -0.668755, 0, 0.668755, 0.743484, 0, 0, 0)
 target_position = Vector3(0, -10, 0)
