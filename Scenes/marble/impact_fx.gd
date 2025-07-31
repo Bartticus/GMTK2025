@@ -21,4 +21,4 @@ func _process(delta: float) -> void:
 		if sprite.visible:
 			spiky_impact_lerp = min(1.0, spiky_impact_lerp)
 			sprite.frame = spiky_impact_lerp * 4
-			print(sprite.frame)
+			
