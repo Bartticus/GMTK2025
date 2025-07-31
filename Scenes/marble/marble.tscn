@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://bpfed2lli6vwn" path="res://Sounds/wind.mp3" id="8_ywu4v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
-friction = 10.0
 friction = 2.0
 rough = true
 bounce = 0.2
@@ -108,4 +107,3 @@ target_position = Vector3(0, -3, 0)
 [node name="windSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_ywu4v")
 autoplay = true
-bus = &"wind filter"
