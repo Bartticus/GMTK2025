@@ -2,6 +2,10 @@ extends RigidBody3D
 
 @export var torque: float = 400
 @export var max_angular_vel: float = 100
+@export var brake_force: float = 5
+@onready var initial_friction: float
+@onready var drift_timer: Timer = $DriftTimer
+
 @onready var visuals : Node3D = $Visuals
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var camera: Camera3D = $CameraAnchor/Camera3D
@@ -20,19 +24,20 @@ func _ready() -> void:
 	camera_initial_pos = camera.position
 	camera_anchor.top_level = true
 	groundDetection1.top_level = true
+	initial_friction = physics_material_override.friction
 	
 	rollSFX.volume_linear = 0
 	windSFX.volume_linear = 0
 
 func _physics_process(delta: float) -> void:
 	movement_handler(delta)
+	drift_handler(delta)
 	visuals.visuals_handler(delta)
+	audio_handler()
 	
 	camera_anchor.global_position = global_position# + camera_initial_pos
 	
 	groundDetection1.position = self.position
-	
-	
 
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
@@ -49,7 +54,34 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.x = clampf(angular_velocity.x, -max_angular_vel, max_angular_vel)
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
+
+var new_friction: float = 0
+func drift_handler(delta) -> void:
+	if not is_on_floor(): return
 	
+	if Input.is_action_just_pressed("drift"):
+		new_friction = 0
+	if Input.is_action_pressed("drift"):
+		linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * brake_force)
+		physics_material_override.friction = 0.1
+		
+		var max_friction: float = 500
+		if new_friction < max_friction:
+			new_friction += 20
+		
+	elif Input.is_action_just_released("drift"):
+		physics_material_override.friction = new_friction
+		
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "physics_material_override:friction", initial_friction, 2)
+
+func is_on_floor() -> bool:
+	for body in get_colliding_bodies():
+		if body.collision_layer == 1:
+			return true
+	return false
+
+func audio_handler() -> void:
 	#audio
 	var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
 	

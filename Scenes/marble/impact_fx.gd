@@ -7,7 +7,6 @@ const life_length = 0.7
 
 func _ready() -> void:
 	top_level = true
-	
 
 func _process(delta: float) -> void:
 	if visible:
@@ -20,5 +19,4 @@ func _process(delta: float) -> void:
 			sprite.visible = false
 		if sprite.visible:
 			spiky_impact_lerp = min(1.0, spiky_impact_lerp)
-			sprite.frame = roundi(spiky_impact_lerp * 4.0)
-			
+			sprite.frame = floori(spiky_impact_lerp * 4.0)

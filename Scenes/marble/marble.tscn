@@ -11,7 +11,9 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 10.0
+friction = 2.0
 rough = true
+bounce = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qlpfi"]
 
@@ -41,6 +43,7 @@ fractal_lacunarity = 1.615
 fractal_gain = 6.795
 
 [node name="Marble" type="RigidBody3D"]
+collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
 contact_monitor = true
 max_contacts_reported = 24

@@ -14,7 +14,6 @@ extends Node3D
 @onready var smoothed_velocity : Vector3 = Vector3.ZERO
 @onready var contact_normal : Vector3 = Vector3.ZERO
 
-
 @export var squash_length : float = 0.3
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.0
@@ -23,7 +22,6 @@ func _ready() -> void:
 	top_level = true
 	impact_fx.top_level = true
 	impact_fx.visible = false
-
 
 func impact(intensity : float = 0.0, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
 	squash_timer = squash_length
@@ -35,7 +33,8 @@ func impact(intensity : float = 0.0, contact_position : Vector3 = Vector3.ZERO, 
 	add_child(fx)
 	fx.visible = true
 	fx.global_position = contact_position
-	fx.look_at(contact_position+normal)
+	if not Vector3.UP.cross(-normal.normalized()).is_zero_approx():
+		fx.look_at(contact_position + normal)
 	fx.sprite.rotate_z(randf())
 
 func visuals_handler(delta: float) -> void:
@@ -43,7 +42,8 @@ func visuals_handler(delta: float) -> void:
 	global_position = marble.global_position
 	
 	smoothed_velocity = smoothed_velocity.lerp(marble.linear_velocity, delta * 7.0)
-	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx():
+	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx() \
+	and smoothed_velocity != Vector3.ZERO:
 		look_at(global_position + smoothed_velocity)
 	
 	marble_mesh.global_rotation = marble.global_rotation
