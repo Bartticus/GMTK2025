@@ -1,7 +1,7 @@
 extends Camera3D
 @export var marble : RigidBody3D
 @export var pivot : Node3D
-@export var front_whisker : RayCast3D
+
 @onready var camera_shake : float = 0.0
 @export var shake_noise : Noise
 @onready var frequency : float = 0.0
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		#marble.visuals.contact_normal
 		var pivot_tilt : float = 0.3
 		var target_rot : float = lerpf(-pivot_tilt, pivot_tilt, normal.z)
-		if target_rot < 0.0: target_rot *= 1.7
+		if target_rot < 0.0: target_rot *= 1.9#more rotation for near slope so we don't clip
 		pivot_rotation = lerpf(pivot_rotation, target_rot, delta*3.0)
 		print(target_rot)
 	else:
@@ -49,6 +49,4 @@ func _process(delta: float) -> void:
 	pivot.rotate_x(pivot_rotation)
 	
 	
-	if front_whisker.is_colliding():
-		front_whisker.get_collision_normal()
 	
