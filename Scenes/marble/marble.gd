@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	movement_handler(delta)
 	visuals.visuals_handler(delta)
 	
-	camera_anchor.global_position = global_position + camera_initial_pos
+	camera_anchor.global_position = global_position# + camera_initial_pos
 	
 	groundDetection1.position = self.position
 	
