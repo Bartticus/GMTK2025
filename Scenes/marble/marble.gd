@@ -7,13 +7,18 @@ extends RigidBody3D
 @onready var camera: Camera3D = $CameraAnchor/Camera3D
 
 @onready var rollSFX : AudioStreamPlayer3D = $rollSFX
-@onready var groundDetection : RayCast3D = $groundDetection
+@onready var groundDetectionAudio : RayCast3D = $groundDetection1/groundDetectionAudio
+@onready var groundDetection1 : RayCast3D = $groundDetection1
+@onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
+@onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
 
 var camera_initial_pos: Vector3
 
 func _ready() -> void:
+	camera_initial_pos = camera.position
 	camera_anchor.top_level = true
-	camera_initial_pos = camera_anchor.position
+	groundDetection1.top_level = true
+	
 	rollSFX.volume_linear = 0
 	
 
@@ -23,14 +28,15 @@ func _physics_process(delta: float) -> void:
 	
 	camera_anchor.global_position = global_position + camera_initial_pos
 	
-	groundDetection.position = self.position
+	groundDetection1.position = self.position
+	
 	
 
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
 	var h_input = Input.get_action_raw_strength("left") - Input.get_action_raw_strength("right")
 	
-	var camera_transform = camera_anchor.global_transform#get_camera_transform()
+	var camera_transform = camera.get_camera_transform()#camera_anchor.global_transform
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
@@ -43,13 +49,11 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
 	#audio
-	if groundDetection.is_colliding():
+	if groundDetectionAudio.is_colliding():
 		#print("hi")
 		var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
 		rollSFX.volume_linear = marbleVOL / 100
-		print(rollSFX.volume_linear)
 	else:
 		rollSFX.volume_linear = 0
 	
 	
-	#print(angular_velocity)
