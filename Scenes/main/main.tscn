@@ -57,6 +57,7 @@ mesh = SubResource("BoxMesh_6bp64")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="Marble" parent="." instance=ExtResource("2_w1fgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -61.2787, 76.1576)
 physics_material_override = SubResource("PhysicsMaterial_4etoo")
 angular_damp = 0.1
 

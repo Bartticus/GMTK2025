@@ -68,22 +68,37 @@ hframes = 2
 vframes = 2
 
 [node name="CameraAnchor" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0, 1.76, 2.497)
+transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000349998, 0.000159979)
+[node name="CameraWhiskerFront" type="RayCast3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 0.435279, -0.900297, 0, 0.900297, 0.435279, 0, 0, 0)
+visible = false
+target_position = Vector3(0, -10, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor" node_paths=PackedStringArray("marble", "pivot", "front_whisker")]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.747906, 2.96204)
 current = true
 far = 200.0
 script = ExtResource("6_whwca")
+marble = NodePath("../..")
+pivot = NodePath("..")
+front_whisker = NodePath("../CameraWhiskerFront")
 shake_noise = SubResource("FastNoiseLite_whwca")
-
-[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor"]
-transform = Transform3D(1, 0, 0, 0, 0.743484, -0.668755, 0, 0.668755, 0.743484, 0, 0, 0)
-target_position = Vector3(0, -10, 0)
 
 [node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_mlxtt")
 autoplay = true
 
-[node name="groundDetection" type="RayCast3D" parent="."]
-top_level = true
+[node name="groundDetection1" type="RayCast3D" parent="."]
+target_position = Vector3(0, -2, 0)
+
+[node name="groundDetectionAudio" type="RayCast3D" parent="groundDetection1"]
+target_position = Vector3(0, -0.65, 0)
+
+[node name="groundDetection2" type="RayCast3D" parent="groundDetection1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+
+[node name="groundDetection3" type="RayCast3D" parent="groundDetection1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+target_position = Vector3(0, -2, 0)

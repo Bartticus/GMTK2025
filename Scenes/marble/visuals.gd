@@ -12,6 +12,7 @@ extends Node3D
 @onready var marble_mesh : MeshInstance3D = $MarbleMesh
 @onready var impact_fx : Node3D = $ImpactFX
 @onready var smoothed_velocity : Vector3 = Vector3.ZERO
+@onready var contact_normal : Vector3 = Vector3.ZERO
 
 
 @export var squash_length : float = 0.3
@@ -55,7 +56,7 @@ func visuals_handler(delta: float) -> void:
 	var contact_count : int = state.get_contact_count()
 	var biggest_impulse : float = 0.0
 	var contact_position : Vector3 = Vector3.ZERO
-	var contact_normal : Vector3 = Vector3.ZERO
+	
 	for i in contact_count:
 		if biggest_impulse < state.get_contact_impulse(i).length():
 			contact_position = state.get_contact_local_position(i)
@@ -68,7 +69,8 @@ func visuals_handler(delta: float) -> void:
 		var impact_scale = biggest_impulse / squash_distortion_max_velocity
 		impact_scale = min(impact_scale, 1.0)
 		impact(impact_scale, contact_position, contact_normal)
-	
+	#else:
+		#contact_normal = Vector3.ZERO
 	
 	var new_scale : Vector3 = Vector3.ONE
 	new_scale.z = lerpf(1.0, 1.0 + (0.2 * scale_distortion_scale), speed_factor)
