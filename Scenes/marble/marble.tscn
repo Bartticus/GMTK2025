@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=15 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://db5fnaevwh8s4" path="res://Scenes/marble/impact_fx.gd" id="4_mowa8"]
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
 [ext_resource type="Script" uid="uid://lr7yfx68wgra" path="res://Scenes/marble/camera.gd" id="6_whwca"]
+[ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 
@@ -79,3 +80,10 @@ shake_noise = SubResource("FastNoiseLite_whwca")
 [node name="RayCast3D" type="RayCast3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 0.743484, -0.668755, 0, 0.668755, 0.743484, 0, 0, 0)
 target_position = Vector3(0, -10, 0)
+
+[node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_mlxtt")
+autoplay = true
+
+[node name="groundDetection" type="RayCast3D" parent="."]
+top_level = true

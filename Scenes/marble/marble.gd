@@ -5,11 +5,16 @@ extends RigidBody3D
 @onready var visuals : Node3D = $Visuals
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var camera: Camera3D = $CameraAnchor/Camera3D
+
+@onready var rollSFX : AudioStreamPlayer3D = $rollSFX
+@onready var groundDetection : RayCast3D = $groundDetection
+
 var camera_initial_pos: Vector3
 
 func _ready() -> void:
 	camera_anchor.top_level = true
 	camera_initial_pos = camera_anchor.position
+	rollSFX.volume_linear = 0
 	
 
 func _physics_process(delta: float) -> void:
@@ -17,6 +22,8 @@ func _physics_process(delta: float) -> void:
 	visuals.visuals_handler(delta)
 	
 	camera_anchor.global_position = global_position + camera_initial_pos
+	
+	groundDetection.position = self.position
 	
 
 func movement_handler(delta: float) -> void:
@@ -34,5 +41,15 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.x = clampf(angular_velocity.x, -max_angular_vel, max_angular_vel)
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
+	
+	#audio
+	if groundDetection.is_colliding():
+		#print("hi")
+		var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
+		rollSFX.volume_linear = marbleVOL / 100
+		print(rollSFX.volume_linear)
+	else:
+		rollSFX.volume_linear = 0
+	
 	
 	#print(angular_velocity)
