@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=14 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
 [ext_resource type="Script" uid="uid://c4by3r2ovm4hr" path="res://Scenes/marble/visuals.gd" id="3_lpkg8"]
 [ext_resource type="Script" uid="uid://db5fnaevwh8s4" path="res://Scenes/marble/impact_fx.gd" id="4_mowa8"]
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
+[ext_resource type="Script" uid="uid://lr7yfx68wgra" path="res://Scenes/marble/camera.gd" id="6_whwca"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 
@@ -27,6 +28,13 @@ uv1_triplanar = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_mowa8"]
 material = SubResource("StandardMaterial3D_lpkg8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_whwca"]
+noise_type = 3
+frequency = 0.99
+fractal_octaves = 3
+fractal_lacunarity = 1.615
+fractal_gain = 6.795
 
 [node name="Marble" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
@@ -65,6 +73,8 @@ transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000349998, 0.000159979)
 current = true
 far = 200.0
+script = ExtResource("6_whwca")
+shake_noise = SubResource("FastNoiseLite_whwca")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 0.743484, -0.668755, 0, 0.668755, 0.743484, 0, 0, 0)
