@@ -35,4 +35,4 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
-	print(angular_velocity)
+	#print(angular_velocity)
