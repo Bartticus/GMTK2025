@@ -50,7 +50,6 @@ func movement_handler(delta: float) -> void:
 	
 	#audio
 	if groundDetectionAudio.is_colliding():
-		#print("hi")
 		var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
 		rollSFX.volume_linear = marbleVOL / 100
 	else:

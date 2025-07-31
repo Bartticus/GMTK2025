@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
+friction = 10.0
+rough = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qlpfi"]
 

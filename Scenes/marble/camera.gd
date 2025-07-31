@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		var target_rot : float = lerpf(-pivot_tilt, pivot_tilt, normal.z)
 		if target_rot < 0.0: target_rot *= 1.9#more rotation for near slope so we don't clip
 		pivot_rotation = lerpf(pivot_rotation, target_rot, delta*3.0)
-		print(target_rot)
+		#print(target_rot)
 	else:
 		pivot_rotation = lerpf(pivot_rotation, 0.0, delta)
 	
