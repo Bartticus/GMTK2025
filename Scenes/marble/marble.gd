@@ -12,6 +12,8 @@ extends RigidBody3D
 @onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
 @onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
 
+@onready var windSFX : AudioStreamPlayer3D = $windSFX
+
 var camera_initial_pos: Vector3
 
 func _ready() -> void:
@@ -20,7 +22,7 @@ func _ready() -> void:
 	groundDetection1.top_level = true
 	
 	rollSFX.volume_linear = 0
-	
+	windSFX.volume_linear = 0
 
 func _physics_process(delta: float) -> void:
 	movement_handler(delta)
@@ -49,10 +51,12 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
 	#audio
+	var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
+	
 	if groundDetectionAudio.is_colliding():
-		var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
 		rollSFX.volume_linear = marbleVOL / 100
 	else:
 		rollSFX.volume_linear = 0
 	
+	windSFX.volume_linear = marbleVOL / 100
 	

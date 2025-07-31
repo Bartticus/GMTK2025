@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=16 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
 [ext_resource type="Script" uid="uid://lr7yfx68wgra" path="res://Scenes/marble/camera.gd" id="6_whwca"]
 [ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
+[ext_resource type="AudioStream" uid="uid://bpfed2lli6vwn" path="res://Sounds/wind.mp3" id="8_ywu4v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 10.0
@@ -83,6 +84,8 @@ shake_noise = SubResource("FastNoiseLite_whwca")
 
 [node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_mlxtt")
+volume_db = -2.883
+max_db = 0.0
 autoplay = true
 
 [node name="groundDetection1" type="RayCast3D" parent="."]
@@ -98,3 +101,8 @@ target_position = Vector3(0, -3, 0)
 [node name="groundDetection3" type="RayCast3D" parent="groundDetection1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 target_position = Vector3(0, -3, 0)
+
+[node name="windSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_ywu4v")
+autoplay = true
+bus = &"wind filter"
