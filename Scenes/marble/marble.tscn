@@ -1,11 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=46 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
 [ext_resource type="Script" uid="uid://c4by3r2ovm4hr" path="res://Scenes/marble/visuals.gd" id="3_lpkg8"]
 [ext_resource type="Script" uid="uid://db5fnaevwh8s4" path="res://Scenes/marble/impact_fx.gd" id="4_mowa8"]
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
-[ext_resource type="Script" uid="uid://lr7yfx68wgra" path="res://Scenes/marble/camera.gd" id="6_whwca"]
 [ext_resource type="FastNoiseLite" uid="uid://dy1pf1f0gay07" path="res://Scenes/marble/camera_shake_noise.tres" id="7_a0fhv"]
 [ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
 [ext_resource type="Script" uid="uid://cgh2hm7ll7wn4" path="res://Scenes/marble/third_person_camera.gd" id="8_0ovb4"]
@@ -17,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://dv5adohal76fj" path="res://Thaddeus/FX/Tx_Smoke_seq_02.png" id="13_55j5u"]
 [ext_resource type="Texture2D" uid="uid://csbbr8ircbd6u" path="res://Thaddeus/FX/Tx_Burst_directional_02_MEDIUM.png" id="13_i5nwi"]
 [ext_resource type="Texture2D" uid="uid://c8157rn7lsfb7" path="res://Thaddeus/FX/hexlinegradientlinesbeveled.png" id="13_o7fp8"]
+[ext_resource type="Texture2D" uid="uid://be3p3qb4avm62" path="res://Thaddeus/FX/frame02.png" id="14_470xv"]
 [ext_resource type="Texture2D" uid="uid://tootnw03vocd" path="res://Thaddeus/FX/Tx_Burst_radial_04.png" id="14_koch1"]
 [ext_resource type="Texture2D" uid="uid://dg4mufql1wdv7" path="res://Thaddeus/FX/ATS_Orna_Corner_174.png" id="14_ld4xo"]
-[ext_resource type="Texture2D" uid="uid://cfywbdb0h7pj0" path="res://Thaddeus/FX/frame_002_SMALL.png" id="15_47kih"]
 [ext_resource type="Script" uid="uid://7e2wfwwbg6rh" path="res://Scenes/marble/spring_arm_3d.gd" id="19_470xv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
@@ -206,7 +205,7 @@ radius = 0.3
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
 contact_monitor = true
-max_contacts_reported = 28
+max_contacts_reported = 500
 script = ExtResource("1_qlpfi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -233,17 +232,6 @@ modulate = Color(1, 1, 1, 0.811765)
 texture = ExtResource("5_0ro2e")
 hframes = 2
 vframes = 2
-
-[node name="CameraAnchor" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CameraAnchor" node_paths=PackedStringArray("marble", "pivot")]
-transform = Transform3D(1, 0, 0, 0, 0.979439, -0.201745, 0, 0.201745, 0.979439, 0, 0.747906, 2.96204)
-far = 2000.0
-script = ExtResource("6_whwca")
-marble = NodePath("../..")
-pivot = NodePath("..")
-shake_noise = ExtResource("7_a0fhv")
 
 [node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_mlxtt")
@@ -389,7 +377,7 @@ texture = ExtResource("14_koch1")
 transform = Transform3D(0.0304074, 0.0326968, -0.753678, 0.0612217, -0.751909, -0.03015, -0.751899, -0.0599002, -0.0329343, -0.0145507, -0.0245822, -0.000376509)
 sorting_offset = 4.0
 pixel_size = 0.003
-texture = ExtResource("15_47kih")
+texture = ExtResource("14_470xv")
 
 [node name="SmallSprite1" type="Sprite3D" parent="DriftFX/Sprites"]
 transform = Transform3D(0.151314, -0.779238, 0.608187, 0.970192, -0.000743762, -0.242333, 0.189288, 0.626726, 0.7559, 0.190598, -0.21991, 0.609154)
@@ -424,17 +412,19 @@ transform = Transform3D(1.075, 0, 0, 0, 1.075, 8.97826e-23, 0, -8.97826e-23, 1.0
 modulate = Color(0, 0, 0, 0.439216)
 texture = ExtResource("13_o7fp8")
 
-[node name="SpringArmPivot" type="Node3D" parent="."]
+[node name="SpringArmPivotY" type="Node3D" parent="."]
 top_level = true
 script = ExtResource("19_470xv")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot"]
+[node name="PivotX" type="Node3D" parent="SpringArmPivotY"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivotY/PivotX"]
 shape = SubResource("SphereShape3D_0ovb4")
 spring_length = 10.0
 
-[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D"]
+[node name="SpringPosition" type="Node3D" parent="SpringArmPivotY/PivotX/SpringArm3D"]
 
-[node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivot" node_paths=PackedStringArray("spring_arm")]
+[node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivotY/PivotX" node_paths=PackedStringArray("spring_arm")]
 current = true
 script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")

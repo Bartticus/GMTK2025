@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func impact(intensity : float = 0.0, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
 	squash_timer = squash_length
-	squash_intensity = lerpf(0.0, 0.5, intensity)
+	squash_intensity = lerpf(0.0, 1.5, intensity)
 	
 	marble.camera.camera_shake = 1.0
 	

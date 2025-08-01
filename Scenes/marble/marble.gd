@@ -4,12 +4,14 @@ extends RigidBody3D
 @export var max_angular_vel: float = 100
 @export var brake_force: float = 5
 @export_range(0.0, 1000.0, 10.0) var linear_force : float = 500.0
+@export var drifting_velocity_boost: float = 2.0
 
 @onready var visuals : Node3D = $Visuals
-@onready var camera_anchor: Node3D = $CameraAnchor
-@onready var camera: Camera3D = $SpringArmPivot/ThirdPersonCamera
-@onready var spring_arm_pivot: Node3D = $SpringArmPivot
+@onready var camera: Camera3D = $SpringArmPivotY/PivotX/ThirdPersonCamera
+@onready var spring_arm_pivot: Node3D = $SpringArmPivotY
 
+@onready var drifting_last_keyboard_f_force : Vector3 = Vector3.ZERO
+@onready var drifting_last_keyboard_h_force : Vector3 = Vector3.ZERO
 @onready var drift_fx : Node3D = $DriftFX
 @onready var particles: Node3D = $Particles
 @onready var spark_particles1: GPUParticles3D = $Particles/DriftSparkParticles1
@@ -29,7 +31,6 @@ var initial_friction: float
 var input_vector: Vector3
 
 func _ready() -> void:
-	camera_anchor.top_level = true
 	groundDetection1.top_level = true
 	drift_fx.top_level = true
 	
@@ -44,7 +45,6 @@ func _physics_process(delta: float) -> void:
 	visuals.visuals_handler(delta)
 	audio_handler()
 	
-	camera_anchor.global_position = global_position
 	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
@@ -67,7 +67,7 @@ func movement_handler(delta: float) -> void:
 		f_input = lerpf(fully_slowed_input.x, f_input, dir_diff_lerp)
 		h_input = lerpf(fully_slowed_input.y, h_input, dir_diff_lerp)
 	
-	var camera_transform = camera.get_camera_transform()
+	var camera_transform = spring_arm_pivot.global_transform#camera.get_camera_transform()
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
@@ -80,21 +80,34 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
-	if true:#abs(f_input) > 0.1 or abs(h_input) > 0.1:
-		var look_vec : Vector2 = Vector2(-input_vector.z, input_vector.x)
-		look_vec = look_vec.rotated(-camera.global_rotation.y)
-		drift_fx.current_move_rot = atan2(look_vec.y, -look_vec.x)
-	else:
-		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + 1.5707963267949
-	
 	f_force = f_input * linear_force * delta * camera_transform.basis.z.normalized()
 	h_force = h_input * linear_force * delta * camera_transform.basis.x.normalized()
 	
 	apply_central_force(f_force)
 	apply_central_force(-h_force)
 	
+	
+	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
+		var look_vec : Vector2 = Vector2(-input_vector.z, input_vector.x)
+		look_vec = look_vec.rotated(-camera.global_rotation.y)
+		drift_fx.current_move_rot = atan2(look_vec.y, -look_vec.x)
+		drifting_last_keyboard_f_force = f_force
+		drifting_last_keyboard_h_force = h_force
+	else:
+		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + 1.5707963267949
+	
+	
+	
 	#linear_velocity.x = clampf(linear_velocity.x, -max_velocity, max_velocity)
 	#linear_velocity.z = clampf(linear_velocity.z, -max_velocity, max_velocity)
+	
+	if is_on_floor() and Input.is_action_just_released("drift"):
+		apply_central_impulse(drifting_last_keyboard_f_force*drifting_velocity_boost)
+		apply_central_impulse(-drifting_last_keyboard_h_force*drifting_velocity_boost)
+		drifting_last_keyboard_f_force = Vector3.ZERO
+		drifting_last_keyboard_h_force = Vector3.ZERO
+	
+	
 
 var new_friction: float = 0
 
@@ -118,6 +131,10 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = true
 		particle_handler(true)
+		
+		var shake_amount : float = angular_velocity.length() / 20.0
+		shake_amount = min(shake_amount, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
+		camera.camera_shake = lerpf(0.0, 0.7, shake_amount)
 	
 	elif Input.is_action_just_released("drift"):
 		physics_material_override.friction = new_friction
