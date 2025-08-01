@@ -80,11 +80,19 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
+	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
+		var look_vec : Vector2 = Vector2(-input_vector.z, input_vector.x)
+		look_vec = look_vec.rotated(-camera.global_rotation.y)
+		drift_fx.current_move_rot = atan2(look_vec.y, -look_vec.x)
+	else:
+		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + PI/2
+	
 	f_force = f_input * linear_force * delta * camera_transform.basis.z.normalized()
 	h_force = h_input * linear_force * delta * camera_transform.basis.x.normalized()
 	
-	apply_central_force(f_force)
-	apply_central_force(-h_force)
+	if not is_on_floor() or true:
+		apply_central_force(f_force)
+		apply_central_force(-h_force)
 	
 	
 	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
@@ -119,8 +127,6 @@ func drift_handler(delta) -> void:
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
 	
-	
-	
 	if Input.is_action_pressed("drift"):
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * brake_force)
 		physics_material_override.friction = 0.1
@@ -143,11 +149,11 @@ func drift_handler(delta) -> void:
 		tween.tween_property(self, "physics_material_override:friction", initial_friction, 2)
 		
 		drift_fx.currently_drifting = false
-		particle_handler(false)
+		particle_handler(false, true)
 
 var rot_speed: float
 var contact_pos: Vector3
-func particle_handler(is_drifting: bool) -> void:
+func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 	rot_speed = angular_velocity.length()
 	var draw_size: Vector2 = Vector2(rot_speed, rot_speed) / 100
 	spark_particles1.draw_pass_1.size = draw_size
@@ -163,11 +169,12 @@ func particle_handler(is_drifting: bool) -> void:
 	spark_particles1.emitting = is_drifting
 	spark_particles2.emitting = is_drifting
 	
-	if not is_drifting:
+	if just_released:
 		smoke_particles1.restart()
 		smoke_particles1.global_position = particles.global_position + input_vector
-	
-	smoke_particles1.emitting = !is_drifting
+		smoke_particles1.emitting = true
+	else:
+		smoke_particles1.emitting = false
 	smoke_particles2.emitting = is_drifting
 	
 	var state = PhysicsServer3D.body_get_direct_state(get_rid())

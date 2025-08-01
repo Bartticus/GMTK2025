@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=47 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dnooj036jptk4" path="res://Textures/smoke_01.png" id="10_lhqa5"]
 [ext_resource type="Script" uid="uid://dig1kwpgvdnbt" path="res://Scenes/marble/drift_fx.gd" id="11_0ovb4"]
 [ext_resource type="Texture2D" uid="uid://cko8grym2ewym" path="res://Thaddeus/FX/Tx_Burst_directional_03_MEDIUM.png" id="11_fmvk0"]
+[ext_resource type="Texture2D" uid="uid://ckc7oovd6hyrk" path="res://Textures/scorch_01.png" id="11_ju2gt"]
 [ext_resource type="Texture2D" uid="uid://dv5adohal76fj" path="res://Thaddeus/FX/Tx_Smoke_seq_02.png" id="13_55j5u"]
 [ext_resource type="Texture2D" uid="uid://csbbr8ircbd6u" path="res://Thaddeus/FX/Tx_Burst_directional_02_MEDIUM.png" id="13_i5nwi"]
 [ext_resource type="Texture2D" uid="uid://c8157rn7lsfb7" path="res://Thaddeus/FX/hexlinegradientlinesbeveled.png" id="13_o7fp8"]
@@ -104,8 +105,8 @@ tangential_accel_max = 2.0
 scale_min = 0.5
 scale_max = 0.5
 scale_curve = SubResource("CurveTexture_ld4xo")
-hue_variation_min = -0.1
-hue_variation_max = 0.1
+hue_variation_min = -0.2
+hue_variation_max = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5nwi"]
 transparency = 1
@@ -113,7 +114,7 @@ blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("9_xfd6w")
+albedo_texture = ExtResource("11_ju2gt")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -262,6 +263,7 @@ top_level = true
 
 [node name="DriftSparkParticles1" type="GPUParticles3D" parent="Particles"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+sorting_offset = 1.0
 emitting = false
 amount = 12
 speed_scale = 2.0
