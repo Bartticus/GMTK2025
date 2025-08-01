@@ -1,8 +1,9 @@
 extends RigidBody3D
 
-@export var torque: float = 400
+@export_range(0.0, 600.0, 10.0) var torque: float = 200
 @export var max_angular_vel: float = 100
 @export var brake_force: float = 5
+@export_range(0.0, 1000.0, 10.0) var linear_force : float = 500.0
 
 @onready var visuals : Node3D = $Visuals
 @onready var camera_anchor: Node3D = $CameraAnchor
@@ -55,10 +56,26 @@ func movement_handler(delta: float) -> void:
 	var h_input = Input.get_action_raw_strength("left") - Input.get_action_raw_strength("right")
 	input_vector = Vector3(h_input, 0, -f_input) * 0.25
 	
+	if !Input.is_action_pressed("drift") and linear_velocity.length() > 0.0:#tone down the angular torque we add the faster we're going, to near 0 if we're spinny real fast
+		var angular_addition_modifier : float = angular_velocity.length() / 20.0
+		angular_addition_modifier = min(angular_addition_modifier, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
+		
+		var fully_slowed_input : Vector2 = Vector2(lerpf(f_input, 0.1, angular_addition_modifier), lerpf(h_input, 0.1, angular_addition_modifier))
+		
+		var dir_diff_lerp : float = input_vector.normalized().dot(linear_velocity.normalized())#-1 when wasd matches current velocity direction, 1 when opposite
+		dir_diff_lerp += 1
+		dir_diff_lerp *= 0.5#now a 0 to 1 range instead of -1 to 1
+		f_input = lerpf(fully_slowed_input.x, f_input, dir_diff_lerp)
+		h_input = lerpf(fully_slowed_input.y, h_input, dir_diff_lerp)
+		print(Vector2(h_input, f_input).length())
+	
 	var camera_transform = camera.get_camera_transform()
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
+	
+	
+	#print(angular_velocity.length())
 	
 	apply_torque(f_force)
 	apply_torque(h_force)
@@ -67,11 +84,20 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
-	
-	if abs(f_input) > 0.15 or abs(h_input) > 0.15:
+	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
 		drift_fx.current_move_rot = atan2(h_force.z, -f_force.x)#Vector2(f_force.x, h_force.z)
 	else:
 		drift_fx.current_move_rot = -atan2(linear_velocity.x, -linear_velocity.z)
+	
+	
+	f_force = f_input * linear_force * delta * camera_transform.basis.z.normalized()
+	h_force = h_input * linear_force * delta * camera_transform.basis.x.normalized()
+	
+	apply_central_force(f_force)
+	apply_central_force(-h_force)
+	
+	#linear_velocity.x = clampf(linear_velocity.x, -max_velocity, max_velocity)
+	#linear_velocity.z = clampf(linear_velocity.z, -max_velocity, max_velocity)
 
 var new_friction: float = 0
 

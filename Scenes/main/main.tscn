@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=27 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
@@ -41,6 +41,12 @@ add_uv2 = true
 size = Vector3(1, 1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4jhlv"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7y5iv"]
+lightmap_size_hint = Vector2i(19, 26)
+material = ExtResource("2_wcurd")
+add_uv2 = true
 size = Vector3(1, 1, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hgq70"]
@@ -160,13 +166,43 @@ shape = SubResource("BoxShape3D_brlrh")
 transform = Transform3D(0.0965263, 0, -0.364951, 0, 0.3775, 0, 0.364951, 0, 0.0965263, -0.201005, -50.4806, 0.91766)
 
 [node name="Ramp" type="StaticBody3D" parent="World/LightmapGI/Ring"]
-transform = Transform3D(0.733023, 0.597391, -0.786576, -0.777047, 0.953467, 1.27389e-08, 0.609735, 0.496916, 0.945621, -1.4516, -50.5785, 2.5713)
+transform = Transform3D(0.8763, 0.714157, -0.484746, -0.777047, 0.953467, 2.54778e-08, 0.375763, 0.306236, 1.13045, -1.4516, -50.5785, 2.5713)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp"]
-transform = Transform3D(0.980024, -0.0162798, 0.198212, -0.0162798, 0.986732, 0.161537, -0.198212, -0.161537, 0.966756, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_b3x3g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp"]
+shape = SubResource("BoxShape3D_4jhlv")
+
+[node name="Ramp3" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 2.58645)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7y5iv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp3"]
+shape = SubResource("BoxShape3D_4jhlv")
+
+[node name="Ramp4" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 1.71846)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7y5iv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp4"]
+shape = SubResource("BoxShape3D_4jhlv")
+
+[node name="Ramp5" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 0.78635)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7y5iv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp5"]
 shape = SubResource("BoxShape3D_4jhlv")
 
 [node name="Building" type="StaticBody3D" parent="World/LightmapGI/Ring"]
