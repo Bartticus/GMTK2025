@@ -43,7 +43,7 @@ func visuals_handler(delta: float) -> void:
 	
 	smoothed_velocity = smoothed_velocity.lerp(marble.linear_velocity, delta * 7.0)
 	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx() \
-	and smoothed_velocity != Vector3.ZERO:
+	and not smoothed_velocity.is_zero_approx():
 		look_at(global_position + smoothed_velocity)
 	
 	marble_mesh.global_rotation = marble.global_rotation
