@@ -7,7 +7,7 @@ extends Node3D
 
 @onready var y_rot : float = 0.0
 
-@onready var alpha : float = 1.0
+@onready var alpha : float = 0.0
 @onready var arrow : Sprite3D = $GroundPath
 
 @onready var sprites : Array = [$Sprites, $Sprites/Sprite1, $Sprites/Sprite2, $Sprites/Sprite3, $Sprites/Sprite4, $Sprites/Sprite5]
@@ -41,13 +41,8 @@ func _process(delta: float) -> void:
 		var sprite_color : Color = start_color
 		sprites[0].modulate = sprite_color.lerp(end_color, drift_lerp)
 	else:
-		alpha = lerpf(alpha, 0.0, delta*14.0)
-		
 		if drifting_timer > 0.0:
-			#arrow.scale = Vector3.ONE * 0.6
-			#arrow.position.z = 0.45
 			alpha = 0.0
-		
 		drifting_timer = 0.0
 		
 	sprites[0].modulate.a = alpha

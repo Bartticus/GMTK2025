@@ -6,12 +6,13 @@
 [ext_resource type="Script" uid="uid://db5fnaevwh8s4" path="res://Scenes/marble/impact_fx.gd" id="4_mowa8"]
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
 [ext_resource type="Script" uid="uid://lr7yfx68wgra" path="res://Scenes/marble/camera.gd" id="6_whwca"]
+[ext_resource type="FastNoiseLite" uid="uid://dy1pf1f0gay07" path="res://Scenes/marble/camera_shake_noise.tres" id="7_a0fhv"]
 [ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
-[ext_resource type="Script" path="res://Scenes/marble/third_person_camera.gd" id="8_0ovb4"]
+[ext_resource type="Script" uid="uid://cgh2hm7ll7wn4" path="res://Scenes/marble/third_person_camera.gd" id="8_0ovb4"]
 [ext_resource type="AudioStream" uid="uid://bpfed2lli6vwn" path="res://Sounds/wind.mp3" id="8_ywu4v"]
 [ext_resource type="Texture2D" uid="uid://n2hq6sdny8n8" path="res://Textures/Tx_Burst_radial_01_MEDIUM - Tile02.png" id="9_xfd6w"]
 [ext_resource type="Texture2D" uid="uid://dnooj036jptk4" path="res://Textures/smoke_01.png" id="10_lhqa5"]
-[ext_resource type="Script" path="res://Scenes/marble/drift_fx.gd" id="11_0ovb4"]
+[ext_resource type="Script" uid="uid://dig1kwpgvdnbt" path="res://Scenes/marble/drift_fx.gd" id="11_0ovb4"]
 [ext_resource type="Texture2D" uid="uid://cko8grym2ewym" path="res://Thaddeus/FX/Tx_Burst_directional_03_MEDIUM.png" id="11_fmvk0"]
 [ext_resource type="Texture2D" uid="uid://dv5adohal76fj" path="res://Thaddeus/FX/Tx_Smoke_seq_02.png" id="13_55j5u"]
 [ext_resource type="Texture2D" uid="uid://csbbr8ircbd6u" path="res://Thaddeus/FX/Tx_Burst_directional_02_MEDIUM.png" id="13_i5nwi"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://tootnw03vocd" path="res://Thaddeus/FX/Tx_Burst_radial_04.png" id="14_koch1"]
 [ext_resource type="Texture2D" uid="uid://dg4mufql1wdv7" path="res://Thaddeus/FX/ATS_Orna_Corner_174.png" id="14_ld4xo"]
 [ext_resource type="Texture2D" uid="uid://cfywbdb0h7pj0" path="res://Thaddeus/FX/frame_002_SMALL.png" id="15_47kih"]
-[ext_resource type="Script" path="res://Scenes/marble/spring_arm_3d.gd" id="19_470xv"]
+[ext_resource type="Script" uid="uid://7e2wfwwbg6rh" path="res://Scenes/marble/spring_arm_3d.gd" id="19_470xv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
@@ -45,13 +46,6 @@ uv1_triplanar = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_mowa8"]
 material = SubResource("StandardMaterial3D_lpkg8")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_whwca"]
-noise_type = 3
-frequency = 0.99
-fractal_octaves = 3
-fractal_lacunarity = 1.615
-fractal_gain = 6.795
 
 [sub_resource type="Curve" id="Curve_o7fp8"]
 _data = [Vector2(0, 0), 0.0, 3.16533, 0, 0, Vector2(0.102941, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.20225, 0.0, 0, 0]
@@ -212,7 +206,7 @@ radius = 0.3
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
 contact_monitor = true
-max_contacts_reported = 24
+max_contacts_reported = 28
 script = ExtResource("1_qlpfi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -249,7 +243,7 @@ far = 2000.0
 script = ExtResource("6_whwca")
 marble = NodePath("../..")
 pivot = NodePath("..")
-shake_noise = SubResource("FastNoiseLite_whwca")
+shake_noise = ExtResource("7_a0fhv")
 
 [node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_mlxtt")
@@ -445,3 +439,4 @@ current = true
 script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0
+shake_noise = ExtResource("7_a0fhv")
