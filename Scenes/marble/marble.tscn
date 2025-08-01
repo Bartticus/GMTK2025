@@ -189,9 +189,9 @@ vframes = 2
 transform = Transform3D(1, 0, 0, 0, 0.93358, 0.358368, 0, -0.358368, 0.93358, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor" node_paths=PackedStringArray("marble", "pivot")]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.747906, 2.96204)
+transform = Transform3D(1, 0, 0, 0, 0.979439, -0.201745, 0, 0.201745, 0.979439, 0, 0.747906, 2.96204)
 current = true
-far = 200.0
+far = 2000.0
 script = ExtResource("6_whwca")
 marble = NodePath("../..")
 pivot = NodePath("..")
