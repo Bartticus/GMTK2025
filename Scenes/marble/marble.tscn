@@ -423,3 +423,7 @@ script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0
 shake_noise = ExtResource("7_a0fhv")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
