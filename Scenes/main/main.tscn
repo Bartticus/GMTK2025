@@ -1,13 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=29 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
-[ext_resource type="Script" path="res://Scenes/main/main.gd" id="1_hgq70"]
+[ext_resource type="Script" uid="uid://siacv54rween" path="res://Scenes/main/main.gd" id="1_hgq70"]
 [ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
 [ext_resource type="Material" uid="uid://bkvo47d3laj1v" path="res://Thaddeus/Visdev.tres" id="2_wcurd"]
 [ext_resource type="PackedScene" uid="uid://e3yd7vkq41oi" path="res://Scenes/ring/ring.tscn" id="3_4etoo"]
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
-[ext_resource type="PackedScene" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -266,3 +267,6 @@ omni_range = 2000.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -198.062, 20.9202)
 physics_material_override = SubResource("PhysicsMaterial_4etoo")
 angular_damp = 0.1
+
+[node name="Bag" parent="." instance=ExtResource("9_8lqer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49804, -201.918, 17.9035)
