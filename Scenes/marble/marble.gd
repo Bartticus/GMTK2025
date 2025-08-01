@@ -26,7 +26,7 @@ extends RigidBody3D
 @onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
 @onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
 
-@onready var windSFX : AudioStreamPlayer3D = $windSFX
+@onready var windSFX : AudioStreamPlayer = $windSFX
 
 var initial_friction: float
 var input_vector: Vector3
@@ -199,6 +199,7 @@ func is_on_floor() -> bool:
 func audio_handler() -> void:
 	#audio
 	var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
+	var windVOL = linear_velocity.length()
 	
 	#if groundDetectionAudio.is_colliding():
 	if is_on_floor():
@@ -206,5 +207,4 @@ func audio_handler() -> void:
 	else:
 		rollSFX.volume_linear = 0
 	
-	windSFX.volume_linear = marbleVOL / 100
-	
+	windSFX.volume_linear = windVOL / 50
