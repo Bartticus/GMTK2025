@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=44 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -144,6 +144,8 @@ scale_min = 0.1
 scale_max = 5.0
 scale_curve = SubResource("CurveTexture_ld4xo")
 color_ramp = SubResource("GradientTexture1D_47kih")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
 turbulence_enabled = true
 turbulence_noise_strength = 1.35
 turbulence_noise_scale = 3.595
@@ -159,7 +161,11 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("10_lhqa5")
+billboard_mode = 3
 billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_a0fhv"]
 material = SubResource("StandardMaterial3D_470xv")
@@ -169,6 +175,7 @@ lifetime_randomness = 0.19
 emission_shape = 1
 emission_sphere_radius = 0.01
 gravity = Vector3(0, 0.2, 0)
+scale_min = 0.1
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_ld4xo")
 color_ramp = SubResource("GradientTexture1D_47kih")
@@ -266,7 +273,6 @@ autoplay = true
 
 [node name="Particles" type="Node3D" parent="."]
 top_level = true
-visible = false
 
 [node name="DriftSparkParticles1" type="GPUParticles3D" parent="Particles"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)

@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 		
 	sprites[0].modulate.a = alpha
 	arrow.modulate.a = alpha
-	#print(small_sprites[0].frame)
+	
 	if alpha > 0.1:
 		sprites_frame_timer += delta
 		small_sprites_frame_timer += delta
