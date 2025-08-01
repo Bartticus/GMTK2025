@@ -18,26 +18,31 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.0
 
+@onready var linear_velocity_lastframe : Vector3 = Vector3.ZERO
+
 func _ready() -> void:
 	top_level = true
 	impact_fx.top_level = true
 	impact_fx.visible = false
 
-func impact(intensity : float = 0.0, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
+
+
+func impact(intensity : float = 0.0, contacted : bool = false, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
 	squash_timer = squash_length
 	squash_intensity = lerpf(0.0, 1.5, intensity)
 	
 	marble.camera.camera_shake = 1.0
-	
-	var fx : Node3D = impact_fx.duplicate()
-	add_child(fx)
-	fx.visible = true
-	fx.global_position = contact_position
-	if not Vector3.UP.cross(-normal.normalized()).is_zero_approx():
-		fx.look_at(contact_position + normal)
-	fx.sprite.rotate_z(randf())
+	if contacted:
+		var fx : Node3D = impact_fx.duplicate()
+		add_child(fx)
+		fx.visible = true
+		fx.global_position = contact_position
+		if not Vector3.UP.cross(-normal.normalized()).is_zero_approx():
+			fx.look_at(contact_position + normal)
+		fx.sprite.rotate_z(randf())
 
 func visuals_handler(delta: float) -> void:
+	
 	set_identity()
 	global_position = marble.global_position
 	
@@ -65,14 +70,18 @@ func visuals_handler(delta: float) -> void:
 			contact_normal = state.get_contact_local_normal(i)
 		biggest_impulse = max(biggest_impulse, state.get_contact_impulse(i).length())
 	
+	var velocity_change = (marble.linear_velocity-linear_velocity_lastframe).length() - 5.0#anthing lower isn't a change that'll make us squash 
+	linear_velocity_lastframe = marble.linear_velocity
 	
 	biggest_impulse -= impulse_minimum_impact
 	if biggest_impulse > 0.0:
 		var impact_scale = biggest_impulse / squash_distortion_max_velocity
 		impact_scale = min(impact_scale, 1.0)
-		impact(impact_scale, contact_position, contact_normal)
-	#else:
-		#contact_normal = Vector3.ZERO
+		impact(impact_scale, true, contact_position, contact_normal)
+	elif velocity_change > 0.0:
+			velocity_change = velocity_change / 15.0
+			velocity_change = min(velocity_change, 1.0)#now a lerp
+			impact(velocity_change)
 	
 	var new_scale : Vector3 = Vector3.ONE
 	new_scale.z = lerpf(1.0, 1.0 + (0.2 * scale_distortion_scale), speed_factor)
@@ -86,3 +95,4 @@ func visuals_handler(delta: float) -> void:
 		new_scale.x += squash_x_curve.sample_baked(squash_lerp) * squash_intensity
 	
 	scale_object_local(new_scale)
+	
