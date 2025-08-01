@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://wlw7qrjti27i"]
+[gd_scene load_steps=6 format=3 uid="uid://wlw7qrjti27i"]
+
+[ext_resource type="ArrayMesh" uid="uid://bgs7ktlm8mh6y" path="res://Scenes/bag/bag.obj" id="1_ad4vs"]
+[ext_resource type="Script" uid="uid://dftua85s7brxj" path="res://Scenes/bag/bag.gd" id="1_ylb2f"]
+
+[sub_resource type="Curve" id="Curve_ylb2f"]
+_data = [Vector2(0, 0), 0.0, 0.0592311, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylb2f"]
+albedo_color = Color(1, 0.75, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.74902, 0, 1)
+emission_energy_multiplier = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gyv"]
+albedo_color = Color(0.101241, 0.101241, 0.101241, 1)
 
 [node name="Bag" type="Node3D"]
+script = ExtResource("1_ylb2f")
+hover_curve = SubResource("Curve_ylb2f")
+
+[node name="BagMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_ad4vs")
+surface_material_override/0 = SubResource("StandardMaterial3D_ylb2f")
+surface_material_override/1 = SubResource("StandardMaterial3D_r3gyv")
