@@ -3,6 +3,7 @@ extends Node3D
 
 @onready var currently_drifting : bool = false
 @onready var drifting_timer : float = 0.0
+@onready var drift_lerp : float = 0.0
 @onready var current_move_rot : float = 0.0#Vector2 = Vector2.ZERO
 
 @onready var y_rot : float = 0.0
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 	if currently_drifting:
 		alpha = lerpf(alpha, 0.9, delta*10.0)
 		drifting_timer += delta
-		var drift_lerp : float = drifting_timer / 2.0
+		drift_lerp = drifting_timer / 2.0
 		drift_lerp = min(drift_lerp, 1.0)
 		
 		drift_lerp = intensity_curve.sample_baked(drift_lerp)
@@ -44,6 +45,7 @@ func _process(delta: float) -> void:
 		if drifting_timer > 0.0:
 			alpha = 0.0
 		drifting_timer = 0.0
+		drift_lerp = 0.0
 		
 	sprites[0].modulate.a = alpha
 	arrow.modulate.a = alpha
