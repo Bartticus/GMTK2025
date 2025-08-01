@@ -7,7 +7,6 @@ extends RigidBody3D
 
 @onready var visuals : Node3D = $Visuals
 @onready var camera_anchor: Node3D = $CameraAnchor
-#@onready var camera: Camera3D = $CameraAnchor/Camera3D
 @onready var camera: Camera3D = $SpringArmPivot/ThirdPersonCamera
 @onready var spring_arm_pivot: Node3D = $SpringArmPivot
 
@@ -67,15 +66,12 @@ func movement_handler(delta: float) -> void:
 		dir_diff_lerp *= 0.5#now a 0 to 1 range instead of -1 to 1
 		f_input = lerpf(fully_slowed_input.x, f_input, dir_diff_lerp)
 		h_input = lerpf(fully_slowed_input.y, h_input, dir_diff_lerp)
-		print(Vector2(h_input, f_input).length())
 	
 	var camera_transform = camera.get_camera_transform()
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
 	
-	
-	#print(angular_velocity.length())
 	
 	apply_torque(f_force)
 	apply_torque(h_force)
@@ -84,11 +80,12 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 	
-	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
-		drift_fx.current_move_rot = atan2(h_force.z, -f_force.x)#Vector2(f_force.x, h_force.z)
+	if true:#abs(f_input) > 0.1 or abs(h_input) > 0.1:
+		var look_vec : Vector2 = Vector2(-input_vector.z, input_vector.x)
+		look_vec = look_vec.rotated(-camera.global_rotation.y)
+		drift_fx.current_move_rot = atan2(look_vec.y, -look_vec.x)
 	else:
-		drift_fx.current_move_rot = -atan2(linear_velocity.x, -linear_velocity.z)
-	
+		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + 1.5707963267949
 	
 	f_force = f_input * linear_force * delta * camera_transform.basis.z.normalized()
 	h_force = h_input * linear_force * delta * camera_transform.basis.x.normalized()

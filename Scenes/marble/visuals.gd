@@ -27,7 +27,7 @@ func impact(intensity : float = 0.0, contact_position : Vector3 = Vector3.ZERO, 
 	squash_timer = squash_length
 	squash_intensity = lerpf(0.0, 0.5, intensity)
 	
-	#marble.camera.camera_shake = 1.0
+	marble.camera.camera_shake = 1.0
 	
 	var fx : Node3D = impact_fx.duplicate()
 	add_child(fx)

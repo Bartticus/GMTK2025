@@ -1,12 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=28 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
+[ext_resource type="Script" uid="uid://siacv54rween" path="res://Scenes/main/main.gd" id="1_hgq70"]
 [ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
 [ext_resource type="Material" uid="uid://bkvo47d3laj1v" path="res://Thaddeus/Visdev.tres" id="2_wcurd"]
 [ext_resource type="PackedScene" uid="uid://e3yd7vkq41oi" path="res://Scenes/ring/ring.tscn" id="3_4etoo"]
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
-[ext_resource type="PackedScene" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -94,6 +95,7 @@ rough = true
 bounce = 0.2
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_hgq70")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jjvhh")
@@ -169,7 +171,6 @@ transform = Transform3D(0.0965263, 0, -0.364951, 0, 0.3775, 0, 0.364951, 0, 0.09
 transform = Transform3D(0.8763, 0.714157, -0.484746, -0.777047, 0.953467, 2.54778e-08, 0.375763, 0.306236, 1.13045, -1.4516, -50.5785, 2.5713)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_b3x3g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp"]
@@ -179,7 +180,6 @@ shape = SubResource("BoxShape3D_4jhlv")
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 2.58645)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_7y5iv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp3"]
@@ -189,7 +189,6 @@ shape = SubResource("BoxShape3D_4jhlv")
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 1.71846)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_7y5iv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp4"]
@@ -199,7 +198,6 @@ shape = SubResource("BoxShape3D_4jhlv")
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 0.78635)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Ramp5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_7y5iv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Ramp5"]
