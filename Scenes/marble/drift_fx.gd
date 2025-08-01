@@ -11,7 +11,7 @@ extends Node3D
 @onready var alpha : float = 0.0
 @onready var arrow : Sprite3D = $GroundPath
 
-@onready var sprites : Array = [$Sprites, $Sprites/Sprite1, $Sprites/Sprite2, $Sprites/Sprite3, $Sprites/Sprite4, $Sprites/Sprite5]
+@onready var sprites : Array = [$Sprites, $Sprites/Sprite1, $Sprites/Sprite2, $Sprites/Sprite3, $Sprites/Sprite4]
 @onready var small_sprites : Array = [$Sprites/SmallSprite1, $Sprites/SmallSprite2]
 @onready var sprites_frame_timer : float = 0.0
 @onready var small_sprites_frame_timer : float = 0.1

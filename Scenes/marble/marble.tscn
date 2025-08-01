@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=46 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://dig1kwpgvdnbt" path="res://Scenes/marble/drift_fx.gd" id="11_0ovb4"]
 [ext_resource type="Texture2D" uid="uid://cko8grym2ewym" path="res://Thaddeus/FX/Tx_Burst_directional_03_MEDIUM.png" id="11_fmvk0"]
 [ext_resource type="Texture2D" uid="uid://ckc7oovd6hyrk" path="res://Textures/scorch_01.png" id="11_ju2gt"]
-[ext_resource type="Texture2D" uid="uid://dv5adohal76fj" path="res://Thaddeus/FX/Tx_Smoke_seq_02.png" id="13_55j5u"]
 [ext_resource type="Texture2D" uid="uid://csbbr8ircbd6u" path="res://Thaddeus/FX/Tx_Burst_directional_02_MEDIUM.png" id="13_i5nwi"]
 [ext_resource type="Texture2D" uid="uid://c8157rn7lsfb7" path="res://Thaddeus/FX/hexlinegradientlinesbeveled.png" id="13_o7fp8"]
 [ext_resource type="Texture2D" uid="uid://be3p3qb4avm62" path="res://Thaddeus/FX/frame02.png" id="14_470xv"]
@@ -359,15 +358,6 @@ texture = ExtResource("11_fmvk0")
 hframes = 3
 vframes = 2
 frame = 5
-
-[node name="Sprite5" type="Sprite3D" parent="DriftFX/Sprites"]
-transform = Transform3D(-0.00486256, -0.00880779, 0.494864, -0.0129586, 0.494521, 0.00849698, -0.319701, -0.0199108, -0.00787117, -0.0577485, -0.0695366, 0.0825539)
-sorting_offset = 4.0
-offset = Vector2(54.79, 153.805)
-pixel_size = 0.003
-texture = ExtResource("13_55j5u")
-hframes = 3
-vframes = 2
 
 [node name="Sprite" type="Sprite3D" parent="DriftFX/Sprites"]
 transform = Transform3D(-0.0456075, -0.038764, -0.752624, 0.661433, 0.359304, -0.0585875, 0.361181, -0.66289, 0.0122554, -0.00477856, -0.465425, -0.00037649)
