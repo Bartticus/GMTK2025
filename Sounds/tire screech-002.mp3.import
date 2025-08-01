@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cuo6w0to62edl"
+path="res://.godot/imported/tire screech-002.mp3-d7de9bb6bf510e68d6ad408341403f17.mp3str"
+
+[deps]
+
+source_file="res://Sounds/tire screech-002.mp3"
+dest_files=["res://.godot/imported/tire screech-002.mp3-d7de9bb6bf510e68d6ad408341403f17.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
