@@ -1,6 +1,6 @@
 extends Node3D
 
-
+@onready var ambi : AudioStreamPlayer = $"Street Ambi"
 
 
 func _ready() -> void:

@@ -113,8 +113,8 @@ func movement_handler(delta: float) -> void:
 		var boost : float = drift_fx.drifting_timer / 0.8
 		boost = min(boost, 1.0)
 		boost *= drifting_velocity_boost
-		apply_central_impulse(drifting_last_keyboard_f_force*boost)
-		apply_central_impulse(-drifting_last_keyboard_h_force*boost)
+		apply_central_impulse(drifting_last_keyboard_f_force * boost * rot_speed_factor)
+		apply_central_impulse(-drifting_last_keyboard_h_force * boost * rot_speed_factor)
 		drifting_last_keyboard_f_force = Vector3.ZERO
 		drifting_last_keyboard_h_force = Vector3.ZERO
 	
@@ -154,18 +154,21 @@ func drift_handler(delta) -> void:
 		drift_fx.currently_drifting = false
 		particle_handler(false, true)
 
-var rot_speed: float
 var contact_pos: Vector3
+var rot_speed_factor: float
+
 func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
-	rot_speed = angular_velocity.length()
-	var draw_size: Vector2 = Vector2(rot_speed, rot_speed) / 100
+	rot_speed_factor = angular_velocity.length() / max_angular_vel
+	var draw_size: Vector2 = Vector2(rot_speed_factor, rot_speed_factor)
 	spark_particles1.draw_pass_1.size = draw_size
 	
-	var hue: float = 0
-	if abs(rot_speed) < 50:
-		hue = .6
-	elif abs(rot_speed) < 100:
-		hue = .08
+	var hue: float
+	if abs(rot_speed_factor) < .4: #slow
+		hue = .6 #blue
+	elif abs(rot_speed_factor) < .7: #medium
+		hue = .83 #red
+	else: #fast
+		hue = 0 #purple
 	var new_color = Color.from_hsv(hue, 1 , 100)
 	spark_particles1.draw_pass_1.material.albedo_color = new_color
 	

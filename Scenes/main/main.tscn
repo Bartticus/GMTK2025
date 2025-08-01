@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
 [ext_resource type="PackedScene" uid="uid://dsx7far2k206t" path="res://Models/Crane.tscn" id="11_7y5iv"]
+[ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="11_7y5iv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -468,3 +469,9 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Bags: 0"
 label_settings = SubResource("LabelSettings_8lqer")
+
+[node name="Street Ambi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_7y5iv")
+autoplay = true
+bus = &"verb"
+parameters/looping = true
