@@ -23,11 +23,10 @@ extends RigidBody3D
 
 @onready var windSFX : AudioStreamPlayer3D = $windSFX
 
-var camera_initial_pos: Vector3
 var initial_friction: float
+var input_vector: Vector3
 
 func _ready() -> void:
-	camera_initial_pos = camera.position
 	camera_anchor.top_level = true
 	groundDetection1.top_level = true
 	drift_fx.top_level = true
@@ -43,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	visuals.visuals_handler(delta)
 	audio_handler()
 	
-	camera_anchor.global_position = global_position# + camera_initial_pos
+	camera_anchor.global_position = global_position
 	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
@@ -51,8 +50,9 @@ func _physics_process(delta: float) -> void:
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
 	var h_input = Input.get_action_raw_strength("left") - Input.get_action_raw_strength("right")
+	input_vector = Vector3(h_input, 0, -f_input) * 0.25
 	
-	var camera_transform = camera.get_camera_transform()#camera_anchor.global_transform
+	var camera_transform = camera.get_camera_transform()
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
@@ -73,7 +73,9 @@ func movement_handler(delta: float) -> void:
 var new_friction: float = 0
 
 func drift_handler(delta) -> void:
-	if not is_on_floor(): return
+	if not is_on_floor():
+		particle_handler(false)
+		return
 	
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
@@ -88,8 +90,8 @@ func drift_handler(delta) -> void:
 		if new_friction < max_friction:
 			new_friction += 20
 		
-		handle_particles(true)
 		drift_fx.currently_drifting = true
+		particle_handler(true)
 	
 	elif Input.is_action_just_released("drift"):
 		physics_material_override.friction = new_friction
@@ -97,24 +99,43 @@ func drift_handler(delta) -> void:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "physics_material_override:friction", initial_friction, 2)
 		
-		handle_particles(false)
 		drift_fx.currently_drifting = false
+		particle_handler(false)
 
-func handle_particles(is_drifting: bool) -> void:
+var contact_pos: Vector3
+var rot_speed: float
+func particle_handler(is_drifting: bool) -> void:
+	rot_speed = angular_velocity.length()
+	var draw_size: Vector2 = Vector2(rot_speed, rot_speed) / 100
+	spark_particles1.draw_pass_1.size = draw_size
+	var hue: float = 0
+	if abs(rot_speed) < 50:
+		hue = .6
+	elif abs(rot_speed) < 100:
+		hue = .08
+	print(hue)
+	print(rot_speed)
+	var new_color = Color.from_hsv(hue, 1 , 100)
+	print(new_color)
+	spark_particles1.draw_pass_1.material.albedo_color = new_color
+	print(spark_particles1.draw_pass_1.material.albedo_color)
+	
 	spark_particles1.emitting = is_drifting
 	spark_particles2.emitting = is_drifting
 	
-	smoke_particles1.emitting = not is_drifting
-	smoke_particles2.emitting = not is_drifting
+	if not is_drifting:
+		smoke_particles1.restart()
+		smoke_particles1.emitting = true
+		smoke_particles1.global_position = particles.global_position + input_vector
+	smoke_particles2.emitting = is_drifting
 	
 	
 	var state = PhysicsServer3D.body_get_direct_state(get_rid())
 	if state:
 		for i in state.get_contact_count():
 			contact_pos = state.get_contact_local_position(i)
-	print(contact_pos)
 	
-	particles.global_position = contact_pos
+	particles.global_position = contact_pos + input_vector
 	
 func is_on_floor() -> bool:
 	for body in get_colliding_bodies():
@@ -134,10 +155,3 @@ func audio_handler() -> void:
 	
 	windSFX.volume_linear = marbleVOL / 100
 	
-
-var contact_pos: Vector3
-#func _on_body_entered(body: Node) -> void:
-	#var state = PhysicsServer3D.body_get_direct_state(get_rid())
-	#if state:
-		#for i in state.get_contact_count():
-			#contact_pos = state.get_contact_local_position(i)
