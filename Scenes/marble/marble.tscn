@@ -71,11 +71,10 @@ hue_variation_max = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ovb4"]
 transparency = 1
-blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0, 0.4, 1, 1)
+albedo_color = Color(0, 0.6, 1, 1)
 albedo_texture = ExtResource("9_xfd6w")
 billboard_mode = 3
 billboard_keep_scale = true
