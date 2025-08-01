@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfywbdb0h7pj0"
-path.s3tc="res://.godot/imported/frame_002_SMALL.png-1bde7503f514ecfa4207122f827187f8.s3tc.ctex"
+uid="uid://be3p3qb4avm62"
+path.s3tc="res://.godot/imported/frame02.png-508b9de52a95280d253078424ec52e15.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Thaddeus/FX/frame_002_SMALL.png"
-dest_files=["res://.godot/imported/frame_002_SMALL.png-1bde7503f514ecfa4207122f827187f8.s3tc.ctex"]
+source_file="res://Thaddeus/FX/frame02.png"
+dest_files=["res://.godot/imported/frame02.png-508b9de52a95280d253078424ec52e15.s3tc.ctex"]
 
 [params]
 
