@@ -482,6 +482,7 @@ label_settings = SubResource("LabelSettings_8lqer")
 
 [node name="Street Ambi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_7y5iv")
+volume_db = -7.0
 autoplay = true
 bus = &"verb"
 parameters/looping = true

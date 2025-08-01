@@ -253,9 +253,10 @@ target_position = Vector3(0, -3, 0)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 target_position = Vector3(0, -3, 0)
 
-[node name="windSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="windSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_ywu4v")
 autoplay = true
+parameters/looping = true
 
 [node name="Particles" type="Node3D" parent="."]
 top_level = true
