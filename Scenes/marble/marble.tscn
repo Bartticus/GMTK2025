@@ -413,6 +413,7 @@ spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0
 shake_noise = ExtResource("7_a0fhv")
 
+<<<<<<< HEAD
 [node name="Audio" type="Node" parent="."]
 
 [node name="windSFX" type="AudioStreamPlayer" parent="Audio"]
@@ -425,3 +426,8 @@ stream = ExtResource("7_mlxtt")
 volume_db = -2.883
 max_db = 0.0
 autoplay = true
+=======
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+>>>>>>> 97206040e22c3c0d8a377aab62ed961ee6ea770b
