@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=31 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
 [ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
+[ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -94,6 +95,10 @@ size = Vector3(50, 2, 50)
 friction = 5.0
 rough = true
 bounce = 0.2
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lqer"]
+font = ExtResource("10_ra8v3")
+font_size = 38
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_hgq70")
@@ -270,3 +275,18 @@ angular_damp = 0.1
 
 [node name="Bag" parent="." instance=ExtResource("9_8lqer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49804, -201.918, 17.9035)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Bags: 0"
+label_settings = SubResource("LabelSettings_8lqer")
