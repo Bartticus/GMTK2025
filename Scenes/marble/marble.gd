@@ -6,7 +6,9 @@ extends RigidBody3D
 
 @onready var visuals : Node3D = $Visuals
 @onready var camera_anchor: Node3D = $CameraAnchor
-@onready var camera: Camera3D = $CameraAnchor/Camera3D
+#@onready var camera: Camera3D = $CameraAnchor/Camera3D
+@onready var camera: Camera3D = $SpringArmPivot/ThirdPersonCamera
+@onready var spring_arm_pivot: Node3D = $SpringArmPivot
 
 @onready var drift_fx : Node3D = $DriftFX
 @onready var particles: Node3D = $Particles
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
+	spring_arm_pivot.position = self.position
 
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
@@ -102,33 +105,30 @@ func drift_handler(delta) -> void:
 		drift_fx.currently_drifting = false
 		particle_handler(false)
 
-var contact_pos: Vector3
 var rot_speed: float
+var contact_pos: Vector3
 func particle_handler(is_drifting: bool) -> void:
 	rot_speed = angular_velocity.length()
 	var draw_size: Vector2 = Vector2(rot_speed, rot_speed) / 100
 	spark_particles1.draw_pass_1.size = draw_size
+	
 	var hue: float = 0
 	if abs(rot_speed) < 50:
 		hue = .6
 	elif abs(rot_speed) < 100:
 		hue = .08
-	print(hue)
-	print(rot_speed)
 	var new_color = Color.from_hsv(hue, 1 , 100)
-	print(new_color)
 	spark_particles1.draw_pass_1.material.albedo_color = new_color
-	print(spark_particles1.draw_pass_1.material.albedo_color)
 	
 	spark_particles1.emitting = is_drifting
 	spark_particles2.emitting = is_drifting
 	
 	if not is_drifting:
 		smoke_particles1.restart()
-		smoke_particles1.emitting = true
 		smoke_particles1.global_position = particles.global_position + input_vector
-	smoke_particles2.emitting = is_drifting
 	
+	smoke_particles1.emitting = !is_drifting
+	smoke_particles2.emitting = is_drifting
 	
 	var state = PhysicsServer3D.body_get_direct_state(get_rid())
 	if state:
