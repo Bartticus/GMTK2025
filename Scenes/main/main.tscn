@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=32 format=3 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
+[ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="11_7y5iv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -286,7 +287,14 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Control"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Bags: 0"
 label_settings = SubResource("LabelSettings_8lqer")
+
+[node name="Street Ambi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_7y5iv")
+autoplay = true
+bus = &"verb"
+parameters/looping = true

@@ -6,4 +6,4 @@ extends Node
 	set(value):
 		bags_gotten = value
 		Global.main.set_bag_count()
-		
+	
