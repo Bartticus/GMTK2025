@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsx7far2k206t"]
+
+[ext_resource type="PackedScene" uid="uid://bhw0x35eaghoe" path="res://Models/crane.blend" id="1_bxdq7"]
+
+[node name="Crane" type="Node3D"]
+
+[node name="crane" parent="." instance=ExtResource("1_bxdq7")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[editable path="crane"]
