@@ -21,6 +21,7 @@ albedo_color = Color(0.101241, 0.101241, 0.101241, 1)
 size = Vector3(1.5, 2.5, 1.5)
 
 [node name="Bag" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 script = ExtResource("1_ylb2f")
 hover_curve = SubResource("Curve_ylb2f")
 white_mat = ExtResource("2_r3gyv")
