@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
-[ext_resource type="PackedScene" uid="uid://dsx7far2k206t" path="res://Models/Crane.tscn" id="11_7y5iv"]
 [ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="11_7y5iv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
@@ -437,8 +436,18 @@ light_size = 0.223
 light_bake_mode = 1
 omni_range = 2000.0
 
-[node name="Crane" parent="World/LightmapGI" instance=ExtResource("11_7y5iv")]
+[node name="Crane" parent="World/LightmapGI"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(0.621503, 0, -0.783412, 0, 1, 0, 0.783412, 0, 0.621503, -36.0503, -343.511, -48.8915)
+script = null
 
 [node name="rooftest" parent="World/LightmapGI" instance=ExtResource("9_io28c")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -202.109, 0)
