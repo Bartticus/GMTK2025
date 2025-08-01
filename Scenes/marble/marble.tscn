@@ -233,12 +233,6 @@ texture = ExtResource("5_0ro2e")
 hframes = 2
 vframes = 2
 
-[node name="rollSFX" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("7_mlxtt")
-volume_db = -2.883
-max_db = 0.0
-autoplay = true
-
 [node name="groundDetection1" type="RayCast3D" parent="."]
 target_position = Vector3(0, -4, 0)
 
@@ -252,11 +246,6 @@ target_position = Vector3(0, -3, 0)
 [node name="groundDetection3" type="RayCast3D" parent="groundDetection1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 target_position = Vector3(0, -3, 0)
-
-[node name="windSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_ywu4v")
-autoplay = true
-parameters/looping = true
 
 [node name="Particles" type="Node3D" parent="."]
 top_level = true
@@ -423,3 +412,16 @@ script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0
 shake_noise = ExtResource("7_a0fhv")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="windSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("8_ywu4v")
+autoplay = true
+parameters/looping = true
+
+[node name="rollSFX" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("7_mlxtt")
+volume_db = -2.883
+max_db = 0.0
+autoplay = true

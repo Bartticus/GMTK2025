@@ -20,13 +20,14 @@ extends RigidBody3D
 @onready var smoke_particles1: GPUParticles3D = $Particles/DriftSmokeParticles1
 @onready var smoke_particles2: GPUParticles3D = $Particles/DriftSmokeParticles1/DriftSmokeParticles2
 
-@onready var rollSFX : AudioStreamPlayer3D = $rollSFX
 @onready var groundDetectionAudio : RayCast3D = $groundDetection1/groundDetectionAudio
 @onready var groundDetection1 : RayCast3D = $groundDetection1
 @onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
 @onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
 
-@onready var windSFX : AudioStreamPlayer = $windSFX
+#audio
+@onready var rollSFX : AudioStreamPlayer3D = $Audio/rollSFX
+@onready var windSFX : AudioStreamPlayer = $Audio/windSFX
 
 var initial_friction: float
 var input_vector: Vector3
