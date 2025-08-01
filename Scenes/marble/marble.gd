@@ -32,6 +32,7 @@ var initial_friction: float
 var input_vector: Vector3
 
 func _ready() -> void:
+	Global.player = self
 	groundDetection1.top_level = true
 	drift_fx.top_level = true
 	

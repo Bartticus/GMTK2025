@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://wlw7qrjti27i"]
+[gd_scene load_steps=8 format=3 uid="uid://wlw7qrjti27i"]
 
 [ext_resource type="ArrayMesh" uid="uid://bgs7ktlm8mh6y" path="res://Scenes/bag/bag.obj" id="1_ad4vs"]
 [ext_resource type="Script" uid="uid://dftua85s7brxj" path="res://Scenes/bag/bag.gd" id="1_ylb2f"]
+[ext_resource type="Material" uid="uid://bclwfo8if28mf" path="res://Thaddeus/HitFlash.tres" id="2_r3gyv"]
 
 [sub_resource type="Curve" id="Curve_ylb2f"]
 _data = [Vector2(0, 0), 0.0, 0.0592311, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -16,12 +17,23 @@ emission_energy_multiplier = 0.7
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gyv"]
 albedo_color = Color(0.101241, 0.101241, 0.101241, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_r3gyv"]
+size = Vector3(1.5, 2.5, 1.5)
+
 [node name="Bag" type="Node3D"]
 script = ExtResource("1_ylb2f")
 hover_curve = SubResource("Curve_ylb2f")
+white_mat = ExtResource("2_r3gyv")
 
 [node name="BagMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("1_ad4vs")
 surface_material_override/0 = SubResource("StandardMaterial3D_ylb2f")
 surface_material_override/1 = SubResource("StandardMaterial3D_r3gyv")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("BoxShape3D_r3gyv")
