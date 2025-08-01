@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://belm2gc5ufb0a"]
+
+[ext_resource type="PackedScene" uid="uid://d0xcmanc4jui1" path="res://Models/gantry.glb" id="1_qqba8"]
+[ext_resource type="Material" uid="uid://bkvo47d3laj1v" path="res://Thaddeus/Visdev.tres" id="2_sr1x8"]
+[ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="3_2fipu"]
+
+[node name="Walkway" type="Node3D"]
+
+[node name="gantry2" parent="." instance=ExtResource("1_qqba8")]
+
+[node name="gantry" parent="gantry2" index="0"]
+surface_material_override/0 = ExtResource("2_sr1x8")
+surface_material_override/1 = ExtResource("3_2fipu")
+
+[editable path="gantry2"]

@@ -62,6 +62,7 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
 
 var new_friction: float = 0
+
 func drift_handler(delta) -> void:
 	if not is_on_floor(): return
 	
