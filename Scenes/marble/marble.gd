@@ -104,14 +104,15 @@ func movement_handler(delta: float) -> void:
 	else:
 		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + 1.5707963267949
 	
-	
-	
 	#linear_velocity.x = clampf(linear_velocity.x, -max_velocity, max_velocity)
 	#linear_velocity.z = clampf(linear_velocity.z, -max_velocity, max_velocity)
 	
 	if is_on_floor() and Input.is_action_just_released("drift"):
-		apply_central_impulse(drifting_last_keyboard_f_force*drifting_velocity_boost)
-		apply_central_impulse(-drifting_last_keyboard_h_force*drifting_velocity_boost)
+		var boost : float = drift_fx.drifting_timer / 0.8
+		boost = min(boost, 1.0)
+		boost *= drifting_velocity_boost
+		apply_central_impulse(drifting_last_keyboard_f_force*boost)
+		apply_central_impulse(-drifting_last_keyboard_h_force*boost)
 		drifting_last_keyboard_f_force = Vector3.ZERO
 		drifting_last_keyboard_h_force = Vector3.ZERO
 	
