@@ -10,6 +10,14 @@
 [ext_resource type="AudioStream" uid="uid://bpfed2lli6vwn" path="res://Sounds/wind.mp3" id="8_ywu4v"]
 [ext_resource type="Texture2D" uid="uid://n2hq6sdny8n8" path="res://Textures/Tx_Burst_radial_01_MEDIUM - Tile02.png" id="9_xfd6w"]
 [ext_resource type="Texture2D" uid="uid://dnooj036jptk4" path="res://Textures/smoke_01.png" id="10_lhqa5"]
+[ext_resource type="Script" uid="uid://dig1kwpgvdnbt" path="res://Scenes/marble/drift_fx.gd" id="11_0ovb4"]
+[ext_resource type="Texture2D" uid="uid://cko8grym2ewym" path="res://Thaddeus/FX/Tx_Burst_directional_03_MEDIUM.png" id="11_fmvk0"]
+[ext_resource type="Texture2D" uid="uid://dv5adohal76fj" path="res://Thaddeus/FX/Tx_Smoke_seq_02.png" id="13_55j5u"]
+[ext_resource type="Texture2D" uid="uid://csbbr8ircbd6u" path="res://Thaddeus/FX/Tx_Burst_directional_02_MEDIUM.png" id="13_i5nwi"]
+[ext_resource type="Texture2D" uid="uid://c8157rn7lsfb7" path="res://Thaddeus/FX/hexlinegradientlinesbeveled.png" id="13_o7fp8"]
+[ext_resource type="Texture2D" uid="uid://tootnw03vocd" path="res://Thaddeus/FX/Tx_Burst_radial_04.png" id="14_koch1"]
+[ext_resource type="Texture2D" uid="uid://dg4mufql1wdv7" path="res://Thaddeus/FX/ATS_Orna_Corner_174.png" id="14_ld4xo"]
+[ext_resource type="Texture2D" uid="uid://cfywbdb0h7pj0" path="res://Thaddeus/FX/frame_002_SMALL.png" id="15_47kih"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
@@ -184,6 +192,10 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_0ovb4"]
 material = SubResource("StandardMaterial3D_fmvk0")
 
+[sub_resource type="Curve" id="Curve_i5nwi"]
+_data = [Vector2(0, 0), 0.0, 2.91435, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Marble" type="RigidBody3D"]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
@@ -206,6 +218,7 @@ mesh = SubResource("SphereMesh_mowa8")
 skeleton = NodePath("../..")
 
 [node name="ImpactFX" type="Node3D" parent="Visuals"]
+visible = false
 script = ExtResource("4_mowa8")
 
 [node name="ImpactSprite" type="Sprite3D" parent="Visuals/ImpactFX"]
@@ -253,6 +266,7 @@ autoplay = true
 
 [node name="Particles" type="Node3D" parent="."]
 top_level = true
+visible = false
 
 [node name="DriftSparkParticles1" type="GPUParticles3D" parent="Particles"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
@@ -297,3 +311,111 @@ randomness = 0.44
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_lhqa5")
 draw_pass_1 = SubResource("QuadMesh_0ovb4")
+
+[node name="DriftFX" type="Node3D" parent="."]
+script = ExtResource("11_0ovb4")
+start_color = Color(0.729412, 1, 1, 1)
+end_color = Color(1, 0.862745, 0.509804, 1)
+intensity_curve = SubResource("Curve_i5nwi")
+
+[node name="Sprites" type="Sprite3D" parent="DriftFX"]
+transform = Transform3D(-1.16814e-08, 4.21216e-08, 1, 0.993019, 0.117953, 6.63143e-09, -0.117953, 0.993019, -4.32054e-08, 0, -0.354443, 0.45907)
+sorting_offset = 3.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("11_fmvk0")
+hframes = 3
+vframes = 2
+
+[node name="Sprite1" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(-0.834638, 0.432232, 0.0123962, 0.425311, 0.815738, 0.193085, 0.0780271, 0.177052, -0.919872, 0.0850097, -0.0331599, 0.230272)
+sorting_offset = 3.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("11_fmvk0")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="Sprite2" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(0.847659, 0.10647, -0.0341214, -0.0981139, 0.833492, 0.16337, 0.0536067, -0.158051, 0.838553, -0.0059492, -0.0280842, -0.243029)
+sorting_offset = 3.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("11_fmvk0")
+hframes = 3
+vframes = 2
+frame = 3
+
+[node name="Sprite3" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(-0.437258, 0.209357, -0.0999994, 0.231572, 0.406953, -0.160586, 0.0142934, -0.188636, -0.457425, 0.0460103, -0.43143, -0.441092)
+sorting_offset = 4.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("11_fmvk0")
+hframes = 3
+vframes = 2
+
+[node name="Sprite4" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(0.453884, 0.00556856, -0.100913, -0.0417612, 0.433136, -0.163932, 0.0920345, 0.169076, 0.423282, -0.00211346, -0.367085, 0.394322)
+sorting_offset = 3.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("11_fmvk0")
+hframes = 3
+vframes = 2
+frame = 5
+
+[node name="Sprite5" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(-0.00486256, -0.00880779, 0.494864, -0.0129586, 0.494521, 0.00849698, -0.319701, -0.0199108, -0.00787117, -0.0577485, -0.0695366, 0.0825539)
+sorting_offset = 4.0
+offset = Vector2(54.79, 153.805)
+pixel_size = 0.003
+texture = ExtResource("13_55j5u")
+hframes = 3
+vframes = 2
+
+[node name="Sprite" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(-0.0456075, -0.038764, -0.752624, 0.661433, 0.359304, -0.0585875, 0.361181, -0.66289, 0.0122554, -0.00477856, -0.465425, -0.00037649)
+sorting_offset = 4.0
+pixel_size = 0.003
+texture = ExtResource("14_koch1")
+
+[node name="SpriteStatic" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(0.0304074, 0.0326968, -0.753678, 0.0612217, -0.751909, -0.03015, -0.751899, -0.0599002, -0.0329343, -0.0145507, -0.0245822, -0.000376509)
+sorting_offset = 4.0
+pixel_size = 0.003
+texture = ExtResource("15_47kih")
+
+[node name="SmallSprite1" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(0.151314, -0.779238, 0.608187, 0.970192, -0.000743762, -0.242333, 0.189288, 0.626726, 0.7559, 0.190598, -0.21991, 0.609154)
+sorting_offset = 3.0
+pixel_size = 0.003
+texture = ExtResource("13_i5nwi")
+hframes = 2
+vframes = 2
+
+[node name="SmallSprite2" type="Sprite3D" parent="DriftFX/Sprites"]
+transform = Transform3D(0.132597, 0.85199, 0.334896, 0.886425, -0.034964, -0.262018, -0.228678, 0.35849, -0.821472, 0.152477, -0.269168, -0.636579)
+sorting_offset = 3.0
+pixel_size = 0.003
+texture = ExtResource("13_i5nwi")
+hframes = 2
+vframes = 2
+
+[node name="GroundPath" type="Sprite3D" parent="DriftFX"]
+transform = Transform3D(-3.51877e-08, 0.805, -3.51877e-08, 0, -3.51877e-08, -0.805, -0.805, -3.51877e-08, 1.5381e-15, 0, -0.444, 0.015)
+sorting_offset = 1.0
+modulate = Color(0.741176, 1, 1, 1)
+texture = ExtResource("13_o7fp8")
+
+[node name="Arrow" type="Sprite3D" parent="DriftFX/GroundPath"]
+transform = Transform3D(-0.714178, 0.714178, -3.62627e-15, -0.714178, -0.714178, -7.10543e-15, -9.29357e-15, 2.18814e-15, 1.01, 1.47607, 6.37807e-08, -0.0169338)
+sorting_offset = 2.0
+pixel_size = 0.002
+texture = ExtResource("14_ld4xo")
+
+[node name="Shadow" type="Sprite3D" parent="DriftFX/GroundPath"]
+transform = Transform3D(1.075, 0, 0, 0, 1.075, 8.97826e-23, 0, -8.97826e-23, 1.075, -0.138532, -1.35564e-08, 0.0183986)
+modulate = Color(0, 0, 0, 0.439216)
+texture = ExtResource("13_o7fp8")

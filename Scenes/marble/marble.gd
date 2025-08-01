@@ -8,6 +8,7 @@ extends RigidBody3D
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var camera: Camera3D = $CameraAnchor/Camera3D
 
+@onready var drift_fx : Node3D = $DriftFX
 @onready var particles: Node3D = $Particles
 @onready var spark_particles1: GPUParticles3D = $Particles/DriftSparkParticles1
 @onready var spark_particles2: GPUParticles3D = $Particles/DriftSparkParticles1/DriftSparkParticles2
@@ -28,6 +29,7 @@ var input_vector: Vector3
 func _ready() -> void:
 	camera_anchor.top_level = true
 	groundDetection1.top_level = true
+	drift_fx.top_level = true
 	
 	initial_friction = physics_material_override.friction
 	
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	audio_handler()
 	
 	camera_anchor.global_position = global_position
+	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
 
@@ -60,6 +63,12 @@ func movement_handler(delta: float) -> void:
 	angular_velocity.x = clampf(angular_velocity.x, -max_angular_vel, max_angular_vel)
 	angular_velocity.y = clampf(angular_velocity.y, -max_angular_vel, max_angular_vel)
 	angular_velocity.z = clampf(angular_velocity.z, -max_angular_vel, max_angular_vel)
+	
+	
+	if abs(f_input) > 0.15 or abs(h_input) > 0.15:
+		drift_fx.current_move_rot = atan2(h_force.z, -f_force.x)#Vector2(f_force.x, h_force.z)
+	else:
+		drift_fx.current_move_rot = -atan2(linear_velocity.x, -linear_velocity.z)
 
 var new_friction: float = 0
 
@@ -71,6 +80,8 @@ func drift_handler(delta) -> void:
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
 	
+	
+	
 	if Input.is_action_pressed("drift"):
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * brake_force)
 		physics_material_override.friction = 0.1
@@ -79,6 +90,7 @@ func drift_handler(delta) -> void:
 		if new_friction < max_friction:
 			new_friction += 20
 		
+		drift_fx.currently_drifting = true
 		particle_handler(true)
 	
 	elif Input.is_action_just_released("drift"):
@@ -87,6 +99,7 @@ func drift_handler(delta) -> void:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "physics_material_override:friction", initial_friction, 2)
 		
+		drift_fx.currently_drifting = false
 		particle_handler(false)
 
 var contact_pos: Vector3
