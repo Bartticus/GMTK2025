@@ -24,7 +24,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
 rough = true
-bounce = 0.2
+bounce = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qlpfi"]
 
@@ -204,6 +204,7 @@ radius = 0.3
 [node name="Marble" type="RigidBody3D"]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
+gravity_scale = 1.5
 contact_monitor = true
 max_contacts_reported = 500
 script = ExtResource("1_qlpfi")

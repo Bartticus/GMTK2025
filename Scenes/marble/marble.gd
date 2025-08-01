@@ -1,3 +1,4 @@
+class_name Marble
 extends RigidBody3D
 
 @export_range(0.0, 600.0, 10.0) var torque: float = 200
@@ -129,7 +130,7 @@ func drift_handler(delta) -> void:
 		new_friction = 0
 	
 	if Input.is_action_pressed("drift"):
-		linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * brake_force)
+		linear_velocity = linear_velocity.lerp(linear_velocity.normalized(), brake_force * delta)
 		physics_material_override.friction = 0.1
 		
 		var max_friction: float = 500

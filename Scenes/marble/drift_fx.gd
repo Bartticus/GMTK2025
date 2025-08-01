@@ -22,7 +22,6 @@ extends Node3D
 
 func _process(delta: float) -> void:
 	global_transform.basis = Basis.IDENTITY
-
 	
 	y_rot = lerp_angle(y_rot, current_move_rot, delta*8.0)
 	
