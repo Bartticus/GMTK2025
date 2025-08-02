@@ -74,7 +74,6 @@ func visuals_handler(delta: float) -> void:
 	var speed_factor : float = current_speed / 14.0
 	speed_factor = min(speed_factor, 1.0)
 	
-	
 	var state = PhysicsServer3D.body_get_direct_state(marble.get_rid())
 	var contact_count : int = state.get_contact_count()
 	var biggest_impulse : float = 0.0

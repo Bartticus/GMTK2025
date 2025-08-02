@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	visuals.visuals_handler(delta)
 	audio_handler()
 	
-	contact_pos = get_contact_pos()
+	set_contact_pos()
 	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
@@ -183,12 +183,11 @@ func drift_handler(delta) -> void:
 		#driftSFXBool = false
 
 
-func get_contact_pos() -> Vector3:
+func set_contact_pos() -> void:
 	var state = PhysicsServer3D.body_get_direct_state(get_rid())
 	if state:
 		for i in state.get_contact_count():
-			return state.get_contact_local_position(i)
-	return Vector3.ZERO
+			contact_pos = state.get_contact_local_position(i)
 
 func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 	if contact_pos == Vector3.ZERO: return
