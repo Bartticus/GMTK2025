@@ -1,15 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuytryr2ftgaa"]
+[gd_scene load_steps=14 format=3 uid="uid://cuytryr2ftgaa"]
 
+[ext_resource type="Script" uid="uid://b1rnpfn2t53kn" path="res://Scenes/NPCs/recruiter.gd" id="1_omwl1"]
 [ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_s5mds"]
 [ext_resource type="Resource" uid="uid://doru4jur4kykn" path="res://Levels/Dialogue/recruiter.dialogue" id="2_ekmmp"]
 [ext_resource type="PackedScene" uid="uid://duma87ygfnoyy" path="res://Scenes/NPCs/NPC Models/rec.glb" id="3_hodnx"]
 [ext_resource type="Texture2D" uid="uid://ci632t5iq7tlf" path="res://Scenes/NPCs/NPC Models/canvas_ao.png" id="4_l8svk"]
 [ext_resource type="Texture2D" uid="uid://dpi5lt0fhuk4w" path="res://Thaddeus/ballshadow.png" id="5_omwl1"]
+[ext_resource type="AudioStream" uid="uid://coj2gy01q5q57" path="res://Sounds/voices/recruit-001.mp3" id="7_nqxnl"]
+[ext_resource type="AudioStream" uid="uid://61miw4embupi" path="res://Sounds/voices/recruit-002.mp3" id="8_gif0r"]
+[ext_resource type="AudioStream" uid="uid://ddx7dhj1n6yrv" path="res://Sounds/voices/recruit-003.mp3" id="9_5ol66"]
+[ext_resource type="AudioStream" uid="uid://dqeoon74vuwrv" path="res://Sounds/voices/recruit-004.mp3" id="10_nic15"]
+[ext_resource type="AudioStream" uid="uid://d36j601jt4d4x" path="res://Sounds/voices/recruit-005.mp3" id="11_ik0qy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsi3a"]
 albedo_texture = ExtResource("4_l8svk")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ngjp"]
+streams_count = 5
+stream_0/stream = ExtResource("7_nqxnl")
+stream_1/stream = ExtResource("8_gif0r")
+stream_2/stream = ExtResource("9_5ol66")
+stream_3/stream = ExtResource("10_nic15")
+stream_4/stream = ExtResource("11_ik0qy")
+
 [node name="Recruiter" type="Node3D"]
+script = ExtResource("1_omwl1")
 
 [node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals") instance=ExtResource("1_s5mds")]
 dialogue = ExtResource("2_ekmmp")
@@ -26,5 +41,9 @@ cast_shadow = 0
 gi_mode = 2
 gi_lightmap_texel_scale = 2.0
 surface_material_override/0 = SubResource("StandardMaterial3D_dsi3a")
+
+[node name="voice" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5ngjp")
+bus = &"Player Verb"
 
 [editable path="rec"]

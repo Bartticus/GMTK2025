@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cj6ymhcv8noty"
+path="res://.godot/imported/old man-005.mp3-9b161aecc80b64f4aff4b6de592b6687.mp3str"
+
+[deps]
+
+source_file="res://Sounds/voices/old man-005.mp3"
+dest_files=["res://.godot/imported/old man-005.mp3-9b161aecc80b64f4aff4b6de592b6687.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

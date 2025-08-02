@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c48wbumf4y64r"
+path="res://.godot/imported/ow cradel-004.mp3-8897ea1fd6f8f3fe1fea645693e4b6ff.mp3str"
+
+[deps]
+
+source_file="res://Sounds/voices/ow cradel-004.mp3"
+dest_files=["res://.godot/imported/ow cradel-004.mp3-8897ea1fd6f8f3fe1fea645693e4b6ff.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
