@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3yptvwpi7x5n"
+path="res://.godot/imported/marble hit Concrete-007.mp3-c581f03a217c2a068428f8b77e6e6eb7.mp3str"
+
+[deps]
+
+source_file="res://Sounds/hit concrete/marble hit Concrete-007.mp3"
+dest_files=["res://.godot/imported/marble hit Concrete-007.mp3-c581f03a217c2a068428f8b77e6e6eb7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
