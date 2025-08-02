@@ -30,6 +30,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func on_dialogue_ended(resource: DialogueResource):
+	if Global.player.talking:
+		Global.ring.spin()
 	Global.player.talking = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	Global.ring.spin()
+	

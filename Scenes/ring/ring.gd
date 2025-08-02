@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			spin_lerp -= updown_point
 			spin_lerp /= updown_point
 			Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
-
+		
 
 
 func spin():
