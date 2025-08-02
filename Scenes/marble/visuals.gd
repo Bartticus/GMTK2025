@@ -18,8 +18,10 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.0
 
+@onready var shadow : Sprite3D = $Shadow
 @onready var shadow_alpha : float = 0.0
 
+@onready var ignore_next_velocity_squash : bool = false
 @onready var linear_velocity_lastframe : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
@@ -30,6 +32,10 @@ func _ready() -> void:
 
 
 func impact(intensity : float = 0.0, contacted : bool = false, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
+	if ignore_next_velocity_squash:
+		ignore_next_velocity_squash = false
+		return
+	
 	squash_timer = squash_length
 	squash_intensity = lerpf(0.0, 1.5, intensity)
 	
