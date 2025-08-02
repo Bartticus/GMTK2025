@@ -13,7 +13,7 @@ const balloon = preload("res://Levels/Dialogue/balloon.tscn")
 		Global.main.set_bag_count()
 	
 #audio
-signal bag_collected_sfx()
+signal bag_collected_sfx
 
 var mouse_sensitivity: float = 0.005
 

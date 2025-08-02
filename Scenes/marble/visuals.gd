@@ -65,9 +65,8 @@ func visuals_handler(delta: float) -> void:
 	
 	smoothed_velocity = smoothed_velocity.lerp(marble.linear_velocity, delta * 7.0)
 	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx() \
-	and not smoothed_velocity.is_zero_approx():
+	and smoothed_velocity.length() > 0.001: #Fix look at precision error
 		look_at(global_position + smoothed_velocity)
-	
 	marble_mesh.global_rotation = marble.global_rotation
 	
 	var current_speed = smoothed_velocity.length() - scale_distortion_start_velocity
