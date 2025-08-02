@@ -246,8 +246,28 @@ transform = Transform3D(-7.86805e-09, 0, 0.18, 0, 0.18, 0, -0.18, 0, -7.86805e-0
 [node name="SatDish" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("10_akswq")]
 transform = Transform3D(0.957158, 0.289566, 0, -0.289566, 0.957158, 0, 0, 0, 1, -2.56012, -46.2803, 0)
 
+[node name="satdishbase" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2/@StaticBody3D@43266" index="1"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="@StaticBody3D@43267" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2" index="1"]
+transform = Transform3D(0.871601, 0.412525, 0.264829, -0.39039, 0.910848, -0.133986, -0.296491, 0.0133961, 0.954942, 0, 1.70543, 0)
+
+[node name="satdish" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2/@StaticBody3D@43267" index="1"]
+surface_material_override/0 = null
+
 [node name="SatDish2" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("10_akswq")]
 transform = Transform3D(0.598224, 0.180979, 0, -0.180979, 0.598224, 0, 0, 0, 0.625, -2.58366, -46.2803, 0.593007)
+
+[node name="satdishbase" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2/@StaticBody3D@43266" index="1"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="@StaticBody3D@43267" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2" index="1"]
+transform = Transform3D(0.771771, 0.586546, -0.245628, -0.47339, 0.787853, 0.393942, 0.424584, -0.187755, 0.885707, 0, 1.70543, 0)
+
+[node name="satdish" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2/@StaticBody3D@43267" index="1"]
+surface_material_override/0 = null
 
 [node name="Level2" type="Node3D" parent="World/LightmapGI/Ring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.457, 0, 0)
@@ -517,3 +537,5 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -185.535, 5.80198)
 
 [editable path="World/LightmapGI/Ring/Level1/tutorial_building"]
+[editable path="World/LightmapGI/Ring/Level1/SatDish"]
+[editable path="World/LightmapGI/Ring/Level1/SatDish2"]
