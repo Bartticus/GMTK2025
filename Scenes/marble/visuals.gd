@@ -18,6 +18,8 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.0
 
+@onready var shadow_alpha : float = 0.0
+
 @onready var linear_velocity_lastframe : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
@@ -45,6 +47,12 @@ func visuals_handler(delta: float) -> void:
 	
 	set_identity()
 	global_position = marble.global_position
+	
+	if marble.is_on_floor():
+		shadow_alpha = lerpf(shadow_alpha, 1.0, delta* 8.0)
+	else:
+		shadow_alpha = lerpf(shadow_alpha, 0.0, delta* 12.0)
+	$Shadow.modulate.a = shadow_alpha
 	
 	smoothed_velocity = smoothed_velocity.lerp(marble.linear_velocity, delta * 7.0)
 	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx() \

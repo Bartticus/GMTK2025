@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://di4sj6n6qvd0q"]
+
+[ext_resource type="Script" uid="uid://c50r0u081031p" path="res://Models/Meshes/fan_vent.gd" id="1_vcysl"]
+[ext_resource type="PackedScene" uid="uid://1jmrco7nx72n" path="res://Models/Meshes/fanvent.glb" id="1_vhpek"]
+[ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="2_g6nnx"]
+[ext_resource type="PackedScene" uid="uid://c7u2h22yrjodp" path="res://Models/Meshes/fans.glb" id="2_xy3xe"]
+[ext_resource type="Material" uid="uid://depe6uqdmeipf" path="res://Thaddeus/Dark.tres" id="3_pb2yc"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="3_uggcu"]
+
+[node name="FanVent" type="Node3D"]
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
+script = ExtResource("1_vcysl")
+
+[node name="fanvent2" parent="." instance=ExtResource("1_vhpek")]
+
+[node name="fanvent" parent="fanvent2" index="0"]
+surface_material_override/0 = ExtResource("3_uggcu")
+surface_material_override/1 = ExtResource("2_g6nnx")
+
+[node name="fans" parent="." instance=ExtResource("2_xy3xe")]
+
+[node name="fan1" parent="fans" index="0"]
+surface_material_override/0 = ExtResource("3_pb2yc")
+
+[node name="fan2" parent="fans" index="1"]
+surface_material_override/0 = ExtResource("3_pb2yc")
+
+[editable path="fanvent2"]
+[editable path="fans"]
