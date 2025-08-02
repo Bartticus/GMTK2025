@@ -8,9 +8,9 @@
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
 [ext_resource type="PackedScene" uid="uid://dnsfd2lwdlfxf" path="res://Levels/Tutorial/tutorial_building.glb" id="5_dikqp"]
 [ext_resource type="Material" uid="uid://clj2r6ckqwdkd" path="res://Thaddeus/Red.tres" id="5_moneo"]
-[ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="PackedScene" path="res://Models/Walkway.tscn" id="6_4jhlv"]
 [ext_resource type="Texture2D" uid="uid://dlxe1akiw2xmc" path="res://Thaddeus/white_tex.png" id="6_h0kdk"]
-[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="7_ebke8"]
+[ext_resource type="Material" path="res://Thaddeus/White.tres" id="7_ebke8"]
 [ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="8_1xtop"]
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
@@ -21,6 +21,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_bottom_color = Color(0.384314, 0.454902, 0.54902, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
 [sub_resource type="Sky" id="Sky_8gbba"]
@@ -30,9 +31,16 @@ sky_material = SubResource("ProceduralSkyMaterial_bo1nx")
 background_mode = 2
 sky = SubResource("Sky_8gbba")
 tonemap_mode = 2
+tonemap_white = 2.0
 fog_enabled = true
-fog_density = 0.0001
-fog_sky_affect = 0.0
+fog_mode = 1
+fog_light_color = Color(0.56112, 0.72373, 1, 1)
+fog_light_energy = 5.0
+fog_density = 0.3
+fog_aerial_perspective = 0.98
+fog_depth_curve = 1.56917
+fog_depth_begin = 0.0
+fog_depth_end = 200.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_brlrh"]
 
