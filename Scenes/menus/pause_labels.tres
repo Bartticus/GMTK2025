@@ -1,6 +1,9 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://h7sdyswr0871"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://h7sdyswr0871"]
+
+[ext_resource type="FontFile" uid="uid://vgsm6f2yfvun" path="res://Fonts/Expansiva bold italic.otf" id="1_eaan5"]
 
 [resource]
+font = ExtResource("1_eaan5")
 font_size = 36
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)

@@ -26,6 +26,8 @@ func _on_resume_pressed() -> void:
 	resume()
 
 func _on_restart_pressed() -> void:
+	Global.level = 0
+	Global.bags_gotten = 0
 	resume()
 	get_tree().reload_current_scene()
 
