@@ -1,4 +1,4 @@
-[gd_resource type="Curve" format=3 uid="uid://dhhyoto0po6ig"]
+[gd_resource type="Curve" load_steps=0 format=3 uid="uid://dhhyoto0po6ig"]
 
 [resource]
 _data = [Vector2(0, 0), 0.0, 0.0592311, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://di4sj6n6qvd0q"]
+[gd_scene load_steps=8 format=3 uid="uid://di4sj6n6qvd0q"]
 
 [ext_resource type="Script" uid="uid://c50r0u081031p" path="res://Models/Meshes/fan_vent.gd" id="1_vcysl"]
 [ext_resource type="PackedScene" uid="uid://1jmrco7nx72n" path="res://Models/Meshes/fanvent.glb" id="1_vhpek"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7u2h22yrjodp" path="res://Models/Meshes/fans.glb" id="2_xy3xe"]
 [ext_resource type="Material" uid="uid://depe6uqdmeipf" path="res://Thaddeus/Dark.tres" id="3_pb2yc"]
 [ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="3_uggcu"]
+[ext_resource type="AudioStream" uid="uid://by5pn1pvepejj" path="res://Sounds/AC Hum.mp3" id="7_ennqf"]
 
 [node name="FanVent" type="Node3D"]
 transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
@@ -24,6 +25,14 @@ surface_material_override/0 = ExtResource("3_pb2yc")
 
 [node name="fan2" parent="fans" index="1"]
 surface_material_override/0 = ExtResource("3_pb2yc")
+
+[node name="Vent Hum" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_ennqf")
+volume_db = -5.0
+autoplay = true
+max_distance = 20.0
+bus = &"verb"
+parameters/looping = true
 
 [editable path="fanvent2"]
 [editable path="fans"]

@@ -30,9 +30,30 @@ func respawn():#should be called from physics_process
 				var spike_force : float = 30.0
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
-				
 
+func _ready() -> void:
+	particle_cache()
 
+signal cache_finished
+
+func particle_cache() -> void:
+	while not is_instance_valid(player):
+		await get_tree().process_frame
+		if is_instance_valid(player):
+			break
+	
+	player.particles.process_mode = Node.PROCESS_MODE_ALWAYS
+	player.particles.global_position = player.camera.global_position + Vector3.FORWARD
+	get_tree().set_deferred("paused", true)
+	for child in player.particles.get_children():
+		if child is GPUParticles3D:
+			child.emitting = true
+			await get_tree().create_timer(0.5).timeout
+			child.emitting = false
+	get_tree().set_deferred("paused", false)
+	player.particles.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	cache_finished.emit()
 
 
 func loadNodes(nodePaths: Array, caller) -> Array:

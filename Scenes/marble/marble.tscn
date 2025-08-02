@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=69 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -210,6 +210,12 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_0ovb4"]
 material = SubResource("StandardMaterial3D_fmvk0")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qover"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qover"]
+material = SubResource("StandardMaterial3D_qover")
+
 [sub_resource type="Curve" id="Curve_i5nwi"]
 _data = [Vector2(0, 0), 0.0, 2.91435, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -292,13 +298,11 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 target_position = Vector3(0, -3, 0)
 
 [node name="Particles" type="Node3D" parent="."]
-process_mode = 3
 top_level = true
 
 [node name="DriftSparkParticles1" type="GPUParticles3D" parent="Particles"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 sorting_offset = 1.0
-emitting = false
 amount = 12
 speed_scale = 2.0
 explosiveness = 0.15
@@ -306,8 +310,8 @@ randomness = 0.44
 process_material = SubResource("ParticleProcessMaterial_fmvk0")
 draw_pass_1 = SubResource("QuadMesh_o7fp8")
 
-[node name="DriftSparkParticles2" type="GPUParticles3D" parent="Particles/DriftSparkParticles1"]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
+[node name="DriftSparkParticles2" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 emitting = false
 amount = 10
 speed_scale = 1.5
@@ -329,7 +333,8 @@ transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_ehthu")
 draw_pass_1 = SubResource("QuadMesh_a0fhv")
 
-[node name="DriftSmokeParticles2" type="GPUParticles3D" parent="Particles/DriftSmokeParticles1"]
+[node name="DriftSmokeParticles2" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 emitting = false
 amount = 20
 lifetime = 3.79
@@ -339,6 +344,10 @@ randomness = 0.44
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_lhqa5")
 draw_pass_1 = SubResource("QuadMesh_0ovb4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Particles"]
+visible = false
+mesh = SubResource("BoxMesh_qover")
 
 [node name="DriftFX" type="Node3D" parent="."]
 script = ExtResource("11_0ovb4")
