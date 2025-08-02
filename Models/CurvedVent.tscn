@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbdxfpl47m6kc"]
+[gd_scene load_steps=6 format=3 uid="uid://cbdxfpl47m6kc"]
 
 [ext_resource type="PackedScene" uid="uid://iryhc6weu5ga" path="res://Models/Meshes/curvedvent.glb" id="1_2ld0e"]
 [ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="2_s6hya"]
 [ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="3_y2ld8"]
 [ext_resource type="Material" uid="uid://depe6uqdmeipf" path="res://Thaddeus/Dark.tres" id="4_fsxtg"]
+[ext_resource type="AudioStream" uid="uid://cdih283hwj7b5" path="res://Sounds/AC Wind.mp3" id="5_y2ld8"]
 
 [node name="CurvedVent" type="Node3D"]
 transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
@@ -14,5 +15,13 @@ transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
 surface_material_override/0 = ExtResource("3_y2ld8")
 surface_material_override/1 = ExtResource("2_s6hya")
 surface_material_override/2 = ExtResource("4_fsxtg")
+
+[node name="Vent Wind" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_y2ld8")
+volume_db = -6.0
+autoplay = true
+max_distance = 15.0
+bus = &"verb"
+parameters/looping = true
 
 [editable path="curvedvent"]
