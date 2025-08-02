@@ -1,16 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuytryr2ftgaa"]
+[gd_scene load_steps=7 format=3 uid="uid://cuytryr2ftgaa"]
 
 [ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_s5mds"]
 [ext_resource type="Resource" uid="uid://doru4jur4kykn" path="res://Levels/Dialogue/recruiter.dialogue" id="2_ekmmp"]
+[ext_resource type="PackedScene" uid="uid://duma87ygfnoyy" path="res://Scenes/NPCs/NPC Models/rec.glb" id="3_hodnx"]
+[ext_resource type="Texture2D" uid="uid://ci632t5iq7tlf" path="res://Scenes/NPCs/NPC Models/canvas_ao.png" id="4_l8svk"]
+[ext_resource type="Texture2D" uid="uid://dpi5lt0fhuk4w" path="res://Thaddeus/ballshadow.png" id="5_omwl1"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_ekmmp"]
-radius = 0.25
-height = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsi3a"]
+albedo_texture = ExtResource("4_l8svk")
 
 [node name="Recruiter" type="Node3D"]
 
 [node name="NpcComponent" parent="." instance=ExtResource("1_s5mds")]
 dialogue = ExtResource("2_ekmmp")
 
-[node name="NPC test" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_ekmmp")
+[node name="rec" parent="." instance=ExtResource("3_hodnx")]
+
+[node name="Recruiter" parent="rec" index="0"]
+gi_lightmap_texel_scale = 2.0
+surface_material_override/0 = SubResource("StandardMaterial3D_dsi3a")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(0.26, 0, 0, 0, -1.1365e-08, -0.26, 0, 0.26, -1.1365e-08, 0, 0, 0)
+texture = ExtResource("5_omwl1")
+
+[editable path="rec"]
