@@ -14,6 +14,7 @@ const balloon = preload("res://Levels/Dialogue/balloon.tscn")
 	
 #audio
 signal bag_collected_sfx
+signal dialogue_line_advance
 
 var mouse_sensitivity: float = 0.005
 
@@ -55,6 +56,8 @@ func particle_cache() -> void:
 	
 	cache_finished.emit()
 
+func dialogue_line_advanced():
+	dialogue_line_advance.emit()
 
 func loadNodes(nodePaths: Array, caller) -> Array:
 	var nodes := []

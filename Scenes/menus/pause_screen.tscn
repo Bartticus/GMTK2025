@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://nddnkqjfr5g7" path="res://Scenes/menus/pause_screen.gdshader" id="1_w8il3"]
 [ext_resource type="LabelSettings" uid="uid://h7sdyswr0871" path="res://Scenes/menus/pause_labels.tres" id="4_6tl5j"]
 [ext_resource type="Script" uid="uid://de4hddumfls3j" path="res://Scenes/menus/h_slider.gd" id="4_a1r0b"]
-[ext_resource type="Script" uid="uid://cuhaviagnpgxs" path="res://Scenes/menus/sens_slider.gd" id="6_67d4t"]
+[ext_resource type="Script" path="res://Scenes/menus/sens_slider.gd" id="6_67d4t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fcwn1"]
 shader = ExtResource("1_w8il3")

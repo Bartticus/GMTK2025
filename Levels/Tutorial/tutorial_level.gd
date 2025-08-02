@@ -12,7 +12,7 @@ extends Level
 
 func _ready() -> void:
 	first_bag.bag_collected.connect(on_bag_collected)
-	recuiter_npc.visible = false
+	#recuiter_npc.visible = false #this needs to happen when shipping game
 
 func _process(delta: float) -> void:
 	if Global.level == 0:
