@@ -1,20 +1,23 @@
-[gd_scene load_steps=40 format=4 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=43 format=4 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
 [ext_resource type="Script" uid="uid://siacv54rween" path="res://Scenes/main/main.gd" id="1_hgq70"]
-[ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
 [ext_resource type="Material" uid="uid://bkvo47d3laj1v" path="res://Thaddeus/Visdev.tres" id="2_wcurd"]
 [ext_resource type="PackedScene" uid="uid://e3yd7vkq41oi" path="res://Scenes/ring/ring.tscn" id="3_4etoo"]
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
+[ext_resource type="PackedScene" uid="uid://dnsfd2lwdlfxf" path="res://Levels/Tutorial/tutorial_building.glb" id="5_dikqp"]
 [ext_resource type="Material" uid="uid://clj2r6ckqwdkd" path="res://Thaddeus/Red.tres" id="5_moneo"]
 [ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="Texture2D" uid="uid://dlxe1akiw2xmc" path="res://Thaddeus/white_tex.png" id="6_h0kdk"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="7_ebke8"]
 [ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="8_1xtop"]
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
 [ext_resource type="PackedScene" uid="uid://5yrwwj7cadsk" path="res://Scenes/menus/pause_screen.tscn" id="11_7y5iv"]
 [ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="14_dikqp"]
+[ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="18_ki64f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -41,6 +44,10 @@ size = Vector3(50, 300, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brlrh"]
 size = Vector3(50, 300, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebke8"]
+albedo_color = Color(0.724643, 0.724643, 0.724643, 1)
+albedo_texture = ExtResource("6_h0kdk")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y3d5x"]
 _surfaces = [{
@@ -133,11 +140,6 @@ uv1_triplanar = true
 material = SubResource("StandardMaterial3D_21xkr")
 size = Vector3(50, 2, 50)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4etoo"]
-friction = 5.0
-rough = true
-bounce = 0.2
-
 [sub_resource type="LabelSettings" id="LabelSettings_8lqer"]
 font = ExtResource("10_ra8v3")
 font_size = 38
@@ -167,6 +169,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="Rooftop" type="StaticBody3D" parent="World/LightmapGI/Ring"]
 top_level = true
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Rooftop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -351.918, 0)
@@ -212,204 +215,231 @@ mesh = SubResource("BoxMesh_4jhlv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -351.918, 0)
 shape = SubResource("BoxShape3D_brlrh")
 
-[node name="BeamComplex" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+[node name="Level1" type="Node3D" parent="World/LightmapGI/Ring"]
+
+[node name="tutorial_building" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("5_dikqp")]
+transform = Transform3D(0.245, 0, 0, 0, 0.245, 0, 0, 0, 0.245, 0, -46.6008, 0)
+
+[node name="tutorial_building" parent="World/LightmapGI/Ring/Level1/tutorial_building" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ebke8")
+surface_material_override/1 = ExtResource("7_ebke8")
+
+[node name="sidebuilding" parent="World/LightmapGI/Ring/Level1/tutorial_building" index="2"]
+surface_material_override/0 = ExtResource("7_ebke8")
+
+[node name="Bag" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("9_8lqer")]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, -1.10316, -45.5091, -1.60945)
+
+[node name="Level2" type="Node3D" parent="World/LightmapGI/Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.457, 0, 0)
+
+[node name="BeamComplex" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2"]
 transform = Transform3D(0.0316789, 0.115743, 0, -0.115743, 0.0316789, 0, 0, 0, 0.12, 0.435955, -45.0817, -0.495292)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/BeamComplex"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/BeamComplex"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("5_moneo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/BeamComplex"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/BeamComplex"]
 shape = SubResource("ConcavePolygonShape3D_io28c")
 
-[node name="BeamSimple" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+[node name="BeamSimple" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2"]
 transform = Transform3D(0.12, 0, 0, 0, 0.118416, 0.0194317, 0, -0.0194317, 0.118416, 0.203151, -45.2409, -0.495292)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/BeamSimple"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/BeamSimple"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("5_moneo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/BeamSimple"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/BeamSimple"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple2" type="StaticBody3D" parent="World/LightmapGI/Ring"]
+[node name="BeamSimple2" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2"]
 transform = Transform3D(0.109574, 0.0487616, 0.00397648, -0.0488127, 0.10962, 0.000841465, -0.00329061, -0.00238588, 0.119931, -0.0865544, -45.2891, -0.495292)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/BeamSimple2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/BeamSimple2"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("5_moneo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/BeamSimple2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/BeamSimple2"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="OldPlayground" type="Node3D" parent="World/LightmapGI/Ring"]
+[node name="OldPlayground" type="Node3D" parent="World/LightmapGI/Ring/Level2"]
 visible = false
 
-[node name="Walkway" parent="World/LightmapGI/Ring/OldPlayground" instance=ExtResource("6_4jhlv")]
+[node name="Walkway" parent="World/LightmapGI/Ring/Level2/OldPlayground" instance=ExtResource("6_4jhlv")]
 transform = Transform3D(0.0965263, 0, -0.364951, 0, 0.3775, 0, 0.364951, 0, 0.0965263, -0.201005, -50.4806, 0.91766)
 
-[node name="Ramp" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Ramp" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(0.8763, 0.714157, -0.484746, -0.777047, 0.953467, 2.54778e-08, 0.375763, 0.306236, 1.13045, -1.4516, -50.5785, 2.5713)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp"]
 mesh = SubResource("BoxMesh_b3x3g")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp"]
 shape = SubResource("BoxShape3D_4jhlv")
 
-[node name="Ramp3" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Ramp3" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 2.58645)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp3"]
 mesh = SubResource("BoxMesh_7y5iv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp3"]
 shape = SubResource("BoxShape3D_4jhlv")
 
-[node name="Ramp4" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Ramp4" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 1.71846)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp4"]
 mesh = SubResource("BoxMesh_7y5iv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp4"]
 shape = SubResource("BoxShape3D_4jhlv")
 
-[node name="Ramp5" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Ramp5" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(-0.0117805, -0.00960116, -0.614812, -0.266067, 0.554455, -0.00356046, 0.554342, 0.265917, -0.0147745, 2.77121, -50.6327, 0.78635)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp5"]
 mesh = SubResource("BoxMesh_7y5iv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp5"]
 shape = SubResource("BoxShape3D_4jhlv")
 
-[node name="Building" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Building" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.516691, -50.5684, -1.9132)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Building"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11541, 0, 0.152376)
 mesh = SubResource("BoxMesh_hgq70")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Building"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11541, 0, 0.152376)
 shape = SubResource("ConcavePolygonShape3D_8lqer")
 
-[node name="Building2" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Building2" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16931, -50.0257, -2.25876)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Building2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Building2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11541, 0, 0.152376)
 mesh = SubResource("BoxMesh_8lqer")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Building2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Building2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11541, 0, 0.152376)
 shape = SubResource("ConcavePolygonShape3D_b3x3g")
 
-[node name="Ramp2" type="StaticBody3D" parent="World/LightmapGI/Ring/OldPlayground"]
+[node name="Ramp2" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/OldPlayground"]
 transform = Transform3D(0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0, 1, -0.237628, -50.6434, -2.87434)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp2"]
 transform = Transform3D(1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0, 1, -0.854454, -0.716972, 0.152376)
 mesh = SubResource("BoxMesh_ra8v3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/OldPlayground/Ramp2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/OldPlayground/Ramp2"]
 transform = Transform3D(1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0, 1, -0.854454, -0.716972, 0.152376)
 shape = SubResource("ConcavePolygonShape3D_hgq70")
 
-[node name="Structure" type="Node3D" parent="World/LightmapGI/Ring"]
+[node name="Structure" type="Node3D" parent="World/LightmapGI/Ring/Level2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51956, -46.3728, 3.61235)
 
-[node name="BeamSimple2" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple2" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.119694, -3.74482e-10, -0.00856716, -0.00856716, -5.23198e-09, -0.119694, 0, 0.12, -5.24537e-09, 0.166751, -0.0690117, -1.228)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple2"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple2"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple7" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple7" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.054362, 0.031383, 0.102274, -0.0162189, 0.115812, -0.0269165, -0.105744, -0.00162939, 0.0567065, 1.64427, 1.00553, -0.511675)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple7"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple7"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple7"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple7"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple8" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple8" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.0487976, 0.0184156, 0.108073, 0.0183441, 0.115256, -0.0279225, -0.108085, 0.0278753, 0.0440531, 1.5391, 1.00553, -1.00023)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple8"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple8"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple8"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple8"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple5" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple5" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.105293, 0.0570958, -0.0073091, -0.00642525, -0.00348413, -0.119777, -0.057202, 0.105489, -4.61107e-09, 0.166751, -0.0690117, -0.0648363)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple5"]
 transform = Transform3D(1, 0, -4.03491e-09, 0, 1, 1.61128e-09, -1.28482e-09, -2.17825e-09, 1, 0.0785751, 0.0426102, 1.46484)
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple5"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple3" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple3" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.100151, -0.0661049, 2.88954e-09, 0.00453067, 0.00686408, -0.119718, 0.0659494, 0.0999151, 0.00822451, -1.6601, -0.0690117, -1.13426)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple3"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple3"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple4" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple4" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.12, 0, 0, 0, 0.00844807, -0.119702, 0, 0.119702, 0.00844807, -1.60542, -0.0690117, 0.111624)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple4"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple4"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamSimple6" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamSimple6" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(0.0072713, 0.011024, -0.119271, 0.00765076, 0.119204, 0.0114842, 0.119535, -0.00830016, 0.00652022, -0.822494, 1.50858, -0.0638254)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamSimple6"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple6"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamSimple6"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamSimple6"]
 shape = SubResource("BoxShape3D_7y5iv")
 
-[node name="BeamComplex2" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamComplex2" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(-0.0134616, 0.116753, 0.0242384, -0.118011, -0.00954805, -0.0195499, -0.0170923, -0.0260298, 0.115889, -1.62068, 1.53748, -1.16016)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamComplex2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamComplex2"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamComplex2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamComplex2"]
 shape = SubResource("ConcavePolygonShape3D_io28c")
 
-[node name="BeamComplex3" type="StaticBody3D" parent="World/LightmapGI/Ring/Structure"]
+[node name="BeamComplex3" type="StaticBody3D" parent="World/LightmapGI/Ring/Level2/Structure"]
 transform = Transform3D(-0.0178924, 0.118328, 0.00884478, -0.114289, -0.0195906, 0.0308907, 0.0319044, -0.00381796, 0.115618, 0.0581648, 1.48024, -0.856728)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Structure/BeamComplex3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamComplex3"]
 mesh = SubResource("ArrayMesh_7y5iv")
 surface_material_override/0 = ExtResource("8_1xtop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Structure/BeamComplex3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LightmapGI/Ring/Level2/Structure/BeamComplex3"]
 shape = SubResource("ConcavePolygonShape3D_io28c")
+
+[node name="rooftest" parent="World/LightmapGI/Ring/Level2" instance=ExtResource("9_io28c")]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, 0, -50.5272, 0)
+
+[node name="Bag" parent="World/LightmapGI/Ring/Level2" instance=ExtResource("9_8lqer")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -5.5365, -44.51, 5.41305)
+
+[node name="Bag2" parent="World/LightmapGI/Ring/Level2" instance=ExtResource("9_8lqer")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.317858, -44.618, 3.58658)
 
 [node name="Floor" type="StaticBody3D" parent="World/LightmapGI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
@@ -437,20 +467,6 @@ light_size = 0.223
 light_bake_mode = 1
 omni_range = 2000.0
 
-[node name="rooftest" parent="World/LightmapGI" instance=ExtResource("9_io28c")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -202.109, 0)
-
-[node name="Marble" parent="." instance=ExtResource("2_w1fgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -183.388, 20.3227)
-physics_material_override = SubResource("PhysicsMaterial_4etoo")
-angular_damp = 0.1
-
-[node name="Bag" parent="." instance=ExtResource("9_8lqer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.146, -178.04, 21.6522)
-
-[node name="Bag2" parent="." instance=ExtResource("9_8lqer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27143, -178.472, 14.3463)
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -471,9 +487,14 @@ label_settings = SubResource("LabelSettings_8lqer")
 stream = ExtResource("14_dikqp")
 volume_db = -7.0
 autoplay = true
-parameters/looping = true
+bus = &"verb"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("11_7y5iv")]
+
+[node name="Marble" parent="." instance=ExtResource("18_ki64f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -185.535, 5.80198)
+
+[editable path="World/LightmapGI/Ring/Level1/tutorial_building"]
