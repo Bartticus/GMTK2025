@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://n2aque34pw2u"]
+
+[ext_resource type="PackedScene" uid="uid://vyan1qonf3k2" path="res://Models/Meshes/ramp.glb" id="1_uxt0g"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="2_160xi"]
+
+[node name="Ramp" type="Node3D"]
+
+[node name="ramp" parent="." instance=ExtResource("1_uxt0g")]
+
+[node name="Ramp" parent="ramp" index="0"]
+surface_material_override/0 = ExtResource("2_160xi")
+
+[editable path="ramp"]
