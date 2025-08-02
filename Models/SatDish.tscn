@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbbmhvuy14jw6"]
+
+[ext_resource type="Script" uid="uid://cb46kbjbp6tkb" path="res://Models/Meshes/sat_dish.gd" id="1_2jy1e"]
+[ext_resource type="PackedScene" uid="uid://0ktr4j52ajd1" path="res://Models/Meshes/satdish.glb" id="1_5o5eu"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="2_fex7e"]
+[ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="3_rbiq1"]
+
+[node name="SatDish" type="Node3D" node_paths=PackedStringArray("satdish", "dish_collidor")]
+script = ExtResource("1_2jy1e")
+satdish = NodePath("satdish2/satdish")
+dish_collidor = NodePath("satdish2/@StaticBody3D@43267/CollisionShape3D")
+
+[node name="satdish2" parent="." instance=ExtResource("1_5o5eu")]
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
+
+[node name="satdishbase" parent="satdish2" index="0"]
+surface_material_override/0 = ExtResource("2_fex7e")
+surface_material_override/1 = ExtResource("3_rbiq1")
+
+[node name="satdish" parent="satdish2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70543, 0)
+surface_material_override/0 = ExtResource("2_fex7e")
+
+[node name="CollisionShape3D" parent="satdish2/@StaticBody3D@43267" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[editable path="satdish2"]

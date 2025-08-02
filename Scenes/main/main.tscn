@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dv7x2ren5evyl"]
+[gd_scene load_steps=45 format=4 uid="uid://dv7x2ren5evyl"]
 
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
@@ -8,12 +8,14 @@
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
 [ext_resource type="PackedScene" uid="uid://dnsfd2lwdlfxf" path="res://Levels/Tutorial/tutorial_building.glb" id="5_dikqp"]
 [ext_resource type="Material" uid="uid://clj2r6ckqwdkd" path="res://Thaddeus/Red.tres" id="5_moneo"]
-[ext_resource type="PackedScene" path="res://Models/Walkway.tscn" id="6_4jhlv"]
+[ext_resource type="PackedScene" uid="uid://belm2gc5ufb0a" path="res://Models/Walkway.tscn" id="6_4jhlv"]
 [ext_resource type="Texture2D" uid="uid://dlxe1akiw2xmc" path="res://Thaddeus/white_tex.png" id="6_h0kdk"]
-[ext_resource type="Material" path="res://Thaddeus/White.tres" id="7_ebke8"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="7_ebke8"]
 [ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="8_1xtop"]
 [ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="9_8lqer"]
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
+[ext_resource type="PackedScene" uid="uid://di4sj6n6qvd0q" path="res://Models/FanVent.tscn" id="9_padk7"]
+[ext_resource type="PackedScene" uid="uid://cbbmhvuy14jw6" path="res://Models/SatDish.tscn" id="10_akswq"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
 [ext_resource type="PackedScene" uid="uid://5yrwwj7cadsk" path="res://Scenes/menus/pause_screen.tscn" id="11_7y5iv"]
 [ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="14_dikqp"]
@@ -237,6 +239,17 @@ surface_material_override/0 = ExtResource("7_ebke8")
 
 [node name="Bag" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("9_8lqer")]
 transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, -1.10316, -45.5091, -1.60945)
+
+[node name="FanVent" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("9_padk7")]
+transform = Transform3D(-7.86805e-09, 0, 0.18, 0, 0.18, 0, -0.18, 0, -7.86805e-09, 0.0969438, -46.5993, -1.93183)
+
+[node name="SatDish" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("10_akswq")]
+transform = Transform3D(0.957158, 0.289566, 0, -0.289566, 0.957158, 0, 0, 0, 1, -2.56012, -46.2803, 0)
+dish_rotation = Vector3(0.255, 0, -0.73)
+
+[node name="SatDish2" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("10_akswq")]
+transform = Transform3D(0.598224, 0.180979, 0, -0.180979, 0.598224, 0, 0, 0, 0.625, -2.58366, -46.2803, 0.593007)
+dish_rotation = Vector3(0.045, 0, -0.73)
 
 [node name="Level2" type="Node3D" parent="World/LightmapGI/Ring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.457, 0, 0)
