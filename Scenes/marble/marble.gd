@@ -20,9 +20,9 @@ extends RigidBody3D
 @onready var drift_fx : Node3D = $DriftFX
 @onready var particles: Node3D = $Particles
 @onready var spark_particles1: GPUParticles3D = $Particles/DriftSparkParticles1
-@onready var spark_particles2: GPUParticles3D = $Particles/DriftSparkParticles1/DriftSparkParticles2
+@onready var spark_particles2: GPUParticles3D = $Particles/DriftSparkParticles2
 @onready var smoke_particles1: GPUParticles3D = $Particles/DriftSmokeParticles1
-@onready var smoke_particles2: GPUParticles3D = $Particles/DriftSmokeParticles1/DriftSmokeParticles2
+@onready var smoke_particles2: GPUParticles3D = $Particles/DriftSmokeParticles2
 
 @onready var groundDetectionAudio : RayCast3D = $groundDetection1/groundDetectionAudio
 @onready var groundDetection1 : RayCast3D = $groundDetection1
@@ -40,6 +40,8 @@ extends RigidBody3D
 
 var initial_friction: float
 var input_vector: Vector3
+var contact_pos: Vector3
+var rot_speed_factor: float
 
 
 func _ready() -> void:
@@ -52,30 +54,14 @@ func _ready() -> void:
 	rollSFX.volume_linear = 0
 	windSFX.volume_linear = 0
 	Global.connect("bag_collected_sfx", _on_Bag_Collect_SFX)
-	#particle_cache() disabled just to make testing game faster
-
-func particle_cache() -> void:
-	particles.process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().set_deferred("paused", true)
-	for child in particles.get_children():
-		if child is GPUParticles3D:
-			if child.one_shot == true:
-				child.emitting = true
-			else:
-				child.one_shot = true
-				child.emitting = true
-				await child.finished
-				child.one_shot = false
-	get_tree().set_deferred("paused", false)
-	particles.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _physics_process(delta: float) -> void:
-	#print(spark_particles2.emitting)
 	movement_handler(delta)
 	drift_handler(delta)
 	visuals.visuals_handler(delta)
 	audio_handler()
 	
+	contact_pos = get_contact_pos()
 	drift_fx.global_position = global_position
 	
 	groundDetection1.position = self.position
@@ -198,10 +184,18 @@ func drift_handler(delta) -> void:
 		particle_handler(false, true)
 		driftSFXBool = false
 
-var contact_pos: Vector3
-var rot_speed_factor: float
+
+func get_contact_pos() -> Vector3:
+	var state = PhysicsServer3D.body_get_direct_state(get_rid())
+	if state:
+		for i in state.get_contact_count():
+			return state.get_contact_local_position(i)
+	return Vector3.ZERO
 
 func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
+	if contact_pos == Vector3.ZERO: return
+	particles.global_position = contact_pos + input_vector
+	
 	rot_speed_factor = angular_velocity.length() / max_angular_vel
 	var draw_size: Vector2 = Vector2(rot_speed_factor, rot_speed_factor)
 	spark_particles1.draw_pass_1.size = draw_size
@@ -226,14 +220,7 @@ func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 	else:
 		smoke_particles1.emitting = false
 	smoke_particles2.emitting = is_drifting
-	
-	var state = PhysicsServer3D.body_get_direct_state(get_rid())
-	if state:
-		for i in state.get_contact_count():
-			contact_pos = state.get_contact_local_position(i)
-	
-	particles.global_position = contact_pos + input_vector
-	
+
 func is_on_floor() -> bool:
 	for body in get_colliding_bodies():
 		if body.collision_layer == 1:
