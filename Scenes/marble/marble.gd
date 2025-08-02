@@ -29,6 +29,7 @@ extends RigidBody3D
 #audio
 @onready var rollSFX : AudioStreamPlayer3D = $Audio/rollSFX
 @onready var windSFX : AudioStreamPlayer = $Audio/windSFX
+@onready var bagSFX : AudioStreamPlayer = $Audio/bagSFX
 
 var initial_friction: float
 var input_vector: Vector3
@@ -42,6 +43,7 @@ func _ready() -> void:
 	
 	rollSFX.volume_linear = 0
 	windSFX.volume_linear = 0
+	Global.connect("bag_collected_sfx", _on_Bag_Collect_SFX)
 
 func _physics_process(delta: float) -> void:
 	movement_handler(delta)
@@ -214,3 +216,6 @@ func audio_handler() -> void:
 		rollSFX.volume_linear = 0
 	
 	windSFX.volume_linear = windVOL / 50
+
+func _on_Bag_Collect_SFX():
+	bagSFX.play()

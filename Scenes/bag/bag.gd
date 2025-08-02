@@ -12,6 +12,8 @@ extends Node3D
 @onready var going_down : bool = false
 @onready var height_lerp : float = 0.0
 
+
+
 func _ready() -> void:
 	$Area3D.body_entered.connect(on_body_entered)
 
@@ -53,6 +55,7 @@ func just_collected():
 	bagmesh.set_surface_override_material(0, white_mat)
 	bagmesh.set_surface_override_material(1, white_mat)
 	
+	Global.emit_signal("bag_collected_sfx")
 
 
 func on_body_entered(body : Node3D):

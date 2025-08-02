@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=56 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -21,6 +21,14 @@
 [ext_resource type="Texture2D" uid="uid://tootnw03vocd" path="res://Thaddeus/FX/Tx_Burst_radial_04.png" id="14_koch1"]
 [ext_resource type="Texture2D" uid="uid://dg4mufql1wdv7" path="res://Thaddeus/FX/ATS_Orna_Corner_174.png" id="14_ld4xo"]
 [ext_resource type="Script" uid="uid://7e2wfwwbg6rh" path="res://Scenes/marble/spring_arm_3d.gd" id="19_470xv"]
+[ext_resource type="AudioStream" uid="uid://cylfx0a80obvc" path="res://Sounds/bag sfx/bag-001.mp3" id="22_e4e5g"]
+[ext_resource type="AudioStream" uid="uid://d2ws4kf23mmhv" path="res://Sounds/bag sfx/bag-002.mp3" id="23_xtb7g"]
+[ext_resource type="AudioStream" uid="uid://cey0riyh2shm1" path="res://Sounds/bag sfx/bag-003.mp3" id="24_ajqlj"]
+[ext_resource type="AudioStream" uid="uid://c2eljlsfwsliv" path="res://Sounds/bag sfx/bag-004.mp3" id="25_hbmsj"]
+[ext_resource type="AudioStream" uid="uid://dbbsddgbhx4ab" path="res://Sounds/bag sfx/bag-005.mp3" id="26_fyu7u"]
+[ext_resource type="AudioStream" uid="uid://84455f6r71dk" path="res://Sounds/bag sfx/bag-006.mp3" id="27_n4shh"]
+[ext_resource type="AudioStream" uid="uid://djl87mb2nvt2p" path="res://Sounds/bag sfx/bag-007.mp3" id="28_8f3cu"]
+[ext_resource type="AudioStream" uid="uid://xspadjkhxx18" path="res://Sounds/bag sfx/bag-008.mp3" id="29_p7los"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
@@ -200,6 +208,17 @@ point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0ovb4"]
 radius = 0.3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_16wrw"]
+streams_count = 8
+stream_0/stream = ExtResource("22_e4e5g")
+stream_1/stream = ExtResource("23_xtb7g")
+stream_2/stream = ExtResource("24_ajqlj")
+stream_3/stream = ExtResource("25_hbmsj")
+stream_4/stream = ExtResource("26_fyu7u")
+stream_5/stream = ExtResource("27_n4shh")
+stream_6/stream = ExtResource("28_8f3cu")
+stream_7/stream = ExtResource("29_p7los")
 
 [node name="Marble" type="RigidBody3D"]
 collision_layer = 2
@@ -431,3 +450,6 @@ autoplay = true
 [node name="windSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("8_ywu4v")
 autoplay = true
+
+[node name="bagSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_16wrw")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cey0riyh2shm1"
+path="res://.godot/imported/bag-003.mp3-f420cb01a62108c6a6e358780a70a0ee.mp3str"
+
+[deps]
+
+source_file="res://Sounds/bag sfx/bag-003.mp3"
+dest_files=["res://.godot/imported/bag-003.mp3-f420cb01a62108c6a6e358780a70a0ee.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
