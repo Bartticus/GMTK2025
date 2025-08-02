@@ -4,9 +4,9 @@ extends Node3D
 
 
 
-@export var satdish : MeshInstance3D
+@onready var satdish : MeshInstance3D = $satdish2/satdish
 @onready var dish_body : StaticBody3D = $"satdish2/@StaticBody3D@43267"
-@export var dish_collidor : CollisionShape3D
+@onready var dish_collidor : CollisionShape3D = $"satdish2/@StaticBody3D@43267/CollisionShape3D"
 
 @export var dish_rotation : Vector3 = Vector3.ZERO:
 	set(value):
