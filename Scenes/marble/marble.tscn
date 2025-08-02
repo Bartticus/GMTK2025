@@ -92,7 +92,6 @@ hue_variation_max = 0.1
 transparency = 1
 cull_mode = 2
 shading_mode = 0
-vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0.6, 1, 1)
 albedo_texture = ExtResource("9_xfd6w")
 billboard_mode = 3
@@ -294,6 +293,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 target_position = Vector3(0, -3, 0)
 
 [node name="Particles" type="Node3D" parent="."]
+process_mode = 3
 top_level = true
 
 [node name="DriftSparkParticles1" type="GPUParticles3D" parent="Particles"]

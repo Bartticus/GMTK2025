@@ -13,6 +13,8 @@ config_version=5
 config/name="GMTK2025"
 run/main_scene="uid://dv7x2ren5evyl"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=120
+boot_splash/image="uid://co3og10yoa5yb"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -27,7 +29,9 @@ gdscript/warnings/unused_parameter=0
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [input]
 

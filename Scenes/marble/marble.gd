@@ -38,6 +38,7 @@ extends RigidBody3D
 var initial_friction: float
 var input_vector: Vector3
 
+
 func _ready() -> void:
 	Global.player = self
 	groundDetection1.top_level = true
@@ -48,8 +49,26 @@ func _ready() -> void:
 	rollSFX.volume_linear = 0
 	windSFX.volume_linear = 0
 	Global.connect("bag_collected_sfx", _on_Bag_Collect_SFX)
+	
+	particle_cache()
+
+func particle_cache() -> void:
+	particles.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().set_deferred("paused", true)
+	for child in particles.get_children():
+		if child is GPUParticles3D:
+			if child.one_shot == true:
+				child.emitting = true
+			else:
+				child.one_shot = true
+				child.emitting = true
+				await child.finished
+				child.one_shot = false
+	get_tree().set_deferred("paused", false)
+	particles.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _physics_process(delta: float) -> void:
+	print(spark_particles2.emitting)
 	movement_handler(delta)
 	drift_handler(delta)
 	visuals.visuals_handler(delta)
