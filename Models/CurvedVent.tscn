@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbdxfpl47m6kc"]
+
+[ext_resource type="PackedScene" uid="uid://iryhc6weu5ga" path="res://Models/Meshes/curvedvent.glb" id="1_2ld0e"]
+[ext_resource type="Material" uid="uid://djd6a48khejwv" path="res://Thaddeus/Steel.tres" id="2_s6hya"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="3_y2ld8"]
+[ext_resource type="Material" uid="uid://depe6uqdmeipf" path="res://Thaddeus/Dark.tres" id="4_fsxtg"]
+
+[node name="CurvedVent" type="Node3D"]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
+
+[node name="curvedvent" parent="." instance=ExtResource("1_2ld0e")]
+
+[node name="CurvedVent" parent="curvedvent" index="0"]
+surface_material_override/0 = ExtResource("3_y2ld8")
+surface_material_override/1 = ExtResource("2_s6hya")
+surface_material_override/2 = ExtResource("4_fsxtg")
+
+[editable path="curvedvent"]
