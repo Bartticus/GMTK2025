@@ -3,5 +3,4 @@
 [ext_resource type="Texture2D" uid="uid://dlxe1akiw2xmc" path="res://Thaddeus/white_tex.png" id="1_ee6us"]
 
 [resource]
-albedo_color = Color(0.843184, 0.843184, 0.843184, 1)
 albedo_texture = ExtResource("1_ee6us")
