@@ -2,11 +2,8 @@
 
 [ext_resource type="ArrayMesh" uid="uid://bgs7ktlm8mh6y" path="res://Scenes/bag/bag.obj" id="1_ad4vs"]
 [ext_resource type="Script" uid="uid://dftua85s7brxj" path="res://Scenes/bag/bag.gd" id="1_ylb2f"]
+[ext_resource type="Curve" uid="uid://dhhyoto0po6ig" path="res://Scenes/bag/hover_curve.tres" id="2_kww3e"]
 [ext_resource type="Material" uid="uid://bclwfo8if28mf" path="res://Thaddeus/HitFlash.tres" id="2_r3gyv"]
-
-[sub_resource type="Curve" id="Curve_ylb2f"]
-_data = [Vector2(0, 0), 0.0, 0.0592311, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylb2f"]
 albedo_color = Color(1, 0.75, 0, 1)
@@ -23,7 +20,7 @@ size = Vector3(1.5, 2.5, 1.5)
 [node name="Bag" type="Node3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 script = ExtResource("1_ylb2f")
-hover_curve = SubResource("Curve_ylb2f")
+hover_curve = ExtResource("2_kww3e")
 white_mat = ExtResource("2_r3gyv")
 
 [node name="BagMesh" type="MeshInstance3D" parent="."]
