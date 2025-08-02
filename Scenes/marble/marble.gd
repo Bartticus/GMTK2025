@@ -10,6 +10,7 @@ extends RigidBody3D
 @onready var visuals : Node3D = $Visuals
 @onready var camera: Camera3D = $SpringArmPivotY/PivotX/ThirdPersonCamera
 @onready var spring_arm_pivot: Node3D = $SpringArmPivotY
+@onready var coyote_timer: Timer = $CoyoteTimer
 
 @onready var drifting_last_keyboard_f_force : Vector3 = Vector3.ZERO
 @onready var drifting_last_keyboard_h_force : Vector3 = Vector3.ZERO
@@ -20,13 +21,14 @@ extends RigidBody3D
 @onready var smoke_particles1: GPUParticles3D = $Particles/DriftSmokeParticles1
 @onready var smoke_particles2: GPUParticles3D = $Particles/DriftSmokeParticles1/DriftSmokeParticles2
 
-@onready var rollSFX : AudioStreamPlayer3D = $rollSFX
 @onready var groundDetectionAudio : RayCast3D = $groundDetection1/groundDetectionAudio
 @onready var groundDetection1 : RayCast3D = $groundDetection1
 @onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
 @onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
 
-@onready var windSFX : AudioStreamPlayer = $windSFX
+#audio
+@onready var rollSFX : AudioStreamPlayer3D = $Audio/rollSFX
+@onready var windSFX : AudioStreamPlayer = $Audio/windSFX
 
 var initial_friction: float
 var input_vector: Vector3
@@ -69,11 +71,14 @@ func movement_handler(delta: float) -> void:
 		f_input = lerpf(fully_slowed_input.x, f_input, dir_diff_lerp)
 		h_input = lerpf(fully_slowed_input.y, h_input, dir_diff_lerp)
 	
-	var camera_transform = spring_arm_pivot.global_transform#camera.get_camera_transform()
+	var camera_transform = spring_arm_pivot.global_transform
 	
 	var f_force = f_input * torque * delta * camera_transform.basis.x.normalized()
 	var h_force = h_input * torque * delta * camera_transform.basis.z.normalized()
 	
+	if drift_fx.currently_drifting:
+		f_force *= 1.5
+		h_force *= 1.5
 	
 	apply_torque(f_force)
 	apply_torque(h_force)
@@ -96,7 +101,6 @@ func movement_handler(delta: float) -> void:
 		apply_central_force(f_force)
 		apply_central_force(-h_force)
 	
-	
 	if abs(f_input) > 0.1 or abs(h_input) > 0.1:
 		var look_vec : Vector2 = Vector2(-input_vector.z, input_vector.x)
 		look_vec = look_vec.rotated(-camera.global_rotation.y)
@@ -104,7 +108,7 @@ func movement_handler(delta: float) -> void:
 		drifting_last_keyboard_f_force = f_force
 		drifting_last_keyboard_h_force = h_force
 	else:
-		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + 1.5707963267949
+		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + PI/2
 	
 	#linear_velocity.x = clampf(linear_velocity.x, -max_velocity, max_velocity)
 	#linear_velocity.z = clampf(linear_velocity.z, -max_velocity, max_velocity)
@@ -117,24 +121,26 @@ func movement_handler(delta: float) -> void:
 		apply_central_impulse(-drifting_last_keyboard_h_force * boost * rot_speed_factor)
 		drifting_last_keyboard_f_force = Vector3.ZERO
 		drifting_last_keyboard_h_force = Vector3.ZERO
-	
-	
 
 var new_friction: float = 0
 
 func drift_handler(delta) -> void:
 	if not is_on_floor():
-		particle_handler(false)
-		return
+		if coyote_timer.is_stopped():
+			drift_fx.currently_drifting = false
+			particle_handler(false)
+			return
+	else:
+		coyote_timer.start()
 	
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
 	
-	if Input.is_action_pressed("drift"):
-		linear_velocity = linear_velocity.lerp(linear_velocity.normalized(), brake_force * delta)
+	if Input.is_action_pressed("drift") and !coyote_timer.is_stopped():
+		linear_velocity = linear_velocity.lerp(Vector3.ZERO, brake_force * delta)
 		physics_material_override.friction = 0.1
 		
-		var max_friction: float = 500
+		var max_friction: float = 1000
 		if new_friction < max_friction:
 			new_friction += 20
 		

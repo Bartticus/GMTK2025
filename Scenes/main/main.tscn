@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dk6dq52gtsalp" path="res://Textures/texture_01.png" id="1_b20jg"]
 [ext_resource type="LightmapGIData" uid="uid://dd7ruvw8a0ua5" path="res://Textures/main.lmbake" id="1_brlrh"]
 [ext_resource type="Script" uid="uid://siacv54rween" path="res://Scenes/main/main.gd" id="1_hgq70"]
-[ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="2_w1fgp"]
 [ext_resource type="Material" uid="uid://bkvo47d3laj1v" path="res://Thaddeus/Visdev.tres" id="2_wcurd"]
 [ext_resource type="PackedScene" uid="uid://e3yd7vkq41oi" path="res://Scenes/ring/ring.tscn" id="3_4etoo"]
 [ext_resource type="Material" uid="uid://ybbnsrboni3v" path="res://Thaddeus/VisdevRed.tres" id="4_4jhlv"]
@@ -17,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://2k4oxqlcnm4k" path="res://Levels/rooftest.glb" id="9_io28c"]
 [ext_resource type="FontFile" uid="uid://dqvwl6qxiv1fs" path="res://Thaddeus/NataSans-Regular.ttf" id="10_ra8v3"]
 [ext_resource type="PackedScene" uid="uid://5yrwwj7cadsk" path="res://Scenes/menus/pause_screen.tscn" id="11_7y5iv"]
+[ext_resource type="AudioStream" uid="uid://da0fe8b25crcv" path="res://Sounds/ambi generic.mp3" id="14_dikqp"]
+[ext_resource type="PackedScene" uid="uid://bo12c78cmhfo2" path="res://Scenes/marble/marble.tscn" id="18_ki64f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -138,11 +139,6 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_6bp64"]
 material = SubResource("StandardMaterial3D_21xkr")
 size = Vector3(50, 2, 50)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4etoo"]
-friction = 5.0
-rough = true
-bounce = 0.2
 
 [sub_resource type="LabelSettings" id="LabelSettings_8lqer"]
 font = ExtResource("10_ra8v3")
@@ -471,11 +467,6 @@ light_size = 0.223
 light_bake_mode = 1
 omni_range = 2000.0
 
-[node name="Marble" parent="." instance=ExtResource("2_w1fgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86102e-06, -184.098, 5.12396)
-physics_material_override = SubResource("PhysicsMaterial_4etoo")
-angular_damp = 0.1
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -493,6 +484,7 @@ text = "Bags: 0"
 label_settings = SubResource("LabelSettings_8lqer")
 
 [node name="Street Ambi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_dikqp")
 volume_db = -7.0
 autoplay = true
 bus = &"verb"
@@ -501,5 +493,8 @@ bus = &"verb"
 process_mode = 3
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("11_7y5iv")]
+
+[node name="Marble" parent="." instance=ExtResource("18_ki64f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -185.535, 5.80198)
 
 [editable path="World/LightmapGI/Ring/Level1/tutorial_building"]
