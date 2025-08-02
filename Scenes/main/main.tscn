@@ -253,11 +253,7 @@ surface_material_override/1 = null
 [node name="@StaticBody3D@43267" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2" index="1"]
 transform = Transform3D(0.871601, 0.412525, 0.264829, -0.39039, 0.910848, -0.133986, -0.296491, 0.0133961, 0.954942, 0, 1.70543, 0)
 
-[node name="CollisionShape3D" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2/@StaticBody3D@43267" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="satdish" parent="World/LightmapGI/Ring/Level1/SatDish/satdish2/@StaticBody3D@43267" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = null
 
 [node name="SatDish2" parent="World/LightmapGI/Ring/Level1" instance=ExtResource("10_akswq")]
@@ -270,11 +266,7 @@ surface_material_override/1 = null
 [node name="@StaticBody3D@43267" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2" index="1"]
 transform = Transform3D(0.771771, 0.586546, -0.245628, -0.47339, 0.787853, 0.393942, 0.424584, -0.187755, 0.885707, 0, 1.70543, 0)
 
-[node name="CollisionShape3D" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2/@StaticBody3D@43267" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="satdish" parent="World/LightmapGI/Ring/Level1/SatDish2/satdish2/@StaticBody3D@43267" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = null
 
 [node name="Level2" type="Node3D" parent="World/LightmapGI/Ring"]
