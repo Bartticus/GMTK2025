@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 			if height_lerp == 1.0:
 				going_down = true
 		
-		e_prompt.position.y = lerpf(0.645, 0.745, hover_curve.sample_baked(height_lerp))
+		e_prompt.position.y = lerpf(0.845, 0.945, hover_curve.sample_baked(height_lerp))
 
 
 
