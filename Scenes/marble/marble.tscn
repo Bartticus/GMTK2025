@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=68 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
