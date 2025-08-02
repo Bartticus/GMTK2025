@@ -11,6 +11,9 @@ extends Node3D
 @onready var going_down : bool = false
 @onready var height_lerp : float = 0.0
 
+@onready var breathing_down : bool = false
+@onready var breathing_timer: float = 0.0
+
 @onready var squishing : bool = false
 @export var squash_length : float = 0.35
 @onready var squash_timer : float = 0.0
@@ -56,6 +59,17 @@ func _process(delta: float) -> void:
 		if height_lerp == 1.0:
 			going_down = true
 	
+	if breathing_down:
+		breathing_timer -= delta
+		breathing_timer = max(breathing_timer, 0.0)
+		if breathing_timer == 0.0:
+			breathing_down = false
+	else:
+		breathing_timer += delta
+		breathing_timer = min(breathing_timer, 1.0)
+		if breathing_timer == 1.0:
+			breathing_down = true
+	
 	
 	
 	if e_prompt.modulate.a > 0.05:
@@ -73,10 +87,11 @@ func _process(delta: float) -> void:
 		
 		if squash_timer == 0.0:
 			squishing = false
+			breathing_down = false
+			breathing_timer = 0.5
 	else:
-		var breathing_scale : float = 0.15
-		var breathing_lerp : float = hover_curve.sample_baked(height_lerp) - 1.0
-		#breathing_lerp -= 1.0
+		var breathing_scale : float = 0.08
+		var breathing_lerp : float = hover_curve.sample_baked(breathing_timer) - 1.0
 		new_scale.x += breathing_lerp * breathing_scale
 		new_scale.z += breathing_lerp * breathing_scale
 		new_scale.y -= breathing_lerp * breathing_scale
