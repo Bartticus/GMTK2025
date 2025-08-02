@@ -3,9 +3,12 @@ extends RigidBody3D
 
 @export_range(0.0, 600.0, 10.0) var torque: float = 200
 @export var max_angular_vel: float = 100
-@export var brake_force: float = 5
+@export var brake_force: float = 5.0
+@export var talking_brake_force: float = 7.0
 @export_range(0.0, 1000.0, 10.0) var linear_force : float = 500.0
 @export var drifting_velocity_boost: float = 2.0
+
+@onready var talking : bool = false
 
 @onready var visuals : Node3D = $Visuals
 @onready var camera: Camera3D = $SpringArmPivotY/PivotX/ThirdPersonCamera
@@ -49,7 +52,6 @@ func _ready() -> void:
 	rollSFX.volume_linear = 0
 	windSFX.volume_linear = 0
 	Global.connect("bag_collected_sfx", _on_Bag_Collect_SFX)
-	
 	#particle_cache() disabled just to make testing game faster
 
 func particle_cache() -> void:
@@ -82,6 +84,12 @@ func _physics_process(delta: float) -> void:
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
 	var h_input = Input.get_action_raw_strength("left") - Input.get_action_raw_strength("right")
+	if talking:
+		f_input = 0.0
+		h_input = 0.0
+		linear_velocity = linear_velocity.lerp(Vector3.ZERO, talking_brake_force * delta)
+		angular_velocity = angular_velocity.lerp(Vector3.ZERO, talking_brake_force * delta)
+	
 	input_vector = Vector3(h_input, 0, -f_input) * 0.25
 	
 	if !Input.is_action_pressed("drift") and linear_velocity.length() > 0.0:#tone down the angular torque we add the faster we're going, to near 0 if we're spinny real fast
@@ -150,8 +158,8 @@ func movement_handler(delta: float) -> void:
 var new_friction: float = 0
 
 func drift_handler(delta) -> void:
-	if not is_on_floor():
-		if coyote_timer.is_stopped():
+	if not is_on_floor() or talking:
+		if coyote_timer.is_stopped() or talking:
 			drift_fx.currently_drifting = false
 			particle_handler(false)
 			#driftSFXBool = false
@@ -238,7 +246,7 @@ func audio_handler() -> void:
 	var windVOL = linear_velocity.length()
 	
 	#if groundDetectionAudio.is_colliding():
-	if is_on_floor():
+	if is_on_floor() and not talking:
 		rollSFX.volume_linear = marbleVOL / 100
 	else:
 		rollSFX.volume_linear = 0
@@ -247,7 +255,7 @@ func audio_handler() -> void:
 	
 	#if self.is_on_floor(): playDriftSFXOnce = true
 	
-	if driftSFXBool:
+	if driftSFXBool and not talking:
 		if playDriftSFXOnce == true:
 			driftSFX.play()
 			playDriftSFXOnce = false

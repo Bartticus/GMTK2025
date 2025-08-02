@@ -8,6 +8,8 @@ extends Node3D
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	DialogueManager.dialogue_ended.connect(on_dialogue_ended)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -24,5 +26,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif event is InputEventMouseButton:
+	elif event is InputEventMouseButton and not Global.player.talking:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func on_dialogue_ended(resource: DialogueResource):
+	Global.player.talking = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

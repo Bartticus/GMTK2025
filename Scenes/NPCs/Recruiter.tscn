@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuytryr2ftgaa"]
+
+[ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_s5mds"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ekmmp"]
+radius = 0.25
+height = 0.5
+
+[node name="Recruiter" type="Node3D"]
+
+[node name="NpcComponent" parent="." instance=ExtResource("1_s5mds")]
+
+[node name="NPC test" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ekmmp")
