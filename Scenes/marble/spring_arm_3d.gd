@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var mouse_sensitivity: float = 0.005
 @export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_vertical_angle: float = -PI/2
 @export_range(0.0, 90.0, 0.1, "radians_as_degrees") var max_vertical_angle: float = PI/4
 
@@ -12,10 +11,10 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotation.y -= event.relative.x * mouse_sensitivity
+		rotation.y -= event.relative.x * Global.mouse_sensitivity
 		rotation.y = wrapf(rotation.y, 0.0, TAU)
 		
-		pivot_x.rotation.x -= event.relative.y * mouse_sensitivity
+		pivot_x.rotation.x -= event.relative.y * Global.mouse_sensitivity
 		pivot_x.rotation.x = clamp(pivot_x.rotation.x, min_vertical_angle, max_vertical_angle)
 	
 	if event.is_action_pressed("wheel_up") and spring_arm.spring_length >= 5:
