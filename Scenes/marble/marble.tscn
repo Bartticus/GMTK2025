@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=67 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -29,6 +29,16 @@
 [ext_resource type="AudioStream" uid="uid://84455f6r71dk" path="res://Sounds/bag sfx/bag-006.mp3" id="27_n4shh"]
 [ext_resource type="AudioStream" uid="uid://djl87mb2nvt2p" path="res://Sounds/bag sfx/bag-007.mp3" id="28_8f3cu"]
 [ext_resource type="AudioStream" uid="uid://xspadjkhxx18" path="res://Sounds/bag sfx/bag-008.mp3" id="29_p7los"]
+[ext_resource type="AudioStream" uid="uid://cp7s6rep7w5x3" path="res://Sounds/hit/marble hit-001.mp3" id="30_dltu1"]
+[ext_resource type="AudioStream" uid="uid://cuowcrl8dlw1o" path="res://Sounds/hit/marble hit-002.mp3" id="31_qover"]
+[ext_resource type="AudioStream" uid="uid://0rqiqyvxohv7" path="res://Sounds/hit/marble hit-003.mp3" id="32_5x7hh"]
+[ext_resource type="AudioStream" uid="uid://k5it1nxa4n6a" path="res://Sounds/hit/marble hit-004.mp3" id="33_g2288"]
+[ext_resource type="AudioStream" uid="uid://c1otym1g1077o" path="res://Sounds/hit/marble hit-005.mp3" id="34_ra8qn"]
+[ext_resource type="AudioStream" uid="uid://bc7wvvfqt0y6y" path="res://Sounds/hit/marble hit-006.mp3" id="35_ktgsy"]
+[ext_resource type="AudioStream" uid="uid://cpbnomd787rls" path="res://Sounds/hit/marble hit-007.mp3" id="36_y4c4n"]
+[ext_resource type="AudioStream" uid="uid://cembidpemkgyw" path="res://Sounds/hit/marble hit-008.mp3" id="37_kaq5a"]
+[ext_resource type="AudioStream" uid="uid://cruv6rgrst77t" path="res://Sounds/hit/marble hit-009.mp3" id="38_nkqdp"]
+[ext_resource type="AudioStream" uid="uid://cuo6w0to62edl" path="res://Sounds/tire screech-002.mp3" id="39_qover"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
@@ -219,6 +229,18 @@ stream_4/stream = ExtResource("26_fyu7u")
 stream_5/stream = ExtResource("27_n4shh")
 stream_6/stream = ExtResource("28_8f3cu")
 stream_7/stream = ExtResource("29_p7los")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l7rxb"]
+streams_count = 9
+stream_0/stream = ExtResource("30_dltu1")
+stream_1/stream = ExtResource("31_qover")
+stream_2/stream = ExtResource("32_5x7hh")
+stream_3/stream = ExtResource("33_g2288")
+stream_4/stream = ExtResource("34_ra8qn")
+stream_5/stream = ExtResource("35_ktgsy")
+stream_6/stream = ExtResource("36_y4c4n")
+stream_7/stream = ExtResource("37_kaq5a")
+stream_8/stream = ExtResource("38_nkqdp")
 
 [node name="Marble" type="RigidBody3D"]
 collision_layer = 2
@@ -446,6 +468,7 @@ one_shot = true
 [node name="rollSFX" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("7_mlxtt")
 autoplay = true
+bus = &"Player Verb"
 
 [node name="windSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("8_ywu4v")
@@ -453,3 +476,12 @@ autoplay = true
 
 [node name="bagSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_16wrw")
+bus = &"Player Verb"
+
+[node name="impactSFX" type="AudioStreamPlayer3D" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_l7rxb")
+bus = &"Player Verb"
+
+[node name="driftSFX" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("39_qover")
+bus = &"Player Verb"
