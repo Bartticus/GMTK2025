@@ -147,6 +147,7 @@ func drift_handler(delta) -> void:
 	if not is_on_floor() or talking:
 		if coyote_timer.is_stopped() or talking:
 			drift_fx.currently_drifting = false
+			driftSFX.stop()
 			particle_handler(false)
 			#driftSFXBool = false
 			return
@@ -155,8 +156,8 @@ func drift_handler(delta) -> void:
 	
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
-		driftSFXBool = true
-		playDriftSFXOnce = true
+		#driftSFXBool = true
+		#playDriftSFXOnce = true
 	
 	if Input.is_action_pressed("drift") and !coyote_timer.is_stopped():
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, brake_force * delta)
@@ -182,7 +183,7 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = false
 		particle_handler(false, true)
-		driftSFXBool = false
+		#driftSFXBool = false
 
 
 func get_contact_pos() -> Vector3:
@@ -217,9 +218,22 @@ func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 		smoke_particles1.restart()
 		smoke_particles1.global_position = particles.global_position + input_vector
 		smoke_particles1.emitting = true
+		driftSFX.stop()
 	else:
 		smoke_particles1.emitting = false
 	smoke_particles2.emitting = is_drifting
+	
+	if is_drifting && driftSFX.playing == false:
+		driftSFX.play()
+		driftSFXBool= true
+		playDriftSFXOnce = true
+		
+	else:
+		driftSFXBool = false
+		playDriftSFXOnce = false
+		#driftSFX.stop()
+	#if not is_on_floor():
+		#driftSFX.stop()
 
 func is_on_floor() -> bool:
 	for body in get_colliding_bodies():
@@ -242,14 +256,14 @@ func audio_handler() -> void:
 	
 	#if self.is_on_floor(): playDriftSFXOnce = true
 	
-	if driftSFXBool and not talking:
-		if playDriftSFXOnce == true:
-			driftSFX.play()
-			playDriftSFXOnce = false
-	else:
-		driftSFX.stop()
-		driftSFXBool = false
-		playDriftSFXOnce = false
+	#if driftSFXBool and not talking:
+		#if playDriftSFXOnce == true && driftSFX.playing == false:
+			#driftSFX.play()
+			#playDriftSFXOnce = false
+	#else:
+		#driftSFX.stop()
+		#driftSFXBool = false
+		#playDriftSFXOnce = false
 		
 
 func _on_Bag_Collect_SFX():
