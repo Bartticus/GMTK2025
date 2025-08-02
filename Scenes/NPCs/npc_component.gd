@@ -16,6 +16,8 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.8
 
+@onready var voiceSFX : AudioStreamPlayer3D = $Voice
+
 func _ready() -> void:
 	$TalkArea.body_entered.connect(on_body_entered)
 	$TalkArea.body_exited.connect(on_body_exited)
@@ -37,6 +39,7 @@ func _process(delta: float) -> void:
 			add_child(balloon)
 			#get_tree().current_scene.add_child
 			balloon.start(dialogue, "start")
+			voiceSFX.play()
 			
 	else:
 		e_prompt.modulate.a = lerpf(e_prompt.modulate.a, 0.0, delta * 10.0)
@@ -83,6 +86,7 @@ func _process(delta: float) -> void:
 func next_line():
 	squash_timer = squash_length
 	squishing = true
+	voiceSFX.play()
 
 
 
