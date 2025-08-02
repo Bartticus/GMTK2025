@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		var spin_lerp : float = lerpf(1.0, 0.0, spin_timer / spin_duration)
 		
 		
-		var level_angle_dist : float = deg_to_rad(16.0) #this might become custom per level
+		var level_angle_dist : float = deg_to_rad(20.0) #this might become custom per level
 		rotation.x = x_rot - lerpf(0.0, level_angle_dist, ring_spin_curve.sample_baked(spin_lerp))
 		#rotate_x(ring_rotation_speed / 1000.0)
 		
@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			spin_lerp -= updown_point
 			spin_lerp /= updown_point
 			Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
-
+		
 
 
 func spin():
