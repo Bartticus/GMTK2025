@@ -11,17 +11,21 @@ albedo_texture = ExtResource("4_l8svk")
 
 [node name="Recruiter" type="Node3D"]
 
-[node name="NpcComponent" parent="." instance=ExtResource("1_s5mds")]
+[node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals") instance=ExtResource("1_s5mds")]
 dialogue = ExtResource("2_ekmmp")
+character_visuals = NodePath("../rec")
+squash_length = 0.35
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(0.365, 0, 0, 0, -1.59547e-08, -0.365, 0, 0.365, -1.59547e-08, 0, 0, 0)
+texture = ExtResource("5_omwl1")
 
 [node name="rec" parent="." instance=ExtResource("3_hodnx")]
 
 [node name="Recruiter" parent="rec" index="0"]
+cast_shadow = 0
+gi_mode = 2
 gi_lightmap_texel_scale = 2.0
 surface_material_override/0 = SubResource("StandardMaterial3D_dsi3a")
-
-[node name="Shadow" type="Sprite3D" parent="."]
-transform = Transform3D(0.26, 0, 0, 0, -1.1365e-08, -0.26, 0, 0.26, -1.1365e-08, 0, 0, 0)
-texture = ExtResource("5_omwl1")
 
 [editable path="rec"]
