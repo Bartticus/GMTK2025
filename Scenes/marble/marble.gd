@@ -30,6 +30,10 @@ extends RigidBody3D
 @onready var rollSFX : AudioStreamPlayer3D = $Audio/rollSFX
 @onready var windSFX : AudioStreamPlayer = $Audio/windSFX
 @onready var bagSFX : AudioStreamPlayer = $Audio/bagSFX
+@onready var impactSFX : AudioStreamPlayer3D = $Audio/impactSFX
+@onready var driftSFX : AudioStreamPlayer3D = $Audio/driftSFX
+@onready var driftSFXBool : bool = false
+@onready var playDriftSFXOnce : bool = false
 
 var initial_friction: float
 var input_vector: Vector3
@@ -131,12 +135,15 @@ func drift_handler(delta) -> void:
 		if coyote_timer.is_stopped():
 			drift_fx.currently_drifting = false
 			particle_handler(false)
+			#driftSFXBool = false
 			return
 	else:
 		coyote_timer.start()
 	
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
+		driftSFXBool = true
+		playDriftSFXOnce = true
 	
 	if Input.is_action_pressed("drift") and !coyote_timer.is_stopped():
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, brake_force * delta)
@@ -148,6 +155,7 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = true
 		particle_handler(true)
+		#playDriftSFXOnce = true
 		
 		var shake_amount : float = angular_velocity.length() / 20.0
 		shake_amount = min(shake_amount, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
@@ -161,6 +169,7 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = false
 		particle_handler(false, true)
+		driftSFXBool = false
 
 var contact_pos: Vector3
 var rot_speed_factor: float
@@ -216,6 +225,18 @@ func audio_handler() -> void:
 		rollSFX.volume_linear = 0
 	
 	windSFX.volume_linear = windVOL / 50
+	
+	#if self.is_on_floor(): playDriftSFXOnce = true
+	
+	if driftSFXBool:
+		if playDriftSFXOnce == true:
+			driftSFX.play()
+			playDriftSFXOnce = false
+	else:
+		driftSFX.stop()
+		driftSFXBool = false
+		playDriftSFXOnce = false
+		
 
 func _on_Bag_Collect_SFX():
 	bagSFX.play()

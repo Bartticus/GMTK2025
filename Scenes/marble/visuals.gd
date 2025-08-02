@@ -42,6 +42,9 @@ func impact(intensity : float = 0.0, contacted : bool = false, contact_position 
 		if not Vector3.UP.cross(-normal.normalized()).is_zero_approx():
 			fx.look_at(contact_position + normal)
 		fx.sprite.rotate_z(randf())
+		
+	#audio
+	get_parent().impactSFX.play()
 
 func visuals_handler(delta: float) -> void:
 	
