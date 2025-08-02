@@ -1,0 +1,8 @@
+~ start
+Recuiter: Oh ho! Nice bag. Fancy yourself a Freeroller, do you?
+Recuiter: It is the sworn pilgrimage of all Freerollers to travel all the way around Loopolis, back to your home.
+Recuiter: Best to start while you’re young and spry; ready to start?
+- Hell yeah! => END
+- …I guess? => END
+- Ok => END
+=> END

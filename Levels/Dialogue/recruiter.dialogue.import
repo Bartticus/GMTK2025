@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://doru4jur4kykn"
+path="res://.godot/imported/recruiter.dialogue-6c23fd30c37043f558c880389a3f9d2a.tres"
+
+[deps]
+
+source_file="res://Levels/Dialogue/recruiter.dialogue"
+dest_files=["res://.godot/imported/recruiter.dialogue-6c23fd30c37043f558c880389a3f9d2a.tres"]
+
+[params]
+
+defaults=true

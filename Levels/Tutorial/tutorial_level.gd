@@ -1,5 +1,6 @@
 extends Level
 
+@export var recuiter_npc : Node3D
 @export var first_bag : Node3D
 @export var move_prompt : Control
 @export var boost_prompt : Control
@@ -11,6 +12,7 @@ extends Level
 
 func _ready() -> void:
 	first_bag.bag_collected.connect(on_bag_collected)
+	recuiter_npc.visible = false
 
 func _process(delta: float) -> void:
 	if Global.level == 0:
@@ -49,3 +51,4 @@ func _process(delta: float) -> void:
 
 func on_bag_collected():
 	tut_progress = 2
+	recuiter_npc.visible = true

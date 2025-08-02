@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var dialogue : DialogueResource
 @onready var in_range : bool = false
 @onready var npc : Node3D = get_parent()
 
@@ -27,7 +28,7 @@ func _process(delta: float) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			#elif event is InputEventMouseButton:
 				#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			var balloon : Object = DialogueManager.show_example_dialogue_balloon(load("res://Levels/Dialogue/untitled.dialogue"))
+			var balloon : Object = DialogueManager.show_example_dialogue_balloon(dialogue)#"res://Levels/Dialogue/recruiter.dialogue"
 			print(balloon)
 	else:
 		e_prompt.modulate.a = lerpf(e_prompt.modulate.a, 0.0, delta * 10.0)
