@@ -9,3 +9,5 @@ extends Node
 	
 #audio
 signal bag_collected_sfx()
+
+var mouse_sensitivity: float = 0.005

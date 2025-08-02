@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5yrwwj7cadsk"]
+[gd_scene load_steps=11 format=3 uid="uid://5yrwwj7cadsk"]
 
 [ext_resource type="Script" uid="uid://bo61ry03h17vr" path="res://Scenes/menus/pause_screen.gd" id="1_fcwn1"]
 [ext_resource type="Theme" uid="uid://w01bn6ippsou" path="res://Scenes/menus/pause_theme.tres" id="1_pqfwi"]
 [ext_resource type="Shader" uid="uid://nddnkqjfr5g7" path="res://Scenes/menus/pause_screen.gdshader" id="1_w8il3"]
+[ext_resource type="LabelSettings" uid="uid://h7sdyswr0871" path="res://Scenes/menus/pause_labels.tres" id="4_6tl5j"]
 [ext_resource type="Script" uid="uid://de4hddumfls3j" path="res://Scenes/menus/h_slider.gd" id="4_a1r0b"]
+[ext_resource type="Script" uid="uid://cuhaviagnpgxs" path="res://Scenes/menus/sens_slider.gd" id="6_67d4t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fcwn1"]
 shader = ExtResource("1_w8il3")
@@ -125,11 +127,15 @@ theme = ExtResource("1_pqfwi")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 170
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 61
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 10
+theme_override_font_sizes/font_size = 100
 text = "Game Paused"
 horizontal_alignment = 1
 
@@ -140,6 +146,7 @@ size_flags_horizontal = 4
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Master Volume"
+label_settings = ExtResource("4_6tl5j")
 horizontal_alignment = 1
 
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxContainer"]
@@ -152,10 +159,16 @@ bus_name = "Master"
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Mouse Sensitivity"
+label_settings = ExtResource("4_6tl5j")
 horizontal_alignment = 1
 
 [node name="SensSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+min_value = 0.01
+max_value = 2.0
+step = 0.01
+value = 0.1
+script = ExtResource("6_67d4t")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -165,28 +178,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -107.5
-offset_top = 41.0
-offset_right = 107.5
-offset_bottom = 227.0
+offset_left = -227.5
+offset_top = 15.0
+offset_right = 227.5
+offset_bottom = 438.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_pqfwi")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 45
 alignment = 1
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Resume"
 
 [node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Restart"
 
 [node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
