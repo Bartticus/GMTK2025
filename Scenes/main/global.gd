@@ -7,3 +7,5 @@ extends Node
 		bags_gotten = value
 		Global.main.set_bag_count()
 	
+#audio
+signal bag_collected_sfx()
