@@ -18,4 +18,4 @@ func set_bag_count():
 	$Control/Label.text = "Bags: " + str(Global.bags_gotten)
 
 func _root_viewport_size_changed():
-	$Control/Label.label_settings.font_size = get_viewport().size.y*0.07
+	pass#$Control/Label.label_settings.font_size = get_viewport().size.y*0.07
