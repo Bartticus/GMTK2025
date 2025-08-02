@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://k122kplaynxk"]
+[gd_scene load_steps=10 format=3 uid="uid://k122kplaynxk"]
 
 [ext_resource type="Script" uid="uid://dhkd6txy2hhox" path="res://Levels/Dialogue/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="FontFile" uid="uid://hc0yybjig02m" path="res://Fonts/ACME-REGULAR.TTF" id="3_8qqhn"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -64,7 +65,7 @@ MarginContainer/constants/margin_top = 15
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
 
 [node name="ExampleBalloon" type="CanvasLayer"]
-layer = 100
+layer = 2
 script = ExtResource("1_36de5")
 
 [node name="Balloon" type="Control" parent="."]
@@ -103,6 +104,8 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_8qqhn")
+theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -112,6 +115,8 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_8qqhn")
+theme_override_font_sizes/normal_font_size = 45
 text = "Dialogue..."
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
@@ -135,7 +140,10 @@ script = ExtResource("3_72ixx")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8qqhn")
+theme_override_font_sizes/font_size = 45
 text = "Response example"
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
