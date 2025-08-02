@@ -35,6 +35,7 @@ extends RigidBody3D
 @onready var bagSFX : AudioStreamPlayer = $Audio/bagSFX
 @onready var impactSFX : AudioStreamPlayer3D = $Audio/impactSFX
 @onready var driftSFX : AudioStreamPlayer3D = $Audio/driftSFX
+@onready var driftSFX2 : AudioStreamPlayer3D = $Audio/driftSFX2
 @onready var driftSFXBool : bool = false
 @onready var playDriftSFXOnce : bool = false
 
@@ -145,6 +146,7 @@ func drift_handler(delta) -> void:
 		if coyote_timer.is_stopped() or talking:
 			drift_fx.currently_drifting = false
 			driftSFX.stop()
+			driftSFX2.stop()
 			particle_handler(false)
 			#driftSFXBool = false
 			return
@@ -216,12 +218,14 @@ func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 		smoke_particles1.global_position = particles.global_position + input_vector
 		smoke_particles1.emitting = true
 		driftSFX.stop()
+		driftSFX2.stop()
 	else:
 		smoke_particles1.emitting = false
 	smoke_particles2.emitting = is_drifting
 	
 	if is_drifting && driftSFX.playing == false:
 		driftSFX.play()
+		driftSFX2.play()
 		driftSFXBool= true
 		playDriftSFXOnce = true
 		
@@ -261,7 +265,10 @@ func audio_handler() -> void:
 		#driftSFX.stop()
 		#driftSFXBool = false
 		#playDriftSFXOnce = false
-		
+	
+	driftSFX.volume_linear = rot_speed_factor
+	driftSFX2.volume_linear = rot_speed_factor
+	
 
 func _on_Bag_Collect_SFX():
 	bagSFX.play()

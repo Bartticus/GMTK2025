@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=69 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
@@ -37,6 +37,7 @@
 [ext_resource type="AudioStream" uid="uid://vo4chbw7l3vo" path="res://Sounds/hit concrete/marble hit Concrete-006.mp3" id="35_ktgsy"]
 [ext_resource type="AudioStream" uid="uid://c3yptvwpi7x5n" path="res://Sounds/hit concrete/marble hit Concrete-007.mp3" id="36_y4c4n"]
 [ext_resource type="AudioStream" uid="uid://kp36vveog26m" path="res://Sounds/hit concrete/marble hit Concrete-008.mp3" id="37_kaq5a"]
+[ext_resource type="AudioStream" uid="uid://c47cd4vg8s78a" path="res://Sounds/Energy.wav" id="39_5x7hh"]
 [ext_resource type="AudioStream" uid="uid://cuo6w0to62edl" path="res://Sounds/tire screech-002.mp3" id="39_qover"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
@@ -492,4 +493,10 @@ bus = &"Player Verb"
 
 [node name="driftSFX" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("39_qover")
+volume_db = -7.207
+bus = &"Player Verb"
+
+[node name="driftSFX2" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("39_5x7hh")
+volume_db = -15.855
 bus = &"Player Verb"
