@@ -129,9 +129,6 @@ func movement_handler(delta: float) -> void:
 	else:
 		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + PI/2
 	
-	#linear_velocity.x = clampf(linear_velocity.x, -max_velocity, max_velocity)
-	#linear_velocity.z = clampf(linear_velocity.z, -max_velocity, max_velocity)
-	
 	if is_on_floor() and Input.is_action_just_released("drift"):
 		var boost : float = drift_fx.drifting_timer / 0.8
 		boost = min(boost, 1.0)
