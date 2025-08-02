@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://t3bmronkgmkw"]
+[gd_scene load_steps=6 format=3 uid="uid://t3bmronkgmkw"]
 
 [ext_resource type="Script" uid="uid://dd7lbmda4pnqr" path="res://Scenes/NPCs/npc_component.gd" id="1_845ls"]
 [ext_resource type="Texture2D" uid="uid://blskthucmtedo" path="res://Levels/Tutorial/E_Key_Light.png" id="2_vouq5"]
 [ext_resource type="Curve" uid="uid://dhhyoto0po6ig" path="res://Scenes/bag/hover_curve.tres" id="2_wh3bl"]
+[ext_resource type="AudioStream" uid="uid://d2ws4kf23mmhv" path="res://Sounds/bag sfx/bag-002.mp3" id="4_lotjf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_845ls"]
 height = 0.65
@@ -24,3 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.945, 0)
 pixel_size = 0.005
 billboard = 1
 texture = ExtResource("2_vouq5")
+
+[node name="Voice" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_lotjf")
+bus = &"Player Verb"
