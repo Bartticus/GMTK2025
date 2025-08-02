@@ -23,13 +23,14 @@ func _process(delta: float) -> void:
 	if in_range and npc.visible:
 		e_prompt.modulate.a = lerpf(e_prompt.modulate.a, 1.0, delta * 10.0)
 	
-		if Input.is_action_just_pressed("talk"):
+		if Input.is_action_just_pressed("talk") and !Global.player.talking:
 			Global.player.talking = true
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			#elif event is InputEventMouseButton:
-				#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			var balloon : Object = DialogueManager.show_example_dialogue_balloon(dialogue)#"res://Levels/Dialogue/recruiter.dialogue"
-			print(balloon)
+			var balloon : Node = Global.balloon.instantiate()
+			add_child(balloon)
+			#get_tree().current_scene.add_child
+			balloon.start(dialogue, "start")
+			
 	else:
 		e_prompt.modulate.a = lerpf(e_prompt.modulate.a, 0.0, delta * 10.0)
 	
