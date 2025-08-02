@@ -50,7 +50,7 @@ func _ready() -> void:
 	windSFX.volume_linear = 0
 	Global.connect("bag_collected_sfx", _on_Bag_Collect_SFX)
 	
-	particle_cache()
+	#particle_cache() disabled just to make testing game faster
 
 func particle_cache() -> void:
 	particles.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -68,7 +68,7 @@ func particle_cache() -> void:
 	particles.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _physics_process(delta: float) -> void:
-	print(spark_particles2.emitting)
+	#print(spark_particles2.emitting)
 	movement_handler(delta)
 	drift_handler(delta)
 	visuals.visuals_handler(delta)

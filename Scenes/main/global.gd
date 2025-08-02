@@ -20,11 +20,11 @@ func respawn():#should be called from physics_process
 		
 		if is_instance_valid(ring.levels[level]):
 			if is_instance_valid(ring.levels[level].starter_point):
-				
+				player.visuals.ignore_next_velocity_squash = true
 				player.freeze = true
 				player.global_position = ring.levels[level].starter_point.global_position
 				player.freeze = false
-				var spike_force : float = 15.0
+				var spike_force : float = 30.0
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
 				

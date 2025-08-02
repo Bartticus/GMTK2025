@@ -43,7 +43,8 @@ func _physics_process(delta: float) -> void:
 		
 		if spin_timer == 0.0:
 			x_rot -= level_angle_dist
-			Global.player.camera.camera_shake = 2.0
+			#Global.player.camera.camera_shake = 2.0
+			Global.player.visuals.shadow.visible = true
 			Global.respawn()
 		
 		var updown_point : float = 0.5#where in the lerp will we hit the apex
@@ -65,6 +66,8 @@ func spin():
 	spin_timer = spin_duration
 	angular_momentum = Global.player.angular_velocity
 	Global.player.freeze = true
+	Global.player.visuals.shadow_alpha = 0.0
+	Global.player.visuals.shadow.visible = false
 
 func _input(event):
 	if event.is_action_pressed("ui_text_submit"):
