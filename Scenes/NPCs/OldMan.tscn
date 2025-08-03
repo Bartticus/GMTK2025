@@ -1,0 +1,48 @@
+[gd_scene load_steps=14 format=3 uid="uid://c253intqddacu"]
+
+[ext_resource type="PackedScene" uid="uid://ehqp4pno0ega" path="res://Scenes/NPCs/NPC Models/oldman.glb" id="1_00yd3"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="2_2pupe"]
+[ext_resource type="Texture2D" uid="uid://ceudoorar7ijb" path="res://Textures/texture_01 - bright.png" id="2_jdwsr"]
+[ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="4_8bt7k"]
+[ext_resource type="Resource" uid="uid://dexucu8au1s4t" path="res://Levels/Dialogue/Oldman.dialogue" id="5_0ymcv"]
+[ext_resource type="AudioStream" uid="uid://chgvhneosfhup" path="res://Sounds/voices/old man-001.mp3" id="6_ux2fy"]
+[ext_resource type="AudioStream" uid="uid://dj6h5hn4j6ylb" path="res://Sounds/voices/old man-002.mp3" id="7_0ihm1"]
+[ext_resource type="AudioStream" uid="uid://18jk0orc3k2q" path="res://Sounds/voices/old man-003.mp3" id="8_gj7pi"]
+[ext_resource type="AudioStream" uid="uid://cmxjeis4vb5qa" path="res://Sounds/voices/old man-004.mp3" id="9_lgkcm"]
+[ext_resource type="AudioStream" uid="uid://cj6ymhcv8noty" path="res://Sounds/voices/old man-005.mp3" id="10_n0hvg"]
+[ext_resource type="Texture2D" uid="uid://dpi5lt0fhuk4w" path="res://Thaddeus/ballshadow.png" id="11_0ihm1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bt7k"]
+albedo_color = Color(0.590831, 0.379048, 0.316616, 1)
+albedo_texture = ExtResource("2_jdwsr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1ttvw"]
+streams_count = 5
+stream_0/stream = ExtResource("6_ux2fy")
+stream_1/stream = ExtResource("7_0ihm1")
+stream_2/stream = ExtResource("8_gj7pi")
+stream_3/stream = ExtResource("9_lgkcm")
+stream_4/stream = ExtResource("10_n0hvg")
+
+[node name="OldMan" type="Node3D"]
+
+[node name="oldman" parent="." instance=ExtResource("1_00yd3")]
+
+[node name="OldMan" parent="oldman" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8bt7k")
+surface_material_override/1 = ExtResource("2_2pupe")
+
+[node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals", "voiceSFX") instance=ExtResource("4_8bt7k")]
+dialogue = ExtResource("5_0ymcv")
+character_visuals = NodePath("../oldman")
+voiceSFX = NodePath("../Voice")
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_1ttvw")
+volume_db = -3.624
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(0.365, 0, 0, 0, -1.59547e-08, -0.365, 0, 0.365, -1.59547e-08, 0, 0, 0)
+texture = ExtResource("11_0ihm1")
+
+[editable path="oldman"]

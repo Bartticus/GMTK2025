@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dexucu8au1s4t"
+path="res://.godot/imported/Oldman.dialogue-236e83cf665a7645eb0551662be101e6.tres"
+
+[deps]
+
+source_file="res://Levels/Dialogue/Oldman.dialogue"
+dest_files=["res://.godot/imported/Oldman.dialogue-236e83cf665a7645eb0551662be101e6.tres"]
+
+[params]
+
+defaults=true
