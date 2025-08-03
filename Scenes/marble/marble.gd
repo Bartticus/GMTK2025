@@ -34,8 +34,8 @@ extends RigidBody3D
 @onready var windSFX : AudioStreamPlayer = $Audio/windSFX
 @onready var bagSFX : AudioStreamPlayer = $Audio/bagSFX
 @onready var impactSFX : AudioStreamPlayer3D = $Audio/impactSFX
-@onready var driftSFX : AudioStreamPlayer3D = $Audio/driftSFX
-@onready var driftSFX2 : AudioStreamPlayer3D = $Audio/driftSFX2
+@onready var driftSFX : AudioStreamPlayer = $Audio/driftSFX
+@onready var driftSFX2 : AudioStreamPlayer = $Audio/driftSFX2
 @onready var driftSFXBool : bool = false
 @onready var playDriftSFXOnce : bool = false
 
@@ -80,7 +80,7 @@ func movement_handler(delta: float) -> void:
 	input_vector = Vector3(h_input, 0, -f_input) * 0.25
 	
 	if !Input.is_action_pressed("drift") and linear_velocity.length() > 0.0:#tone down the angular torque we add the faster we're going, to near 0 if we're spinny real fast
-		var angular_addition_modifier : float = angular_velocity.length() / 20.0
+		var angular_addition_modifier : float = angular_velocity.length() / 50.0
 		angular_addition_modifier = min(angular_addition_modifier, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
 		
 		var fully_slowed_input : Vector2 = Vector2(lerpf(f_input, 0.1, angular_addition_modifier), lerpf(h_input, 0.1, angular_addition_modifier))
@@ -148,15 +148,12 @@ func drift_handler(delta) -> void:
 			driftSFX.stop()
 			driftSFX2.stop()
 			particle_handler(false)
-			#driftSFXBool = false
 			return
 	else:
 		coyote_timer.start()
 	
 	if Input.is_action_just_pressed("drift"):
 		new_friction = 0
-		#driftSFXBool = true
-		#playDriftSFXOnce = true
 	
 	if Input.is_action_pressed("drift") and !coyote_timer.is_stopped():
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, brake_force * delta)
@@ -168,7 +165,6 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = true
 		particle_handler(true)
-		#playDriftSFXOnce = true
 		
 		var shake_amount : float = angular_velocity.length() / 20.0
 		shake_amount = min(shake_amount, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
@@ -182,8 +178,6 @@ func drift_handler(delta) -> void:
 		
 		drift_fx.currently_drifting = false
 		particle_handler(false, true)
-		#driftSFXBool = false
-
 
 func set_contact_pos() -> void:
 	var state = PhysicsServer3D.body_get_direct_state(get_rid())
@@ -231,9 +225,6 @@ func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 	else:
 		driftSFXBool = false
 		playDriftSFXOnce = false
-		#driftSFX.stop()
-	#if not is_on_floor():
-		#driftSFX.stop()
 
 func is_on_floor() -> bool:
 	for body in get_colliding_bodies():
@@ -246,7 +237,6 @@ func audio_handler() -> void:
 	var marbleVOL = max(abs(angular_velocity.x), abs(angular_velocity.y), abs(angular_velocity.z))
 	var windVOL = linear_velocity.length()
 	
-	#if groundDetectionAudio.is_colliding():
 	if is_on_floor() and not talking:
 		rollSFX.volume_linear = marbleVOL / 100
 	else:
@@ -254,19 +244,8 @@ func audio_handler() -> void:
 	
 	windSFX.volume_linear = windVOL / 50
 	
-	#if self.is_on_floor(): playDriftSFXOnce = true
-	
-	#if driftSFXBool and not talking:
-		#if playDriftSFXOnce == true && driftSFX.playing == false:
-			#driftSFX.play()
-			#playDriftSFXOnce = false
-	#else:
-		#driftSFX.stop()
-		#driftSFXBool = false
-		#playDriftSFXOnce = false
-	
-	driftSFX.volume_linear = rot_speed_factor
-	driftSFX2.volume_linear = rot_speed_factor
+	driftSFX.volume_linear = rot_speed_factor / 2.0
+	driftSFX2.volume_linear = rot_speed_factor * 2.0
 	
 
 func _on_Bag_Collect_SFX():
