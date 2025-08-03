@@ -17,6 +17,7 @@ radius = 0.25
 height = 0.5
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kgtyj"]
+resource_local_to_scene = true
 streams_count = 3
 stream_0/stream = ExtResource("3_erbih")
 stream_1/stream = ExtResource("4_l3r0l")
@@ -27,7 +28,7 @@ stream_2/stream = ExtResource("5_lwo1m")
 [node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals", "voiceSFX") instance=ExtResource("1_3d5js")]
 dialogue = ExtResource("2_ukq7h")
 character_visuals = NodePath("../MeshInstance3D")
-voiceSFX = NodePath("")
+voiceSFX = NodePath("../Voice")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_jj0ni")
