@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://cfoi7c5eqr8dq"]
 
-[ext_resource type="Script" uid="uid://bou5a1sk10ngi" path="res://Scenes/NPCs/NPC Models/newtons_cradle.gd" id="1_fq6xi"]
+[ext_resource type="Script" path="res://Scenes/NPCs/NPC Models/newtons_cradle.gd" id="1_fq6xi"]
 [ext_resource type="FontFile" uid="uid://hc0yybjig02m" path="res://Fonts/ACME-REGULAR.TTF" id="1_nkna7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qx0t"]
