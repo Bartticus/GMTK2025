@@ -1,11 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://5yrwwj7cadsk"]
+[gd_scene load_steps=19 format=3 uid="uid://5yrwwj7cadsk"]
 
 [ext_resource type="Script" uid="uid://bo61ry03h17vr" path="res://Scenes/menus/pause_screen.gd" id="1_fcwn1"]
 [ext_resource type="Theme" uid="uid://w01bn6ippsou" path="res://Scenes/menus/pause_theme.tres" id="1_pqfwi"]
 [ext_resource type="Shader" uid="uid://nddnkqjfr5g7" path="res://Scenes/menus/pause_screen.gdshader" id="1_w8il3"]
 [ext_resource type="LabelSettings" uid="uid://h7sdyswr0871" path="res://Scenes/menus/pause_labels.tres" id="4_6tl5j"]
 [ext_resource type="Script" uid="uid://de4hddumfls3j" path="res://Scenes/menus/h_slider.gd" id="4_a1r0b"]
-[ext_resource type="Script" path="res://Scenes/menus/sens_slider.gd" id="6_67d4t"]
+[ext_resource type="Script" uid="uid://cuhaviagnpgxs" path="res://Scenes/menus/sens_slider.gd" id="6_67d4t"]
+[ext_resource type="AudioStream" uid="uid://bcpomf2oc6c1c" path="res://Sounds/ui/scibutton-001.mp3" id="7_ex2d7"]
+[ext_resource type="AudioStream" uid="uid://djug6vdpiupfi" path="res://Sounds/ui/scibutton-002.mp3" id="8_qlmw8"]
+[ext_resource type="AudioStream" uid="uid://b4k236nqy6q2q" path="res://Sounds/ui/scibutton-003.mp3" id="9_hpvpn"]
+[ext_resource type="AudioStream" uid="uid://bhhqlkmergrwp" path="res://Sounds/ui/scibutton-004.mp3" id="10_qsi0d"]
+[ext_resource type="AudioStream" uid="uid://ca20dqdvcwtyc" path="res://Sounds/ui/scibutton-005.mp3" id="11_coaco"]
+[ext_resource type="AudioStream" uid="uid://bhj7vhp6j14qc" path="res://Sounds/ui/scibutton-006.mp3" id="12_qqyxh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fcwn1"]
 shader = ExtResource("1_w8il3")
@@ -95,6 +101,24 @@ _data = {
 &"RESET": SubResource("Animation_6tl5j"),
 &"blur": SubResource("Animation_a1r0b")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_53c8m"]
+streams_count = 6
+stream_0/stream = ExtResource("7_ex2d7")
+stream_1/stream = ExtResource("8_qlmw8")
+stream_2/stream = ExtResource("9_hpvpn")
+stream_3/stream = ExtResource("10_qsi0d")
+stream_4/stream = ExtResource("11_coaco")
+stream_5/stream = ExtResource("12_qqyxh")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lgn6r"]
+streams_count = 6
+stream_0/stream = ExtResource("7_ex2d7")
+stream_1/stream = ExtResource("8_qlmw8")
+stream_2/stream = ExtResource("9_hpvpn")
+stream_3/stream = ExtResource("10_qsi0d")
+stream_4/stream = ExtResource("11_coaco")
+stream_5/stream = ExtResource("12_qqyxh")
 
 [node name="PauseScreen" type="Control"]
 process_mode = 3
@@ -211,6 +235,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_67d4t")
 }
 
+[node name="uisfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_53c8m")
+
+[node name="uiHoversfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_lgn6r")
+bus = &"UI hover"
+
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
