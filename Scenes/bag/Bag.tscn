@@ -4,15 +4,8 @@
 [ext_resource type="Script" uid="uid://dftua85s7brxj" path="res://Scenes/bag/bag.gd" id="1_ylb2f"]
 [ext_resource type="Curve" uid="uid://dhhyoto0po6ig" path="res://Scenes/bag/hover_curve.tres" id="2_kww3e"]
 [ext_resource type="Material" uid="uid://bclwfo8if28mf" path="res://Thaddeus/HitFlash.tres" id="2_r3gyv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylb2f"]
-albedo_color = Color(1, 0.75, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.74902, 0, 1)
-emission_energy_multiplier = 0.7
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3gyv"]
-albedo_color = Color(0.101241, 0.101241, 0.101241, 1)
+[ext_resource type="Material" uid="uid://do1xqs5mmy0ws" path="res://Scenes/bag/BagYellow.tres" id="5_57o80"]
+[ext_resource type="Material" uid="uid://doicxdlf8kygi" path="res://Scenes/bag/BagBlack.tres" id="6_y0ukj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3gyv"]
 size = Vector3(1.5, 2.5, 1.5)
@@ -26,8 +19,8 @@ white_mat = ExtResource("2_r3gyv")
 [node name="BagMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = ExtResource("1_ad4vs")
-surface_material_override/0 = SubResource("StandardMaterial3D_ylb2f")
-surface_material_override/1 = SubResource("StandardMaterial3D_r3gyv")
+surface_material_override/0 = ExtResource("5_57o80")
+surface_material_override/1 = ExtResource("6_y0ukj")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_mask = 2
