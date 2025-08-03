@@ -1,0 +1,13 @@
+~ start
+Elderly Orb: That was some fancy footwork! I remember when I used to roll stunts like that.
+do Global.dialogue_line_advanced()
+Elderly Orb: I did it, you know, I made it all the way around the ring. It took years.
+do Global.dialogue_line_advanced()
+Elderly Orb: It gave me meaning, but I wish I hadn’t done it. People moved on while I was away… All I have to show for it is ballthritis and memories.
+do Global.dialogue_line_advanced()
+Elderly Orb: But enough from me; you’ll probably want to be going now.
+- Yes please! => END
+- I’ll consider what you said. => END
+- Ok => END
+
+=> END
