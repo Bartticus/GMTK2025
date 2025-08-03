@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://h3vtxt6t0p5n"]
+[gd_scene load_steps=14 format=3 uid="uid://bnlqpp7bmkfbj"]
 
 [ext_resource type="Texture2D" uid="uid://bvbclpmm57wb7" path="res://Textures/BALLKOUR_Menu_Screen.png" id="1_1bxdl"]
-[ext_resource type="Script" uid="uid://43j12v4vc8ph" path="res://Scenes/menus/main_menu.gd" id="1_6upyc"]
+[ext_resource type="Script" path="res://Scenes/menus/main_menu.gd" id="1_6upyc"]
 [ext_resource type="Theme" uid="uid://w01bn6ippsou" path="res://Scenes/menus/pause_theme.tres" id="3_6p7ge"]
 [ext_resource type="AudioStream" uid="uid://bcpomf2oc6c1c" path="res://Sounds/ui/scibutton-001.mp3" id="4_fxueo"]
 [ext_resource type="AudioStream" uid="uid://djug6vdpiupfi" path="res://Sounds/ui/scibutton-002.mp3" id="5_ls046"]
@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bhhqlkmergrwp" path="res://Sounds/ui/scibutton-004.mp3" id="7_h6oay"]
 [ext_resource type="AudioStream" uid="uid://ca20dqdvcwtyc" path="res://Sounds/ui/scibutton-005.mp3" id="8_scqlf"]
 [ext_resource type="AudioStream" uid="uid://bhj7vhp6j14qc" path="res://Sounds/ui/scibutton-006.mp3" id="9_nnvic"]
-[ext_resource type="Texture2D" uid="uid://dy8mghj8qw41q" path="res://Textures/BALLKOUR_credits_menu.png" id="10_ls046"]
+[ext_resource type="Texture2D" uid="uid://wwyiwv6j1tyn" path="res://Textures/BALLKOUR_credits_menu.png" id="10_ls046"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6upyc"]
 
