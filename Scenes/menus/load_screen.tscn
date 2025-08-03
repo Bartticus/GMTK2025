@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dilwuicmeg1nu"]
+[gd_scene load_steps=5 format=3 uid="uid://4gqt8iemkp83"]
 
 [ext_resource type="Script" uid="uid://d33m6ok676ijn" path="res://Scenes/menus/load_screen.gd" id="1_3mk5w"]
-[ext_resource type="Texture2D" uid="uid://co3og10yoa5yb" path="res://Textures/BALLKOUR_splash.png" id="1_gmjy7"]
+[ext_resource type="Texture2D" uid="uid://dlrqsilt7vthb" path="res://Textures/BALLKOUR_splash.png" id="1_gmjy7"]
 [ext_resource type="FontFile" uid="uid://vgsm6f2yfvun" path="res://Fonts/Expansiva bold italic.otf" id="2_3mk5w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cn54d"]
@@ -25,10 +25,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -39.0
-offset_top = -34.0
-offset_right = 13.0
-offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_gmjy7")

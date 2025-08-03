@@ -33,9 +33,9 @@ func respawn():#should be called from physics_process
 				var spike_force : float = 30.0
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
-#
-func _ready() -> void:
-	particle_cache() #REENABLE FOR EXPORT
+
+#func _ready() -> void:
+	#particle_cache() #REENABLE FOR EXPORT
 
 signal cache_finished
 

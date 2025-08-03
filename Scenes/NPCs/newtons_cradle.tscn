@@ -1,0 +1,614 @@
+[gd_scene load_steps=25 format=3 uid="uid://cfoi7c5eqr8dq"]
+
+[ext_resource type="FontFile" uid="uid://hc0yybjig02m" path="res://Fonts/ACME-REGULAR.TTF" id="1_nkna7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qx0t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qx0t"]
+material = SubResource("StandardMaterial3D_7qx0t")
+size = Vector3(20, 1, 7.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7qx0t"]
+size = Vector3(20, 1, 7.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkna7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nkna7"]
+material = SubResource("StandardMaterial3D_nkna7")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fq6xi"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7qx0t"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nkna7"]
+size = Vector3(16.5, 9.7, 4.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fq6xi"]
+albedo_color = Color(0.29219, 0.29219, 0.29219, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7qx0t"]
+material = SubResource("StandardMaterial3D_fq6xi")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh23g"]
+albedo_color = Color(0.601223, 0.601223, 0.601223, 1)
+metallic = 1.0
+metallic_specular = 0.0
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nkna7"]
+material = SubResource("StandardMaterial3D_bh23g")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="Animation" id="Animation_nkna7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotLeftOut:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotLeftIn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.261799)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotRightIn:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PivotRightOut:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7qx0t"]
+resource_name = "rocking"
+length = 1.4
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotLeftOut:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.0472), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotLeftIn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.261799), Vector3(0, 0, -2.98023e-08)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotRightIn:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.261799)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PivotRightOut:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 1.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.0472)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkna7"]
+_data = {
+&"RESET": SubResource("Animation_nkna7"),
+&"rocking": SubResource("Animation_7qx0t")
+}
+
+[sub_resource type="Animation" id="Animation_fq6xi"]
+resource_name = "ouchies"
+length = 5.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Text1:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2, 4.9, 5.6),
+"transitions": PackedFloat32Array(100, 5, 100, 5, 100, 5, 100, 5, 100),
+"update": 0,
+"values": [Color(0.68, 0.111633, 0.102, 0), Color(0.68, 0.111633, 0.102, 1), Color(0.68, 0.111633, 0.102, 0), Color(0.68, 0.111633, 0.102, 1), Color(0.68, 0.111633, 0.102, 0), Color(0.68, 0.111633, 0.102, 1), Color(0.68, 0.111633, 0.102, 0), Color(0.68, 0.111633, 0.102, 1), Color(0.68, 0.111633, 0.102, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Text1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 1.1, 1.9),
+"transitions": PackedFloat32Array(0.574349, 1.31951, 1),
+"update": 0,
+"values": [Vector3(-2.08394, 4.16586, -0.188237), Vector3(-4.68232, 5.35216, -0.188237), Vector3(-6.49, 6.456, -0.188)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Text1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Text3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.5, 3.9, 5.2),
+"transitions": PackedFloat32Array(0.574349, 0.933033, 1),
+"update": 0,
+"values": [Vector3(-2.08394, 4.16586, -0.188237), Vector3(-4.68232, 5.35216, -0.188237), Vector3(-6.49, 6.456, -0.188)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Text3:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3.5, 4.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Text2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.1, 2.6, 3.3),
+"transitions": PackedFloat32Array(0.5, 1.86607, 1),
+"update": 0,
+"values": [Vector3(2.58923, 4.16586, -0.188237), Vector3(3.71521, 5.3701, -0.188237), Vector3(5.50877, 4.3424, -0.188237)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Text2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.1, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Text4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(4.9, 5.4, 6.1),
+"transitions": PackedFloat32Array(0.5, 1.86607, 1),
+"update": 0,
+"values": [Vector3(2.58923, 4.16586, -0.188237), Vector3(3.71521, 5.3701, -0.188237), Vector3(5.50877, 4.3424, -0.188237)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Text4:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.9, 5.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bh23g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Text1:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.68, 0.111633, 0.102, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Text1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.08394, 4.16586, -0.188237)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Text1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Text3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Text3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.08394, 4.16586, -0.188237)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Text2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.58923, 4.16586, -0.188237)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Text2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Text4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.58923, 4.16586, -0.188237)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Text4:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trcjf"]
+_data = {
+&"RESET": SubResource("Animation_bh23g"),
+&"ouchies": SubResource("Animation_fq6xi")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trcjf"]
+transparency = 1
+albedo_color = Color(0.68, 0.111633, 0.102, 0)
+
+[sub_resource type="TextMesh" id="TextMesh_fq6xi"]
+material = SubResource("StandardMaterial3D_trcjf")
+text = "*OUCH*"
+font = ExtResource("1_nkna7")
+font_size = 127
+depth = 0.5
+
+[sub_resource type="TextMesh" id="TextMesh_bh23g"]
+material = SubResource("StandardMaterial3D_trcjf")
+text = "*YOWZA*"
+font = ExtResource("1_nkna7")
+font_size = 127
+depth = 0.5
+
+[sub_resource type="TextMesh" id="TextMesh_nkna7"]
+material = SubResource("StandardMaterial3D_trcjf")
+text = "*OOF*"
+font = ExtResource("1_nkna7")
+font_size = 127
+depth = 0.5
+
+[sub_resource type="TextMesh" id="TextMesh_trcjf"]
+material = SubResource("StandardMaterial3D_trcjf")
+text = "*BALLS*"
+font = ExtResource("1_nkna7")
+font_size = 127
+depth = 0.5
+
+[node name="NewtonsCradle" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7qx0t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_7qx0t")
+
+[node name="Brace" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 2)
+mesh = SubResource("CylinderMesh_nkna7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 2)
+mesh = SubResource("CylinderMesh_nkna7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, -2)
+mesh = SubResource("CylinderMesh_nkna7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, -2)
+mesh = SubResource("CylinderMesh_nkna7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 10, 2)
+mesh = SubResource("CylinderMesh_fq6xi")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 10, -2)
+mesh = SubResource("CylinderMesh_fq6xi")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, 2)
+mesh = SubResource("SphereMesh_7qx0t")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, -2)
+mesh = SubResource("SphereMesh_7qx0t")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 10, -2)
+mesh = SubResource("SphereMesh_7qx0t")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 10, 2)
+mesh = SubResource("SphereMesh_7qx0t")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Brace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Brace/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
+shape = SubResource("BoxShape3D_nkna7")
+
+[node name="PivotLeftOut" type="Node3D" parent="."]
+transform = Transform3D(0.499998, 0.866026, 0, -0.866026, 0.499998, 0, 0, 0, 1, -4, 10, 0)
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PivotLeftOut"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PivotLeftOut"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PivotLeftOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("SphereMesh_nkna7")
+skeleton = NodePath("")
+
+[node name="PivotLeftIn" type="Node3D" parent="."]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -2, 10, 0)
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="PivotLeftIn"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PivotLeftIn"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotLeftIn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("SphereMesh_nkna7")
+skeleton = NodePath("")
+
+[node name="PivotMiddle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotMiddle"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PivotMiddle"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotMiddle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("SphereMesh_nkna7")
+skeleton = NodePath("")
+
+[node name="PivotRightIn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotRightIn"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PivotRightIn"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PivotRightIn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("SphereMesh_nkna7")
+skeleton = NodePath("")
+
+[node name="PivotRightOut" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10, 0)
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PivotRightOut"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="PivotRightOut"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+mesh = SubResource("CylinderMesh_7qx0t")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PivotRightOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("SphereMesh_nkna7")
+skeleton = NodePath("")
+
+[node name="CradleAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nkna7")
+}
+autoplay = "rocking"
+
+[node name="TextAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CradleAnimation")
+libraries = {
+&"": SubResource("AnimationLibrary_trcjf")
+}
+autoplay = "ouchies"
+
+[node name="Text1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08394, 4.16586, -0.188237)
+mesh = SubResource("TextMesh_fq6xi")
+
+[node name="Text3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08394, 4.16586, -0.188237)
+mesh = SubResource("TextMesh_bh23g")
+
+[node name="Text2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58923, 4.16586, -0.188237)
+mesh = SubResource("TextMesh_nkna7")
+
+[node name="Text4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58923, 4.16586, -0.188237)
+mesh = SubResource("TextMesh_trcjf")
