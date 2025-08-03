@@ -77,27 +77,28 @@ func _process(delta: float) -> void:
 	if e_prompt.modulate.a > 0.05:
 		e_prompt.position.y = lerpf(0.845, 0.945, hover_curve.sample_baked(height_lerp)) * scale.x
 	
-	var new_scale : Vector3 = Vector3.ONE
-	if squishing:
-		squash_timer -= delta
-		squash_timer = max(squash_timer, 0.0)
-		var squash_lerp : float = lerpf(1.0, 0.0, squash_timer / squash_length)
-		
-		new_scale.y += Global.player.visuals.squash_z_curve.sample_baked(squash_lerp) * squash_intensity
-		new_scale.x += Global.player.visuals.squash_x_curve.sample_baked(squash_lerp) * squash_intensity
-		new_scale.z += Global.player.visuals.squash_x_curve.sample_baked(squash_lerp) * squash_intensity
-		
-		if squash_timer == 0.0:
-			squishing = false
-			breathing_down = false
-			breathing_timer = 0.5
-	else:
-		var breathing_scale : float = 0.08
-		var breathing_lerp : float = hover_curve.sample_baked(breathing_timer) - 1.0
-		new_scale.x += breathing_lerp * breathing_scale
-		new_scale.z += breathing_lerp * breathing_scale
-		new_scale.y -= breathing_lerp * breathing_scale
-	character_visuals.scale = new_scale
+	if is_instance_valid(character_visuals):
+		var new_scale : Vector3 = Vector3.ONE
+		if squishing:
+			squash_timer -= delta
+			squash_timer = max(squash_timer, 0.0)
+			var squash_lerp : float = lerpf(1.0, 0.0, squash_timer / squash_length)
+			
+			new_scale.y += Global.player.visuals.squash_z_curve.sample_baked(squash_lerp) * squash_intensity
+			new_scale.x += Global.player.visuals.squash_x_curve.sample_baked(squash_lerp) * squash_intensity
+			new_scale.z += Global.player.visuals.squash_x_curve.sample_baked(squash_lerp) * squash_intensity
+			
+			if squash_timer == 0.0:
+				squishing = false
+				breathing_down = false
+				breathing_timer = 0.5
+		else:
+			var breathing_scale : float = 0.08
+			var breathing_lerp : float = hover_curve.sample_baked(breathing_timer) - 1.0
+			new_scale.x += breathing_lerp * breathing_scale
+			new_scale.z += breathing_lerp * breathing_scale
+			new_scale.y -= breathing_lerp * breathing_scale
+		character_visuals.scale = new_scale
 	
 
 func next_line(only_voice : bool = false):
