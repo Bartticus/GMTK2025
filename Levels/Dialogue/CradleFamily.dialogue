@@ -1,0 +1,15 @@
+~ start
+The Cradle Family: Hey! Hey you! (Ow)
+#do Global.dialogue_line_advanced()
+The Cradle Family: Hey, you should totally join us! (oof) It’s great up here!
+#do Global.dialogue_line_advanced()
+- No thank you, just send me along please. => END
+- Uh…? => explain
+- Ok => explain
+
+~ explain
+The Cradle Family: Listen, (ouch) the cradle is a little rough on newcomers, but once you’re in the middle you’re set! (Ow) You just gotta last until someone comes and takes your place on the end. (Ouch)
+- Wow, sounds great, but I’d like to get going please. => END
+- Not for me, but good luck lol => END
+- Ok => END
+=> END

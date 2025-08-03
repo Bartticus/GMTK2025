@@ -1,11 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://cfoi7c5eqr8dq"]
+[gd_scene load_steps=26 format=3 uid="uid://cfoi7c5eqr8dq"]
 
+[ext_resource type="Script" uid="uid://bou5a1sk10ngi" path="res://Scenes/NPCs/NPC Models/newtons_cradle.gd" id="1_fq6xi"]
 [ext_resource type="FontFile" uid="uid://hc0yybjig02m" path="res://Fonts/ACME-REGULAR.TTF" id="1_nkna7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qx0t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7qx0t"]
+lightmap_size_hint = Vector2i(141, 116)
 material = SubResource("StandardMaterial3D_7qx0t")
+add_uv2 = true
 size = Vector3(20, 1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7qx0t"]
@@ -14,17 +17,23 @@ size = Vector3(20, 1, 7.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkna7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_nkna7"]
+lightmap_size_hint = Vector2i(9, 56)
 material = SubResource("StandardMaterial3D_nkna7")
+add_uv2 = true
 top_radius = 0.25
 bottom_radius = 0.25
 height = 10.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fq6xi"]
+lightmap_size_hint = Vector2i(9, 86)
+add_uv2 = true
 top_radius = 0.25
 bottom_radius = 0.25
 height = 16.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_7qx0t"]
+lightmap_size_hint = Vector2i(9, 5)
+add_uv2 = true
 radius = 0.25
 height = 0.5
 
@@ -154,6 +163,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 1.0472)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ouch"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nkna7"]
@@ -426,6 +449,7 @@ font_size = 127
 depth = 0.5
 
 [node name="NewtonsCradle" type="Node3D"]
+script = ExtResource("1_fq6xi")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_7qx0t")
@@ -499,16 +523,19 @@ transform = Transform3D(0.499998, 0.866026, 0, -0.866026, 0.499998, 0, 0, 0, 1, 
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="PivotLeftOut"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="PivotLeftOut"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="PivotLeftOut"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+gi_mode = 2
 mesh = SubResource("SphereMesh_nkna7")
 skeleton = NodePath("")
 
@@ -517,16 +544,19 @@ transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="PivotLeftIn"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="PivotLeftIn"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotLeftIn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+gi_mode = 2
 mesh = SubResource("SphereMesh_nkna7")
 skeleton = NodePath("")
 
@@ -535,16 +565,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PivotMiddle"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="PivotMiddle"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotMiddle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+gi_mode = 2
 mesh = SubResource("SphereMesh_nkna7")
 skeleton = NodePath("")
 
@@ -553,16 +586,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="PivotRightIn"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="PivotRightIn"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PivotRightIn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+gi_mode = 2
 mesh = SubResource("SphereMesh_nkna7")
 skeleton = NodePath("")
 
@@ -571,16 +607,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10, 0)
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="PivotRightOut"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -4, -1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="PivotRightOut"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -4, 1)
+gi_mode = 2
 mesh = SubResource("CylinderMesh_7qx0t")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="PivotRightOut"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+gi_mode = 2
 mesh = SubResource("SphereMesh_nkna7")
 skeleton = NodePath("")
 

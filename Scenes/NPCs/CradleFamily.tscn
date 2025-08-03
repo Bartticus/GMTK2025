@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://drksvet4pbxkt"]
+
+[ext_resource type="Script" uid="uid://b2b1ejhkgkocw" path="res://Scenes/NPCs/NPC Models/cradle_family.gd" id="1_h8klb"]
+[ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_rm28b"]
+[ext_resource type="Resource" uid="uid://bwosl2mpwdsfx" path="res://Levels/Dialogue/CradleFamily.dialogue" id="2_ewcay"]
+[ext_resource type="PackedScene" uid="uid://cfoi7c5eqr8dq" path="res://Scenes/NPCs/newtons_cradle.tscn" id="3_ewcay"]
+[ext_resource type="AudioStream" uid="uid://dkut508lf00vc" path="res://Scenes/NPCs/NPC Models/CradleFamilyVoice.tres" id="5_b8cq5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8klb"]
+size = Vector3(7.875, 3.195, 4.615)
+
+[node name="CradleFamily" type="Node3D"]
+script = ExtResource("1_h8klb")
+
+[node name="NpcComponent" parent="." node_paths=PackedStringArray("voiceSFX") instance=ExtResource("1_rm28b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366994, 0)
+dialogue = ExtResource("2_ewcay")
+voiceSFX = NodePath("../Voice")
+use_own_area = false
+
+[node name="NewtonsCradle" parent="." instance=ExtResource("3_ewcay")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53393, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_h8klb")
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b8cq5")
+
+[node name="Voice3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_b8cq5")

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GMTK2025"
-run/main_scene="uid://h3vtxt6t0p5n"
+run/main_scene="uid://dv7x2ren5evyl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=120
 boot_splash/image="uid://3jcqardc7ikw"
@@ -91,7 +91,7 @@ talk={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Levels/Dialogue/recruiter.dialogue", "res://Levels/Dialogue/Advisor.dialogue", "res://Levels/Dialogue/Oldman.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Levels/Dialogue/recruiter.dialogue", "res://Levels/Dialogue/Advisor.dialogue", "res://Levels/Dialogue/Oldman.dialogue", "res://Levels/Dialogue/CradleFamily.dialogue")
 
 [layer_names]
 

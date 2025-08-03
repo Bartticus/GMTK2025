@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://dkut508lf00vc"]
+
+[ext_resource type="AudioStream" uid="uid://pthg5wes0hqu" path="res://Sounds/voices/ow cradel-001.mp3" id="1_63e6o"]
+[ext_resource type="AudioStream" uid="uid://daovdidw7rnpx" path="res://Sounds/voices/ow cradel-002.mp3" id="2_cxkrf"]
+[ext_resource type="AudioStream" uid="uid://cilsq7s3x473" path="res://Sounds/voices/ow cradel-003.mp3" id="3_w2db5"]
+[ext_resource type="AudioStream" uid="uid://c48wbumf4y64r" path="res://Sounds/voices/ow cradel-004.mp3" id="4_e64mg"]
+[ext_resource type="AudioStream" uid="uid://bj3837evhq386" path="res://Sounds/voices/ow cradel-005.mp3" id="5_kb4i2"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_63e6o")
+stream_1/stream = ExtResource("2_cxkrf")
+stream_2/stream = ExtResource("3_w2db5")
+stream_3/stream = ExtResource("4_e64mg")
+stream_4/stream = ExtResource("5_kb4i2")
