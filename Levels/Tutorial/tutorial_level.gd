@@ -8,6 +8,10 @@ extends Level
 @onready var going_down : bool = true
 @onready var prompt_alpha : float = 1.0
 
+@onready var bag_mat_reset_timer : float = 0.0
+@onready var bag_yellow : StandardMaterial3D = load("res://Scenes/bag/BagYellow.tres")
+@onready var bag_black : StandardMaterial3D = load("res://Scenes/bag/BagBlack.tres")
+
 @onready var tut_progress : int = 0
 
 func _ready() -> void:
@@ -15,6 +19,12 @@ func _ready() -> void:
 	#recuiter_npc.visible = false #this needs to happen when shipping game
 
 func _process(delta: float) -> void:
+	if bag_mat_reset_timer > 0.0:
+		bag_mat_reset_timer -= delta
+		if bag_mat_reset_timer <= 0.0:
+			first_bag.bagmesh.set_surface_override_material(0, bag_yellow)
+			first_bag.bagmesh.set_surface_override_material(1, bag_black)
+	
 	if Global.level == 0:
 		
 		if going_down:

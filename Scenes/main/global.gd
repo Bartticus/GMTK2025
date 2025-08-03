@@ -7,6 +7,8 @@ extends Node
 
 const balloon = preload("res://Levels/Dialogue/balloon.tscn")
 
+
+
 @onready var bags_gotten : int = 0:
 	set(value):
 		bags_gotten = value
@@ -32,8 +34,8 @@ func respawn():#should be called from physics_process
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
 #
-#func _ready() -> void:
-	#particle_cache() #REENABLE FOR EXPORT
+func _ready() -> void:
+	particle_cache() #REENABLE FOR EXPORT
 
 signal cache_finished
 
@@ -53,6 +55,13 @@ func particle_cache() -> void:
 			child.emitting = false
 	get_tree().set_deferred("paused", false)
 	player.particles.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	if is_instance_valid(ring):
+		if is_instance_valid(ring.levels[0]):
+			ring.levels[0].first_bag.bagmesh.set_surface_override_material(0, ring.levels[0].first_bag.white_mat)
+			ring.levels[0].first_bag.bagmesh.set_surface_override_material(1, ring.levels[0].first_bag.white_mat)
+			ring.levels[0].bag_mat_reset_timer = 0.2
+	
 	
 	cache_finished.emit()
 
