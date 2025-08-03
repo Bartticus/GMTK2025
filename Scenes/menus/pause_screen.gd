@@ -10,7 +10,6 @@ func _ready() -> void:
 	anim_player.play("RESET")
 
 func resume() -> void:
-	sfx.play()
 	get_tree().set_deferred("paused", false)
 	hide()
 	anim_player.play_backwards("blur")
@@ -27,9 +26,11 @@ func _process(delta: float) -> void:
 		resume()
 
 func _on_resume_pressed() -> void:
+	sfx.play()
 	resume()
 
 func _on_restart_pressed() -> void:
+	sfx.play()
 	Global.level = 0
 	Global.bags_gotten = 0
 	resume()
@@ -37,19 +38,14 @@ func _on_restart_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	sfx.play()
-	get_tree().quit()
-
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/menus/main_menu.tscn")
 
 func _on_resume_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.
-
 
 func _on_restart_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.
-
 
 func _on_quit_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.

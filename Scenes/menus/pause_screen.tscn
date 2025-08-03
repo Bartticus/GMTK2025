@@ -240,7 +240,6 @@ stream = SubResource("AudioStreamRandomizer_53c8m")
 
 [node name="uiHoversfx" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_lgn6r")
-bus = &"UI hover"
 
 [connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

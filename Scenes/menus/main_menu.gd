@@ -8,24 +8,25 @@ func _on_play_pressed() -> void:
 
 func _on_credits_pressed() -> void:
 	sfx.play()
-	pass #insert credits here
+	$Credits.show()
+
+func _on_return_pressed() -> void:
+	sfx.play()
+	$Credits.hide()
 
 func _on_quit_pressed() -> void:
 	sfx.play()
 	$PanelContainer/VBoxContainer/Quit.text = """This is a browser
 	game lol"""
 
-
 func _on_play_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.
-
 
 func _on_credits_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.
-
 
 func _on_quit_mouse_entered() -> void:
 	sfxH.play()
-	pass # Replace with function body.
+
+func _on_return_mouse_entered() -> void:
+	sfxH.play()
