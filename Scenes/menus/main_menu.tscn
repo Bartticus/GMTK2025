@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bhhqlkmergrwp" path="res://Sounds/ui/scibutton-004.mp3" id="7_h6oay"]
 [ext_resource type="AudioStream" uid="uid://ca20dqdvcwtyc" path="res://Sounds/ui/scibutton-005.mp3" id="8_scqlf"]
 [ext_resource type="AudioStream" uid="uid://bhj7vhp6j14qc" path="res://Sounds/ui/scibutton-006.mp3" id="9_nnvic"]
-[ext_resource type="Texture2D" uid="uid://dy8mghj8qw41q" path="res://Textures/BALLKOUR_credits_menu.png" id="10_ls046"]
+[ext_resource type="Texture2D" uid="uid://wwyiwv6j1tyn" path="res://Textures/BALLKOUR_credits_menu.png" id="10_ls046"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6upyc"]
 
