@@ -10,7 +10,11 @@ func _ready() -> void:
 	get_viewport().connect("size_changed",Callable(self,"_root_viewport_size_changed"))
 	
 	death_area.body_entered.connect(on_body_entered)
-
+	
+	if is_instance_valid(Global.ring.levels[Global.level]):
+		if is_instance_valid(Global.ring.levels[Global.level].starter_point):
+			Global.player.global_position = Global.ring.levels[Global.level].starter_point.global_position
+			
 
 
 
