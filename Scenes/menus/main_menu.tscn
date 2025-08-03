@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://h3vtxt6t0p5n"]
+[gd_scene load_steps=14 format=3 uid="uid://h3vtxt6t0p5n"]
 
 [ext_resource type="Texture2D" uid="uid://bvbclpmm57wb7" path="res://Textures/BALLKOUR_Menu_Screen.png" id="1_1bxdl"]
 [ext_resource type="Script" uid="uid://43j12v4vc8ph" path="res://Scenes/menus/main_menu.gd" id="1_6upyc"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bhhqlkmergrwp" path="res://Sounds/ui/scibutton-004.mp3" id="7_h6oay"]
 [ext_resource type="AudioStream" uid="uid://ca20dqdvcwtyc" path="res://Sounds/ui/scibutton-005.mp3" id="8_scqlf"]
 [ext_resource type="AudioStream" uid="uid://bhj7vhp6j14qc" path="res://Sounds/ui/scibutton-006.mp3" id="9_nnvic"]
+[ext_resource type="Texture2D" uid="uid://dy8mghj8qw41q" path="res://Textures/BALLKOUR_credits_menu.png" id="10_ls046"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6upyc"]
 
@@ -89,7 +90,22 @@ stream = SubResource("AudioStreamRandomizer_sho4w")
 
 [node name="uiHoversfx" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_fxueo")
-bus = &"UI hover"
+
+[node name="Credits" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_ls046")
+
+[node name="Return" type="Button" parent="Credits"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 981.0
+offset_right = 323.0
+offset_bottom = 1052.0
+theme = ExtResource("3_6p7ge")
+text = "Return"
 
 [connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
@@ -97,3 +113,5 @@ bus = &"UI hover"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="mouse_entered" from="Credits/Return" to="." method="_on_return_mouse_entered"]
+[connection signal="pressed" from="Credits/Return" to="." method="_on_return_pressed"]
