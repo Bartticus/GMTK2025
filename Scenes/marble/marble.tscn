@@ -458,6 +458,7 @@ texture = ExtResource("13_o7fp8")
 [node name="SpringArmPivotY" type="Node3D" parent="."]
 top_level = true
 script = ExtResource("19_470xv")
+max_vertical_angle = 1.5708
 
 [node name="PivotX" type="Node3D" parent="SpringArmPivotY"]
 
