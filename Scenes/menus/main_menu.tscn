@@ -1,10 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://h3vtxt6t0p5n"]
+[gd_scene load_steps=13 format=3 uid="uid://h3vtxt6t0p5n"]
 
 [ext_resource type="Texture2D" uid="uid://bvbclpmm57wb7" path="res://Textures/BALLKOUR_Menu_Screen.png" id="1_1bxdl"]
 [ext_resource type="Script" uid="uid://43j12v4vc8ph" path="res://Scenes/menus/main_menu.gd" id="1_6upyc"]
 [ext_resource type="Theme" uid="uid://w01bn6ippsou" path="res://Scenes/menus/pause_theme.tres" id="3_6p7ge"]
+[ext_resource type="AudioStream" uid="uid://bcpomf2oc6c1c" path="res://Sounds/ui/scibutton-001.mp3" id="4_fxueo"]
+[ext_resource type="AudioStream" uid="uid://djug6vdpiupfi" path="res://Sounds/ui/scibutton-002.mp3" id="5_ls046"]
+[ext_resource type="AudioStream" uid="uid://b4k236nqy6q2q" path="res://Sounds/ui/scibutton-003.mp3" id="6_4utaq"]
+[ext_resource type="AudioStream" uid="uid://bhhqlkmergrwp" path="res://Sounds/ui/scibutton-004.mp3" id="7_h6oay"]
+[ext_resource type="AudioStream" uid="uid://ca20dqdvcwtyc" path="res://Sounds/ui/scibutton-005.mp3" id="8_scqlf"]
+[ext_resource type="AudioStream" uid="uid://bhj7vhp6j14qc" path="res://Sounds/ui/scibutton-006.mp3" id="9_nnvic"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6upyc"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sho4w"]
+streams_count = 6
+stream_0/stream = ExtResource("4_fxueo")
+stream_1/stream = ExtResource("5_ls046")
+stream_2/stream = ExtResource("6_4utaq")
+stream_3/stream = ExtResource("7_h6oay")
+stream_4/stream = ExtResource("8_scqlf")
+stream_5/stream = ExtResource("9_nnvic")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fxueo"]
+streams_count = 6
+stream_0/stream = ExtResource("4_fxueo")
+stream_1/stream = ExtResource("5_ls046")
+stream_2/stream = ExtResource("6_4utaq")
+stream_3/stream = ExtResource("7_h6oay")
+stream_4/stream = ExtResource("8_scqlf")
+stream_5/stream = ExtResource("9_nnvic")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -60,6 +84,16 @@ layout_mode = 2
 focus_mode = 0
 text = "Quit"
 
+[node name="uisfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_sho4w")
+
+[node name="uiHoversfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_fxueo")
+bus = &"UI hover"
+
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Credits" to="." method="_on_credits_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
