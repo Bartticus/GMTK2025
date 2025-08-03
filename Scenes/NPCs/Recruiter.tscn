@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuytryr2ftgaa"]
+[gd_scene load_steps=13 format=3 uid="uid://cuytryr2ftgaa"]
 
-[ext_resource type="Script" uid="uid://b1rnpfn2t53kn" path="res://Scenes/NPCs/recruiter.gd" id="1_omwl1"]
 [ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_s5mds"]
 [ext_resource type="Resource" uid="uid://doru4jur4kykn" path="res://Levels/Dialogue/recruiter.dialogue" id="2_ekmmp"]
 [ext_resource type="PackedScene" uid="uid://duma87ygfnoyy" path="res://Scenes/NPCs/NPC Models/rec.glb" id="3_hodnx"]
@@ -24,11 +23,11 @@ stream_3/stream = ExtResource("10_nic15")
 stream_4/stream = ExtResource("11_ik0qy")
 
 [node name="Recruiter" type="Node3D"]
-script = ExtResource("1_omwl1")
 
-[node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals") instance=ExtResource("1_s5mds")]
+[node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals", "voiceSFX") instance=ExtResource("1_s5mds")]
 dialogue = ExtResource("2_ekmmp")
 character_visuals = NodePath("../rec")
+voiceSFX = NodePath("../voice")
 
 [node name="Shadow" type="Sprite3D" parent="."]
 transform = Transform3D(0.365, 0, 0, 0, -1.59547e-08, -0.365, 0, 0.365, -1.59547e-08, 0, 0, 0)
@@ -42,8 +41,9 @@ gi_mode = 2
 gi_lightmap_texel_scale = 2.0
 surface_material_override/0 = SubResource("StandardMaterial3D_dsi3a")
 
-[node name="voice" type="AudioStreamPlayer3D" parent="."]
+[node name="voice" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_5ngjp")
+volume_db = -4.348
 bus = &"Player Verb"
 
 [editable path="rec"]

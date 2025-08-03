@@ -1,11 +1,12 @@
-[gd_scene load_steps=69 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=70 format=3 uid="uid://bo12c78cmhfo2"]
 
-[ext_resource type="Texture2D" uid="uid://cltj4mrbtrpao" path="res://Textures/texture_05.png" id="1_q4dig"]
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
 [ext_resource type="Script" uid="uid://c4by3r2ovm4hr" path="res://Scenes/marble/visuals.gd" id="3_lpkg8"]
+[ext_resource type="Texture2D" uid="uid://bc1xv5st2djjt" path="res://Textures/marble_tex.png" id="3_qover"]
 [ext_resource type="Script" uid="uid://db5fnaevwh8s4" path="res://Scenes/marble/impact_fx.gd" id="4_mowa8"]
 [ext_resource type="Texture2D" uid="uid://bv4xqxdi0apg4" path="res://Thaddeus/FX/Tx_Burst_radial_01_MEDIUM.png" id="5_0ro2e"]
 [ext_resource type="Texture2D" uid="uid://dpi5lt0fhuk4w" path="res://Thaddeus/ballshadow.png" id="6_a0fhv"]
+[ext_resource type="PackedScene" uid="uid://7g5fu113emq6" path="res://Scenes/marble/marble_mesh.glb" id="7_5x7hh"]
 [ext_resource type="FastNoiseLite" uid="uid://dy1pf1f0gay07" path="res://Scenes/marble/camera_shake_noise.tres" id="7_a0fhv"]
 [ext_resource type="AudioStream" uid="uid://bvcqrvylv4j3e" path="res://Scenes/marble/Marble roll loop.wav" id="7_mlxtt"]
 [ext_resource type="Script" uid="uid://cgh2hm7ll7wn4" path="res://Scenes/marble/third_person_camera.gd" id="8_0ovb4"]
@@ -58,7 +59,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.093, 0.838), 0.67993, 0.67993,
 point_count = 5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpkg8"]
-albedo_texture = ExtResource("1_q4dig")
+albedo_texture = ExtResource("3_qover")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
@@ -266,6 +267,7 @@ squash_x_curve = SubResource("Curve_mowa8")
 marble = NodePath("..")
 
 [node name="MarbleMesh" type="MeshInstance3D" parent="Visuals"]
+visible = false
 mesh = SubResource("SphereMesh_mowa8")
 skeleton = NodePath("../..")
 
@@ -283,6 +285,9 @@ vframes = 2
 [node name="Shadow" type="Sprite3D" parent="Visuals"]
 transform = Transform3D(0.475, 0, 0, 0, -2.07629e-08, -0.475, 0, 0.475, -2.07629e-08, 0, -0.455717, 0)
 texture = ExtResource("6_a0fhv")
+
+[node name="marble_mesh" parent="Visuals" instance=ExtResource("7_5x7hh")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="groundDetection1" type="RayCast3D" parent="."]
 target_position = Vector3(0, -4, 0)

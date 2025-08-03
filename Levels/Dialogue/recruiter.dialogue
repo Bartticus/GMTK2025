@@ -4,6 +4,7 @@ do Global.dialogue_line_advanced()
 Recuiter: It is the sworn pilgrimage of all Freerollers to travel all the way around Loopolis, back to your home.
 do Global.dialogue_line_advanced()
 Recuiter: Best to start while you’re young and spry; ready to start?
+do Global.dialogue_line_advanced()
 - Hell yeah! => END
 - …I guess? => END
 - Ok => END

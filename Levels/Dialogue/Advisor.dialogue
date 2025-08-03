@@ -1,0 +1,29 @@
+~ start
+Edgeless Cube: Greetings. My name is Edgeless M. Cube, but you may call me Edgy.
+do Global.dialogue_line_advanced()
+Edgeless Cube:  I see you practice Ballkour. And I also see that you have been instructed to journey around the ring?
+
+- That's right.
+	Edgeless Cube:  Ah yes. Many tread the path of the sky. But why do you seek this purpose?
+	#do Global.dialogue_line_advanced()
+	=> purpose
+- Ok
+	Edgeless Cube:  You may feign apathy, but apathy wouldn't carry you this far. What is your purpose?
+	#do Global.dialogue_line_advanced()
+	=> purpose
+
+~ purpose
+- Ok, look, I want to go all the way round the loop because... \n.    I feel it would be thematic. It would really fulfill my reason for existing.    .
+
+do Global.dialogue_line_advanced(true)
+Edgeless Cube: I see. All ball people need to feel purpose... but look for it elsewhere. Around that ring you will find only broken dreams and unfinished business.
+do Global.dialogue_line_advanced()
+Edgeless Cube: I have seen many lives, and I have seen many deaths. I am a mirror that bears witness to the world. 
+do Global.dialogue_line_advanced()
+Edgeless Cube: Hearken to your friends and family, and be at peace.
+do Global.dialogue_line_advanced()
+Edgeless Cube: And most importantly...
+do Global.dialogue_line_advanced()
+Edgeless Cube: Thanks for Playing!
+
+=> END
