@@ -34,10 +34,11 @@ func respawn():#should be called from physics_process
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
 
-#func _ready() -> void:
-	#particle_cache() #REENABLE FOR EXPORT
+func _ready() -> void:
+	particle_cache() #REENABLE FOR EXPORT
 
 signal cache_finished
+var already_cached: bool = false
 
 func particle_cache() -> void:
 	while not is_instance_valid(player):
@@ -62,8 +63,8 @@ func particle_cache() -> void:
 			ring.levels[0].first_bag.bagmesh.set_surface_override_material(1, ring.levels[0].first_bag.white_mat)
 			ring.levels[0].bag_mat_reset_timer = 0.2
 	
-	
 	cache_finished.emit()
+	already_cached = true
 
 func dialogue_line_advanced(only_voice : bool = false):
 	dialogue_line_advance.emit(only_voice)
