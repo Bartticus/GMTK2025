@@ -20,10 +20,12 @@ extends Node3D
 @onready var squash_intensity : float = 0.8
 
 @export var voiceSFX : AudioStreamPlayer
+@export var use_own_area : bool = true
 
 func _ready() -> void:
-	$TalkArea.body_entered.connect(on_body_entered)
-	$TalkArea.body_exited.connect(on_body_exited)
+	if use_own_area:
+		$TalkArea.body_entered.connect(on_body_entered)
+		$TalkArea.body_exited.connect(on_body_exited)
 	
 	Global.dialogue_line_advance.connect(next_line)
 

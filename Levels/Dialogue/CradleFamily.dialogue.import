@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bwosl2mpwdsfx"
+path="res://.godot/imported/CradleFamily.dialogue-6a2bc246ad6e2d5d7da98d805fff872b.tres"
+
+[deps]
+
+source_file="res://Levels/Dialogue/CradleFamily.dialogue"
+dest_files=["res://.godot/imported/CradleFamily.dialogue-6a2bc246ad6e2d5d7da98d805fff872b.tres"]
+
+[params]
+
+defaults=true
