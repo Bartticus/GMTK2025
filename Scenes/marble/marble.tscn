@@ -500,10 +500,10 @@ bus = &"Player Verb"
 
 [node name="driftSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("39_qover")
-volume_db = -7.207
+volume_db = -13.766
 bus = &"Player Verb"
 
 [node name="driftSFX2" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("39_5x7hh")
-volume_db = -15.855
+volume_db = -27.099
 bus = &"Player Verb"
