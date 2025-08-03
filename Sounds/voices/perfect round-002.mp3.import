@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kytrfltrn07g"
+path="res://.godot/imported/perfect round-002.mp3-988f5f20902beb0c7e19ad5694c8b6de.mp3str"
+
+[deps]
+
+source_file="res://Sounds/voices/perfect round-002.mp3"
+dest_files=["res://.godot/imported/perfect round-002.mp3-988f5f20902beb0c7e19ad5694c8b6de.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
