@@ -43,7 +43,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfrwj"]
 friction = 2.0
 rough = true
-bounce = 0.4
+bounce = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qlpfi"]
 
@@ -492,12 +492,12 @@ bus = &"Player Verb"
 stream = SubResource("AudioStreamRandomizer_l7rxb")
 bus = &"Player Verb"
 
-[node name="driftSFX" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="driftSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("39_qover")
 volume_db = -7.207
 bus = &"Player Verb"
 
-[node name="driftSFX2" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="driftSFX2" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("39_5x7hh")
 volume_db = -15.855
 bus = &"Player Verb"
