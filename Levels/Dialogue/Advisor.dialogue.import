@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://55ecg13cd47m"
+path="res://.godot/imported/Advisor.dialogue-c3063e6ea868d29bf77d579775fdab6c.tres"
+
+[deps]
+
+source_file="res://Levels/Dialogue/Advisor.dialogue"
+dest_files=["res://.godot/imported/Advisor.dialogue-c3063e6ea868d29bf77d579775fdab6c.tres"]
+
+[params]
+
+defaults=true

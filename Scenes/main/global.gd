@@ -56,8 +56,8 @@ func particle_cache() -> void:
 	
 	cache_finished.emit()
 
-func dialogue_line_advanced():
-	dialogue_line_advance.emit()
+func dialogue_line_advanced(only_voice : bool = false):
+	dialogue_line_advance.emit(only_voice)
 
 func loadNodes(nodePaths: Array, caller) -> Array:
 	var nodes := []

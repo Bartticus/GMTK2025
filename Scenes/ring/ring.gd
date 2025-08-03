@@ -53,9 +53,15 @@ func _physics_process(delta: float) -> void:
 			
 			Global.player.global_position = launched_pos.lerp(apex.global_position, launch_up_curve.sample_baked(spin_lerp))
 		else:
-			spin_lerp -= updown_point
-			spin_lerp /= updown_point
-			Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
+			if Global.level == 4:
+				Global.level = 0
+				Global.bags_gotten = 0
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				get_tree().change_scene_to_file("res://Scenes/menus/main_menu.tscn")
+			else:
+				spin_lerp -= updown_point
+				spin_lerp /= updown_point
+				Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
 		
 
 

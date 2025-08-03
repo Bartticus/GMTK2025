@@ -4,7 +4,7 @@ extends RigidBody3D
 @export_range(0.0, 600.0, 10.0) var torque: float = 200
 @export var max_angular_vel: float = 100
 @export var brake_force: float = 5.0
-@export var talking_brake_force: float = 7.0
+@export var talking_brake_force: float = 17.0
 @export_range(0.0, 1000.0, 10.0) var linear_force : float = 500.0
 @export var drifting_velocity_boost: float = 2.0
 

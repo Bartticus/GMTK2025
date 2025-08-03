@@ -9,7 +9,7 @@ extends Node3D
 @export var squash_x_curve : Curve
 
 @export var marble : RigidBody3D
-@onready var marble_mesh : MeshInstance3D = $MarbleMesh
+@onready var marble_mesh : Node3D = $marble_mesh
 @onready var impact_fx : Node3D = $ImpactFX
 @onready var smoothed_velocity : Vector3 = Vector3.ZERO
 @onready var contact_normal : Vector3 = Vector3.ZERO

@@ -19,7 +19,7 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.8
 
-@onready var voiceSFX : AudioStreamPlayer3D
+@export var voiceSFX : AudioStreamPlayer
 
 func _ready() -> void:
 	$TalkArea.body_entered.connect(on_body_entered)
@@ -42,6 +42,7 @@ func _process(delta: float) -> void:
 			add_child(balloon)
 			#get_tree().current_scene.add_child
 			balloon.start(dialogue, "start")
+			
 			voiceSFX.play()
 			
 			
@@ -74,7 +75,7 @@ func _process(delta: float) -> void:
 	
 	
 	if e_prompt.modulate.a > 0.05:
-		e_prompt.position.y = lerpf(0.845, 0.945, hover_curve.sample_baked(height_lerp))
+		e_prompt.position.y = lerpf(0.845, 0.945, hover_curve.sample_baked(height_lerp)) * scale.x
 	
 	var new_scale : Vector3 = Vector3.ONE
 	if squishing:
@@ -99,10 +100,12 @@ func _process(delta: float) -> void:
 	character_visuals.scale = new_scale
 	
 
-func next_line():
-	squash_timer = squash_length
-	squishing = true
-	voiceSFX.play()
+func next_line(only_voice : bool = false):
+	if in_range:
+		if !only_voice:
+			squash_timer = squash_length
+			squishing = true
+		voiceSFX.play()
 
 
 

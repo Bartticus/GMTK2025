@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://62h8xhqgihxq"]
+
+[ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_3d5js"]
+[ext_resource type="Resource" uid="uid://55ecg13cd47m" path="res://Levels/Dialogue/Advisor.dialogue" id="2_ukq7h"]
+[ext_resource type="AudioStream" uid="uid://dkni7eecdao3x" path="res://Sounds/voices/perfect round-001.mp3" id="3_erbih"]
+[ext_resource type="AudioStream" uid="uid://kytrfltrn07g" path="res://Sounds/voices/perfect round-002.mp3" id="4_l3r0l"]
+[ext_resource type="AudioStream" uid="uid://dhj7glf8cajs" path="res://Sounds/voices/perfect round-003.mp3" id="5_lwo1m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kypb"]
+metallic = 1.0
+metallic_specular = 0.6
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_jj0ni"]
+material = SubResource("StandardMaterial3D_3kypb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kgtyj"]
+streams_count = 3
+stream_0/stream = ExtResource("3_erbih")
+stream_1/stream = ExtResource("4_l3r0l")
+stream_2/stream = ExtResource("5_lwo1m")
+
+[node name="Edgy" type="Node3D"]
+
+[node name="NpcComponent" parent="." node_paths=PackedStringArray("character_visuals", "voiceSFX") instance=ExtResource("1_3d5js")]
+dialogue = ExtResource("2_ukq7h")
+character_visuals = NodePath("../MeshInstance3D")
+voiceSFX = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_jj0ni")
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_kgtyj")
+volume_db = -5.798
