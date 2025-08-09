@@ -20,6 +20,8 @@ extends Node3D
 @export var end_color : Color
 @export var intensity_curve : Curve
 
+@export var marble: Marble
+
 func _process(delta: float) -> void:
 	global_transform.basis = Basis.IDENTITY
 	
@@ -29,11 +31,13 @@ func _process(delta: float) -> void:
 	
 	if currently_drifting:
 		alpha = lerpf(alpha, 0.9, delta*10.0)
-		drifting_timer += delta
-		drift_lerp = drifting_timer / 2.0
-		drift_lerp = min(drift_lerp, 1.0)
+		#drifting_timer += delta
+		#drift_lerp = drifting_timer / 2.0
+		#drift_lerp = min(drift_lerp, 1.0)
 		
-		drift_lerp = intensity_curve.sample_baked(drift_lerp)
+		#drift_lerp = intensity_curve.sample_baked(drift_lerp)
+		
+		drift_lerp = lerpf(drift_lerp, marble.rot_speed_factor * 2.0, delta * 2.0)
 		
 		arrow.position.z = lerpf(0.45, 0.025, drift_lerp)
 		arrow.scale = Vector3.ONE * lerpf(0.6, 0.7, drift_lerp)
@@ -41,9 +45,9 @@ func _process(delta: float) -> void:
 		var sprite_color : Color = start_color
 		sprites[0].modulate = sprite_color.lerp(end_color, drift_lerp)
 	else:
-		if drifting_timer > 0.0:
-			alpha = 0.0
-		drifting_timer = 0.0
+		#if drifting_timer > 0.0:
+		alpha = 0.0
+		#drifting_timer = 0.0
 		drift_lerp = 0.0
 		
 	sprites[0].modulate.a = alpha

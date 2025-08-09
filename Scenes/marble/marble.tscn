@@ -470,6 +470,8 @@ spring_length = 10.0
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivotY/PivotX" node_paths=PackedStringArray("spring_arm")]
 current = true
+near = 1.0
+far = 1000.0
 script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0

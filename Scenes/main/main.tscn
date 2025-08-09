@@ -30,10 +30,10 @@
 [ext_resource type="PackedScene" uid="uid://dssriecq20gob" path="res://Levels/Level 4/level4.glb" id="21_50lr6"]
 [ext_resource type="Texture2D" uid="uid://cefyhm85vyuj5" path="res://Levels/Tutorial/mouse_move_dropshadow.png" id="21_n8710"]
 [ext_resource type="Material" uid="uid://c8ldaet7cr847" path="res://Thaddeus/Orange.tres" id="22_ll5jx"]
-[ext_resource type="PackedScene" uid="uid://62h8xhqgihxq" path="res://Scenes/NPCs/Edgy.tscn" id="23_bu6nd"]
+[ext_resource type="PackedScene" path="res://Scenes/NPCs/Edgy.tscn" id="23_bu6nd"]
 [ext_resource type="PackedScene" uid="uid://4gqt8iemkp83" path="res://Scenes/menus/load_screen.tscn" id="25_ckg2h"]
-[ext_resource type="PackedScene" uid="uid://dayg4oedo4rum" path="res://Models/HalfPipe.tscn" id="28_t8r38"]
-[ext_resource type="PackedScene" uid="uid://n2aque34pw2u" path="res://Models/Ramp.tscn" id="29_o4ndm"]
+[ext_resource type="PackedScene" path="res://Models/HalfPipe.tscn" id="28_t8r38"]
+[ext_resource type="PackedScene" path="res://Models/Ramp.tscn" id="29_o4ndm"]
 [ext_resource type="AudioStream" uid="uid://dmyrdjv12ns1d" path="res://Sounds/Music/rolly ball.wav" id="32_usfn4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
@@ -44,12 +44,12 @@ ground_bottom_color = Color(0.054902, 0.32549, 0.917647, 1)
 ground_horizon_color = Color(0.454902, 0.627451, 0.952941, 1)
 ground_curve = 3.0
 
-[sub_resource type="Sky" id="Sky_8gbba"]
+[sub_resource type="Sky" id="Sky_usfn4"]
 sky_material = SubResource("ProceduralSkyMaterial_bo1nx")
 
 [sub_resource type="Environment" id="Environment_jjvhh"]
 background_mode = 2
-sky = SubResource("Sky_8gbba")
+sky = SubResource("Sky_usfn4")
 tonemap_mode = 2
 tonemap_white = 2.0
 glow_enabled = true
@@ -1839,7 +1839,7 @@ transform = Transform3D(-0.0602037, 0.00924191, 0.242467, 0.104873, 0.226271, 0.
 transform = Transform3D(-0.215336, -0.0439504, -0.119159, -0.101652, 0.200256, 0.109838, 0.0761397, 0.143059, -0.19036, 5.63706, -37.5254, -37.3496)
 
 [node name="Ramp" parent="World/LightmapGI/Ring/Level3" instance=ExtResource("29_o4ndm")]
-transform = Transform3D(0.0389684, 0.00154102, -0.0493841, -0.110664, 0.101117, -0.00287517, 0.22076, 0.050417, 0.00727596, 17.3672, -38.2121, -29.4327)
+transform = Transform3D(0.0436924, 0.00286974, -0.049214, -0.110745, 0.101113, -0.00277843, 0.219833, 0.0503675, 0.00838174, 17.3672, -38.2121, -29.4327)
 
 [node name="HalfPipe" parent="World/LightmapGI/Ring/Level3" instance=ExtResource("28_t8r38")]
 transform = Transform3D(0.6575, 0, 0, 0, 0.503674, -0.422633, 0, 0.422633, 0.503674, -0.0017525, -36.4045, -35.1034)
@@ -2187,7 +2187,7 @@ vertical_alignment = 1
 
 [node name="Street Ambi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_dikqp")
-volume_db = -14.496
+volume_db = -7.4
 autoplay = true
 bus = &"verb"
 

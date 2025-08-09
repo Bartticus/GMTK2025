@@ -34,8 +34,9 @@ func respawn():#should be called from physics_process
 				player.apply_central_impulse(Vector3(0.0, -spike_force, 0.0))
 				
 
-func _ready() -> void:
-	particle_cache() #REENABLE FOR EXPORT
+##COMMENT THIS IN OR OUT FOR CACHING TO HAPPEN
+#func _ready() -> void:
+	#particle_cache() #REENABLE FOR EXPORT
 
 signal cache_finished
 var already_cached: bool = false
@@ -77,3 +78,13 @@ func loadNodes(nodePaths: Array, caller) -> Array:
 		if node != null or true:
 			nodes.append(node)
 	return nodes
+
+@onready var previous_window_mode := DisplayServer.window_get_mode()
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
+			previous_window_mode = DisplayServer.window_get_mode()
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(previous_window_mode)
+			
