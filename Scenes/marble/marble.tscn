@@ -356,11 +356,12 @@ draw_pass_1 = SubResource("QuadMesh_0ovb4")
 visible = false
 mesh = SubResource("BoxMesh_qover")
 
-[node name="DriftFX" type="Node3D" parent="."]
+[node name="DriftFX" type="Node3D" parent="." node_paths=PackedStringArray("marble")]
 script = ExtResource("11_0ovb4")
 start_color = Color(0.729412, 1, 1, 1)
 end_color = Color(1, 0.862745, 0.509804, 1)
 intensity_curve = SubResource("Curve_i5nwi")
+marble = NodePath("..")
 
 [node name="Sprites" type="Sprite3D" parent="DriftFX"]
 transform = Transform3D(-1.16814e-08, 4.21216e-08, 1, 0.993019, 0.117953, 6.63143e-09, -0.117953, 0.993019, -4.32054e-08, 0, -0.354443, 0.45907)
