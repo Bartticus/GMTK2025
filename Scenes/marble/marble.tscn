@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bo12c78cmhfo2"]
+[gd_scene load_steps=71 format=3 uid="uid://bo12c78cmhfo2"]
 
 [ext_resource type="Script" uid="uid://b0af3bnnkqf4e" path="res://Scenes/marble/marble.gd" id="1_qlpfi"]
 [ext_resource type="Script" uid="uid://c4by3r2ovm4hr" path="res://Scenes/marble/visuals.gd" id="3_lpkg8"]
@@ -225,6 +225,10 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_0ovb4"]
 radius = 0.3
 
+[sub_resource type="Curve" id="Curve_5x7hh"]
+_data = [Vector2(0, 0), 0.0, -0.0103528, 0, 0, Vector2(0.218023, 0.215199), 1.78056, 1.78056, 0, 0, Vector2(0.5, 0.819957), 1.04217, 1.04217, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_16wrw"]
 streams_count = 8
 stream_0/stream = ExtResource("22_e4e5g")
@@ -250,6 +254,7 @@ stream_7/stream = ExtResource("37_kaq5a")
 
 [node name="Marble" type="RigidBody3D"]
 collision_layer = 2
+collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_vfrwj")
 gravity_scale = 1.5
 contact_monitor = true
@@ -356,11 +361,12 @@ draw_pass_1 = SubResource("QuadMesh_0ovb4")
 visible = false
 mesh = SubResource("BoxMesh_qover")
 
-[node name="DriftFX" type="Node3D" parent="."]
+[node name="DriftFX" type="Node3D" parent="." node_paths=PackedStringArray("marble")]
 script = ExtResource("11_0ovb4")
 start_color = Color(0.729412, 1, 1, 1)
 end_color = Color(1, 0.862745, 0.509804, 1)
 intensity_curve = SubResource("Curve_i5nwi")
+marble = NodePath("..")
 
 [node name="Sprites" type="Sprite3D" parent="DriftFX"]
 transform = Transform3D(-1.16814e-08, 4.21216e-08, 1, 0.993019, 0.117953, 6.63143e-09, -0.117953, 0.993019, -4.32054e-08, 0, -0.354443, 0.45907)
@@ -461,12 +467,14 @@ script = ExtResource("19_470xv")
 max_vertical_angle = 1.5708
 
 [node name="PivotX" type="Node3D" parent="SpringArmPivotY"]
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 0, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivotY/PivotX"]
 shape = SubResource("SphereShape3D_0ovb4")
 spring_length = 10.0
 
 [node name="SpringPosition" type="Node3D" parent="SpringArmPivotY/PivotX/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.672)
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivotY/PivotX" node_paths=PackedStringArray("spring_arm")]
 current = true
@@ -476,6 +484,7 @@ script = ExtResource("8_0ovb4")
 spring_arm = NodePath("../SpringArm3D/SpringPosition")
 lerp_power = 6.0
 shake_noise = ExtResource("7_a0fhv")
+zoom_curve = SubResource("Curve_5x7hh")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.25

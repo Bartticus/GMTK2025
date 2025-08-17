@@ -68,6 +68,15 @@ func _physics_process(delta: float) -> void:
 	groundDetection1.position = self.position
 	spring_arm_pivot.position = self.position
 
+func drift_pressed():
+	return Input.is_action_pressed("drift") and Global.main.met_booster
+
+func drift_just_pressed():
+	return Input.is_action_just_pressed("drift") and Global.main.met_booster
+
+func drift_just_released():
+	return Input.is_action_just_released("drift") and Global.main.met_booster
+
 func movement_handler(delta: float) -> void:
 	var f_input = Input.get_action_raw_strength("backward") - Input.get_action_raw_strength("forward")
 	var h_input = Input.get_action_raw_strength("left") - Input.get_action_raw_strength("right")
@@ -79,7 +88,7 @@ func movement_handler(delta: float) -> void:
 	
 	input_vector = Vector3(h_input, 0, -f_input) * 0.25
 	
-	if !Input.is_action_pressed("drift") and linear_velocity.length() > 0.0:#tone down the angular torque we add the faster we're going, to near 0 if we're spinny real fast
+	if !drift_pressed() and linear_velocity.length() > 0.0:#tone down the angular torque we add the faster we're going, to near 0 if we're spinny real fast
 		var angular_addition_modifier : float = angular_velocity.length() / 50.0
 		angular_addition_modifier = min(angular_addition_modifier, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
 		
@@ -130,7 +139,7 @@ func movement_handler(delta: float) -> void:
 	else:
 		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + PI/2
 	
-	if is_on_floor() and Input.is_action_just_released("drift"):
+	if is_on_floor() and drift_just_released():
 		var boost : float = drift_fx.drifting_timer / 0.8
 		boost = min(boost, 1.0)
 		boost *= drifting_velocity_boost
@@ -152,10 +161,10 @@ func drift_handler(delta) -> void:
 	else:
 		coyote_timer.start()
 	
-	if Input.is_action_just_pressed("drift"):
+	if drift_just_pressed():
 		new_friction = 0
 	
-	if Input.is_action_pressed("drift") and !coyote_timer.is_stopped():
+	if drift_pressed() and !coyote_timer.is_stopped():
 		linear_velocity = linear_velocity.lerp(Vector3.ZERO, brake_force * delta)
 		physics_material_override.friction = 0.1
 		
@@ -170,7 +179,7 @@ func drift_handler(delta) -> void:
 		shake_amount = min(shake_amount, 1.0)#now a lerp value between 0-1 where 1 is maximum torque braking
 		camera.camera_shake = lerpf(0.0, 0.7, shake_amount)
 	
-	elif Input.is_action_just_released("drift"):
+	elif drift_just_released():
 		physics_material_override.friction = new_friction
 		
 		var tween: Tween = create_tween()
@@ -228,7 +237,7 @@ func particle_handler(is_drifting: bool, just_released: bool = false) -> void:
 
 func is_on_floor() -> bool:
 	for body in get_colliding_bodies():
-		if body.collision_layer == 1:
+		if body.collision_layer == 1 or body.collision_layer == 4:
 			return true
 	return false
 

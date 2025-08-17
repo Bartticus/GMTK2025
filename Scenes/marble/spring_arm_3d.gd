@@ -5,6 +5,7 @@ extends Node3D
 
 @onready var pivot_x : Node3D = $PivotX
 @onready var spring_arm: SpringArm3D = $PivotX/SpringArm3D
+@onready var camera : Camera3D = $PivotX/ThirdPersonCamera
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -12,7 +13,7 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(on_dialogue_ended)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and !camera.zoomin: 
 		rotation.y -= event.relative.x * Global.mouse_sensitivity
 		rotation.y = wrapf(rotation.y, 0.0, TAU)
 		
@@ -31,7 +32,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func on_dialogue_ended(resource: DialogueResource):
 	if Global.player.talking:
-		Global.ring.spin()
+		if Global.level == 0:
+			if Global.main.booster_selected_yes:
+				Global.main.boost_bag_prompt.visible = true
+				Global.main.tut_progress = 3
+				Global.ring.spin()
+			else:
+				Global.main.boost_prompt.visible = true
+				Global.main.tut_progress = 2
+		else:
+			Global.ring.spin()
+				
 	Global.player.talking = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
