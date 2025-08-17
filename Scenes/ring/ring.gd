@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 		var level_angle_dist : float = 20.0
-		if Global.level < 4:
+		if Global.level < 5:
 			level_angle_dist = deg_to_rad(levels[Global.level].dist_from_previous)
 		
 		rotation.x = x_rot - lerpf(0.0, level_angle_dist, ring_spin_curve.sample_baked(spin_lerp))
@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			
 			Global.player.global_position = launched_pos.lerp(apex.global_position, launch_up_curve.sample_baked(spin_lerp))
 		else:
-			if Global.level == 4:
+			if Global.level == 5:
 				Global.level = 0
 				Global.bags_gotten = 0
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

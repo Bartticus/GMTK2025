@@ -1,0 +1,17 @@
+~ start
+if Global.main.met_booster
+	=> choice
+????: BOOST GRANTED
+do Global.dialogue_line_advanced()
+????: Press space to boost. Holding longer gives you more boost.
+do Global.dialogue_line_advanced()
+set Global.main.met_booster = true
+~ choice
+????: Do you want to move to the next area?
+- Yes
+	set Global.main.booster_selected_yes = true
+	=> END
+- No
+	????: Return when you are ready.
+
+=> END

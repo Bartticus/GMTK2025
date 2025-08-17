@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bigw0q36t32bv"
+path="res://.godot/imported/booster_dialogue.dialogue-c3c1cc3420bef0de2aa9d528ba5aadce.tres"
+
+[deps]
+
+source_file="res://Scenes/NPCs/booster_dialogue.dialogue"
+dest_files=["res://.godot/imported/booster_dialogue.dialogue-c3c1cc3420bef0de2aa9d528ba5aadce.tres"]
+
+[params]
+
+defaults=true
