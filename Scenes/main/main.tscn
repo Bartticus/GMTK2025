@@ -33,10 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://dssriecq20gob" path="res://Levels/Level 4/level4.glb" id="21_50lr6"]
 [ext_resource type="Texture2D" uid="uid://cefyhm85vyuj5" path="res://Levels/Tutorial/mouse_move_dropshadow.png" id="21_n8710"]
 [ext_resource type="Material" uid="uid://c8ldaet7cr847" path="res://Thaddeus/Orange.tres" id="22_ll5jx"]
-[ext_resource type="PackedScene" uid="uid://62h8xhqgihxq" path="res://Scenes/NPCs/Edgy.tscn" id="23_bu6nd"]
+[ext_resource type="PackedScene" path="res://Scenes/NPCs/Edgy.tscn" id="23_bu6nd"]
 [ext_resource type="PackedScene" uid="uid://4gqt8iemkp83" path="res://Scenes/menus/load_screen.tscn" id="25_ckg2h"]
-[ext_resource type="PackedScene" uid="uid://dayg4oedo4rum" path="res://Models/HalfPipe.tscn" id="28_t8r38"]
-[ext_resource type="PackedScene" uid="uid://n2aque34pw2u" path="res://Models/Ramp.tscn" id="29_o4ndm"]
+[ext_resource type="PackedScene" path="res://Models/HalfPipe.tscn" id="28_t8r38"]
+[ext_resource type="PackedScene" path="res://Models/Ramp.tscn" id="29_o4ndm"]
 [ext_resource type="AudioStream" uid="uid://dmyrdjv12ns1d" path="res://Sounds/Music/rolly ball.wav" id="32_usfn4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
@@ -2702,7 +2702,7 @@ shape = SubResource("BoxShape3D_4sqr6")
 curve = SubResource("Curve3D_whcvk")
 
 [node name="ZoomFollow" type="PathFollow3D" parent="World/ZoomPath"]
-transform = Transform3D(-0.124296, -0.184359, 0.974956, 7.45051e-09, 0.982572, 0.185801, -0.992235, 0.0230944, -0.122131, 619.726, 0, 0)
+transform = Transform3D(-0.124296, -0.184359, 0.974956, -1.4901e-08, 0.982572, 0.1858, -0.992235, 0.0230943, -0.122131, 619.726, 0, 0)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
