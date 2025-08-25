@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://drksvet4pbxkt"]
 
-[ext_resource type="Script" uid="uid://b2b1ejhkgkocw" path="res://Scenes/NPCs/NPC Models/cradle_family.gd" id="1_h8klb"]
+[ext_resource type="Script" path="res://Scenes/NPCs/NPC Models/cradle_family.gd" id="1_h8klb"]
 [ext_resource type="PackedScene" uid="uid://t3bmronkgmkw" path="res://Scenes/NPCs/NPC Component.tscn" id="1_rm28b"]
 [ext_resource type="Resource" uid="uid://bwosl2mpwdsfx" path="res://Levels/Dialogue/CradleFamily.dialogue" id="2_ewcay"]
 [ext_resource type="PackedScene" uid="uid://cfoi7c5eqr8dq" path="res://Scenes/NPCs/newtons_cradle.tscn" id="3_ewcay"]
@@ -35,3 +35,6 @@ stream = ExtResource("5_b8cq5")
 
 [node name="Voice3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_b8cq5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13429, 3.40383)

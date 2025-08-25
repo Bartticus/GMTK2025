@@ -1,3 +1,4 @@
+class_name Ring
 extends StaticBody3D
 
 @export var apex : Node3D
@@ -5,7 +6,7 @@ extends StaticBody3D
 @onready var levels : Array[Level] = []
 
 @onready var x_rot : float = 0.0
-@onready var spin_duration : float = 3.0
+@onready var spin_duration : float = 2.0
 @onready var spin_timer : float = 0.0
 
 @onready var launched_pos : Vector3 = Vector3.ZERO
@@ -15,6 +16,9 @@ extends StaticBody3D
 @export var launch_up_curve : Curve
 @export var launch_down_curve : Curve
 
+var new_level: Level
+var rotate_forward: bool
+
 func _ready() -> void:
 	Global.ring = self
 	var level_nodes : Array = Global.loadNodes(level_nodepaths, self)
@@ -23,60 +27,73 @@ func _ready() -> void:
 	for i in level_nodes.size():
 		levels[i] = level_nodes[i]
 
-##no more spinning
-#@export var ring_rotation_speed: float = -2.0
 func _physics_process(delta: float) -> void:
-	
 	if spin_timer > 0.0:
 		Global.player.camera.camera_shake = max(Global.player.camera.camera_shake, 0.5)
-		Global.player.global_rotation += angular_momentum# * delta
+		#Global.player.global_rotation += angular_momentum# * delta
 		
 		spin_timer -= delta
 		spin_timer = max(spin_timer, 0.0)
 		
 		var spin_lerp : float = lerpf(1.0, 0.0, spin_timer / spin_duration)
 		
-		
 		var level_angle_dist : float = 20.0
-		if Global.level < 5:
-			level_angle_dist = deg_to_rad(levels[Global.level].dist_from_previous)
+		if Global.level < levels.size():
+			if rotate_forward == true:
+				level_angle_dist = deg_to_rad(new_level.dist_from_previous)
+			else:
+				level_angle_dist = deg_to_rad(-levels[Global.level + 1].dist_from_previous)
 		
 		rotation.x = x_rot - lerpf(0.0, level_angle_dist, ring_spin_curve.sample_baked(spin_lerp))
-		#rotate_x(ring_rotation_speed / 1000.0)
 		
 		if spin_timer == 0.0:
 			x_rot -= level_angle_dist
+		
+		##changed rotation behavior
 			#Global.player.camera.camera_shake = 2.0
-			Global.player.visuals.shadow.visible = true
-			Global.respawn()
+			#Global.player.visuals.shadow.visible = true
+			#Global.respawn()
 		
-		var updown_point : float = 0.5#where in the lerp will we hit the apex
-		if spin_lerp < updown_point:
-			spin_lerp /= updown_point
+		
+		#var updown_point : float = 0.5#where in the lerp will we hit the apex
+		#if spin_lerp < updown_point:
+			#spin_lerp /= updown_point
 			
-			Global.player.global_position = launched_pos.lerp(apex.global_position, launch_up_curve.sample_baked(spin_lerp))
+			#Global.player.global_position = launched_pos.lerp(apex.global_position, launch_up_curve.sample_baked(spin_lerp))
+		#else:
+			#if Global.level == 5:
+				#Global.level = 0
+				#Global.bags_gotten = 0
+				#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				#get_tree().change_scene_to_file("res://Scenes/menus/main_menu.tscn")
+			#else:
+				#spin_lerp -= updown_point
+				#spin_lerp /= updown_point
+				#Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
+		#
+
+
+func spin(_level: Level = null):
+	if _level != null:
+		if Global.level == int(_level.name.right(1)) - 1:
+			return
+		elif Global.level > int(_level.name.right(1)) - 1:
+			rotate_forward = false
 		else:
-			if Global.level == 5:
-				Global.level = 0
-				Global.bags_gotten = 0
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-				get_tree().change_scene_to_file("res://Scenes/menus/main_menu.tscn")
-			else:
-				spin_lerp -= updown_point
-				spin_lerp /= updown_point
-				Global.player.global_position = levels[Global.level].starter_point.global_position.lerp(apex.global_position, launch_down_curve.sample_baked(spin_lerp))
+			rotate_forward = true
 		
-
-
-func spin():
+		new_level = _level
+		Global.level = int(new_level.name.right(1)) - 1
+	else:
+		Global.level += 1
+	
 	launched_pos = Global.player.global_position
 	Global.player.camera.camera_shake = 1.0
-	Global.level += 1
 	spin_timer = spin_duration
 	angular_momentum = Global.player.angular_velocity
-	Global.player.freeze = true
-	Global.player.visuals.shadow_alpha = 0.0
-	Global.player.visuals.shadow.visible = false
+	#Global.player.freeze = true
+	#Global.player.visuals.shadow_alpha = 0.0
+	#Global.player.visuals.shadow.visible = false
 
 func _input(event):
 	if event.is_action_pressed("ui_text_submit"):

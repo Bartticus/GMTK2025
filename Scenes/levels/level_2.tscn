@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://c640jlvby4mpg"]
+
+[ext_resource type="Script" uid="uid://c2pnn6t7ctpj1" path="res://Levels/Tutorial/tutorial_level.gd" id="1_fh68y"]
+[ext_resource type="PackedScene" uid="uid://dnsfd2lwdlfxf" path="res://Levels/Tutorial/tutorial_building.glb" id="2_ym5bi"]
+[ext_resource type="Texture2D" uid="uid://dlxe1akiw2xmc" path="res://Thaddeus/white_tex.png" id="3_yuh2w"]
+[ext_resource type="Material" uid="uid://cekxfm3rvyhlw" path="res://Thaddeus/White.tres" id="4_fkc1a"]
+[ext_resource type="PackedScene" uid="uid://wlw7qrjti27i" path="res://Scenes/bag/Bag.tscn" id="5_lnq35"]
+[ext_resource type="PackedScene" uid="uid://di4sj6n6qvd0q" path="res://Models/FanVent.tscn" id="6_35bfj"]
+[ext_resource type="PackedScene" uid="uid://cbbmhvuy14jw6" path="res://Models/SatDish.tscn" id="7_l8nyl"]
+[ext_resource type="PackedScene" uid="uid://cbdxfpl47m6kc" path="res://Models/CurvedVent.tscn" id="8_5i3kd"]
+[ext_resource type="PackedScene" uid="uid://cuytryr2ftgaa" path="res://Scenes/NPCs/Recruiter.tscn" id="9_ynqhv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebke8"]
+albedo_color = Color(0.724643, 0.724643, 0.724643, 1)
+albedo_texture = ExtResource("3_yuh2w")
+
+[node name="Level2" type="Node3D" node_paths=PackedStringArray("recuiter_npc", "first_bag", "starter_point")]
+transform = Transform3D(1, 0, 0, 0, 0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0)
+script = ExtResource("1_fh68y")
+recuiter_npc = NodePath("Recruiter")
+first_bag = NodePath("Bag")
+starter_point = NodePath("StarterPoint")
+dist_from_previous = 40.0
+
+[node name="TutorialBuilding" parent="." instance=ExtResource("2_ym5bi")]
+transform = Transform3D(0.245, 0, 0, 0, 0.245, 0, 0, 0, 0.245, 0, -46.6008, 0)
+
+[node name="tutorial_building" parent="TutorialBuilding" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ebke8")
+surface_material_override/1 = ExtResource("4_fkc1a")
+
+[node name="sidebuilding" parent="TutorialBuilding" index="2"]
+surface_material_override/0 = ExtResource("4_fkc1a")
+
+[node name="Bag" parent="." instance=ExtResource("5_lnq35")]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, -1.10316, -44.5864, -1.60945)
+
+[node name="FanVent" parent="." instance=ExtResource("6_35bfj")]
+transform = Transform3D(-7.86805e-09, 0, 0.18, 0, 0.18, 0, -0.18, 0, -7.86805e-09, 0.0969438, -46.5993, -1.93183)
+
+[node name="SatDish" parent="." instance=ExtResource("7_l8nyl")]
+transform = Transform3D(0.957158, 0.289566, 0, -0.289566, 0.957158, 0, 0, 0, 1, -2.56012, -46.2803, 0)
+
+[node name="satdishbase" parent="SatDish/satdish2/@StaticBody3D@43266" index="1"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="@StaticBody3D@43267" parent="SatDish/satdish2" index="1"]
+transform = Transform3D(0.871601, 0.412525, 0.264829, -0.39039, 0.910848, -0.133986, -0.296491, 0.0133961, 0.954942, 0, 1.70543, 0)
+
+[node name="satdish" parent="SatDish/satdish2/@StaticBody3D@43267" index="1"]
+surface_material_override/0 = null
+
+[node name="SatDish2" parent="." instance=ExtResource("7_l8nyl")]
+transform = Transform3D(0.598224, 0.180979, 0, -0.180979, 0.598224, 0, 0, 0, 0.625, -2.58366, -46.2803, 0.593007)
+
+[node name="satdishbase" parent="SatDish2/satdish2/@StaticBody3D@43266" index="1"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="@StaticBody3D@43267" parent="SatDish2/satdish2" index="1"]
+transform = Transform3D(0.771771, 0.586546, -0.245628, -0.47339, 0.787853, 0.393942, 0.424584, -0.187755, 0.885707, 0, 1.70543, 0)
+
+[node name="satdish" parent="SatDish2/satdish2/@StaticBody3D@43267" index="1"]
+surface_material_override/0 = null
+
+[node name="CurvedVent" parent="." instance=ExtResource("8_5i3kd")]
+transform = Transform3D(-0.21, 0, -1.83588e-08, 0, 0.21, 0, 1.83588e-08, 0, -0.21, 1.60043, -46.5972, 0.182974)
+
+[node name="StarterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.396635, -45.8636, 1.60815)
+
+[node name="Recruiter" parent="." instance=ExtResource("9_ynqhv")]
+transform = Transform3D(-0.183951, 0, -0.982935, 0, 1, 0, 0.982935, 0, -0.183951, 1.07273, -46.6128, -2.22754)
+visible = false
+
+[editable path="TutorialBuilding"]
+[editable path="SatDish"]
+[editable path="SatDish2"]

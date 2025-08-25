@@ -140,9 +140,8 @@ func movement_handler(delta: float) -> void:
 		drift_fx.current_move_rot = atan2(linear_velocity.z, -linear_velocity.x) + PI/2
 	
 	if is_on_floor() and drift_just_released():
-		var boost : float = drift_fx.drifting_timer / 0.8
-		boost = min(boost, 1.0)
-		boost *= drifting_velocity_boost
+		var boost : float = rot_speed_factor * drifting_velocity_boost
+		
 		apply_central_impulse(drifting_last_keyboard_f_force * boost * rot_speed_factor)
 		apply_central_impulse(-drifting_last_keyboard_h_force * boost * rot_speed_factor)
 		drifting_last_keyboard_f_force = Vector3.ZERO

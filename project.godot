@@ -11,11 +11,12 @@ config_version=5
 [application]
 
 config/name="Ballkour - GMTK'25"
-run/main_scene="uid://h3vtxt6t0p5n"
+run/main_scene="uid://dv7x2ren5evyl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=120
 boot_splash/image="uid://3jcqardc7ikw"
 config/icon="uid://c8i21d0ri41jg"
+run/warnings/unused_signal=0
 
 [autoload]
 
@@ -25,6 +26,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 [debug]
 
 gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
 
 [dialogue_manager]
 
