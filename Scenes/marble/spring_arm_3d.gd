@@ -12,9 +12,6 @@ func _ready() -> void:
 	
 	DialogueManager.dialogue_ended.connect(on_dialogue_ended)
 
-func _process(delta: float) -> void:
-	global_position = Global.player.global_position
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and !camera.zoomin: 
 		rotation.y -= event.relative.x * Global.mouse_sensitivity

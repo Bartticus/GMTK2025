@@ -24,11 +24,6 @@ extends RigidBody3D
 @onready var smoke_particles1: GPUParticles3D = $Particles/DriftSmokeParticles1
 @onready var smoke_particles2: GPUParticles3D = $Particles/DriftSmokeParticles2
 
-@onready var groundDetectionAudio : RayCast3D = $groundDetection1/groundDetectionAudio
-@onready var groundDetection1 : RayCast3D = $groundDetection1
-@onready var groundDetection2 : RayCast3D = $groundDetection1/groundDetection2
-@onready var groundDetection3 : RayCast3D = $groundDetection1/groundDetection3
-
 #audio
 @onready var rollSFX : AudioStreamPlayer3D = $Audio/rollSFX
 @onready var windSFX : AudioStreamPlayer = $Audio/windSFX
@@ -47,7 +42,6 @@ var rot_speed_factor: float
 
 func _ready() -> void:
 	Global.player = self
-	groundDetection1.top_level = true
 	drift_fx.top_level = true
 	
 	initial_friction = physics_material_override.friction
@@ -63,10 +57,9 @@ func _physics_process(delta: float) -> void:
 	audio_handler()
 	
 	set_contact_pos()
-	drift_fx.global_position = global_position
 	
-	groundDetection1.position = self.position
-	spring_arm_pivot.position = self.position
+	drift_fx.global_position = global_position
+	spring_arm_pivot.global_position = global_position
 
 func drift_pressed():
 	return Input.is_action_pressed("drift") and Global.main.met_booster

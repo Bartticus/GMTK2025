@@ -18,8 +18,10 @@ extends Node3D
 @onready var squash_timer : float = 0.0
 @onready var squash_intensity : float = 0.0
 
-@onready var shadow : Sprite3D = $Shadow
+@onready var shadow : Sprite3D = $ShadowRaycast/Shadow
 @onready var shadow_alpha : float = 0.0
+@onready var shadow_raycast: RayCast3D = $ShadowRaycast
+var shadow_init_scale: Vector3
 
 @onready var ignore_next_velocity_squash : bool = false
 @onready var linear_velocity_lastframe : Vector3 = Vector3.ZERO
@@ -28,8 +30,8 @@ func _ready() -> void:
 	top_level = true
 	impact_fx.top_level = true
 	impact_fx.visible = false
-
-
+	
+	shadow_init_scale = shadow.scale
 
 func impact(intensity : float = 0.0, contacted : bool = false, contact_position : Vector3 = Vector3.ZERO, normal : Vector3 = Vector3.ZERO)->void:#intensity is 0-1
 	if ignore_next_velocity_squash:
@@ -53,15 +55,28 @@ func impact(intensity : float = 0.0, contacted : bool = false, contact_position 
 	get_parent().impactSFX.play()
 
 func visuals_handler(delta: float) -> void:
-	
 	set_identity()
 	global_position = marble.global_position
+	shadow_raycast.global_position = global_position
 	
-	if marble.is_on_floor():
-		shadow_alpha = lerpf(shadow_alpha, 1.0, delta* 8.0)
-	else:
-		shadow_alpha = lerpf(shadow_alpha, 0.0, delta* 12.0)
-	$Shadow.modulate.a = shadow_alpha
+	if shadow_raycast.is_colliding():
+		shadow.global_position = shadow_raycast.get_collision_point()
+		shadow.position.y += 0.01
+		
+		shadow.global_rotation = Vector3( #what am i doing wrong here
+			shadow_raycast.get_collision_normal().x + deg_to_rad(90),
+			shadow_raycast.get_collision_normal().y + deg_to_rad(45),
+			shadow_raycast.get_collision_normal().z - deg_to_rad(90)
+		)
+		
+		var collision_distance: float = shadow_raycast.global_position.y - shadow_raycast.get_collision_point().y
+		
+		shadow.scale = shadow_init_scale * collision_distance
+		shadow.scale = clamp(shadow.scale, shadow_init_scale, 2.0 * shadow_init_scale)
+		
+		var distance_factor: float = 0.25 / collision_distance
+		shadow_alpha = lerpf(shadow_alpha, distance_factor + 0.5, delta * 10.0)
+		shadow.modulate.a = clampf(shadow_alpha, 0.5, 1.0)
 	
 	smoothed_velocity = smoothed_velocity.lerp(marble.linear_velocity, delta * 7.0)
 	if not Vector3.UP.cross(-smoothed_velocity.normalized()).is_zero_approx() \
